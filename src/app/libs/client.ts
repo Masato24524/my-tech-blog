@@ -22,11 +22,11 @@ export async function getBlogs(limit: number = 10, offset: number = 0) {
     return data;
   }
   
-  // 特定のブログ詳細を取得する関数
-  export async function getDetail(blogId: string) {
-    const data = await client.get({
-      endpoint: 'blogs',
-      contentId: blogId,
-    });
-    return data;
-  }
+// 特定のブログ詳細を取得する関数
+export async function getDetail(blogId: string) {
+const data = await client.get({
+    endpoint: 'blogs',
+    contentId: blogId,
+});
+return data;
+}

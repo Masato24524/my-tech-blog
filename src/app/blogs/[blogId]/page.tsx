@@ -1,5 +1,6 @@
 // app/blogs/[blogId]/page.tsx
-import { getDetail, getBlogs } from '../../libs/client';
+import { getDetail, getBlogs } from 'app/libs/client';
+import Link from 'next/link';
 
 // 静的パスを生成する関数
 export async function generateStaticParams() {
@@ -26,6 +27,8 @@ export default async function StaticDetailPage({
           __html: blog.body,
         }}
       />
+      <br></br>
+      <Link href={'/blogs'} className="return-top">記事一覧に戻る</Link>
     </>
   );
 }
