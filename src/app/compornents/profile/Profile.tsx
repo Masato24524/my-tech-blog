@@ -1,4 +1,4 @@
-import './profile.css';
+import './Profile.css';
 
 
 export function Profile(): React.ReactElement {
