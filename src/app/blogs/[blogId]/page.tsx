@@ -31,4 +31,4 @@ export default async function StaticDetailPage({
       <Link href={'/blogs'} className="return-top">記事一覧に戻る</Link>
     </>
   );
-}
+};

@@ -1,9 +1,11 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { getBlogs } from 'app/libs/client';
 import { Header } from 'app/compornents/Header/Header';
-import './index.css';
 import { Profile } from 'app/compornents/profile/Profile';
+
+import './index.css';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -19,21 +21,35 @@ type BlogsPageProps = {
   currentPage: number;
 };
 
+const CustomHead = () => {
+  return (
+    <Head>
+      <title>サンプルページ |  {`Masato's tech Blog`} </title>;
+      <meta name="description" content="サンプルページの説明文" />;
+      <meta name="viewport" content="width=device-width, initial-scale=1" />;
+    </Head>
+  );
+};
+
 const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
   return (
-    <div className='bg-[url(/unsplash.jpg)]'>
-      <div > </div>
+  <div>
+      <CustomHead />
       <Header />
-      <div className='flex'>
-        <div className='w-full m-10'>
-          <h1 className='inline text-3xl font-bold pb-12'>Blog List</h1>
+      <div id='container' className='flex'>
+        <div id='main' className='w-full mt-40 mx-60'>
+        {/* Blog List */}
+          <h1 className='inline text-3xl font-bold pb-12'></h1>
+          {/* 各投稿記事の表示 */}
           {blogs.map((blog) => (
-            <div key={blog.id}>
-              <h2 className='pt-12 pb-2'>
+            <div key={blog.id} className='border m-4 p-2 rounded-lg border-gray-300'>
+              {/* 記事のタイトル */}
+              <h2 className='pb-12 text-lg font-bold'>
                 <Link href={`/blogs/${blog.id}`}>
                   {blog.title}
                 </Link>
               </h2>
+              {/* 日付の生成 */}
               <p className=''>{new Date(blog.publishedAt).toLocaleDateString()}</p>
             </div>
           ))}
@@ -51,10 +67,9 @@ const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
             ))}
           </div>
         </div>
-        
+        {/* プロフィール欄の表示 */}
         <Profile />
       </div>
-
     </div>
   );
 };
