@@ -1,4 +1,5 @@
 // app/blogs/[blogId]/page.tsx
+import { Footer } from 'app/compornents/Footer/Footer';
 import { Header } from 'app/compornents/Header/Header';
 import { getDetail, getBlogs } from 'app/libs/client';
 import Link from 'next/link';
@@ -34,7 +35,7 @@ export default async function StaticDetailPage({
         <br></br>
         <Link href={'/blogs'} className="return-top bg-gray-300">記事一覧に戻る</Link>
       </div>
-
+      <Footer />
     </div>
   );
 };

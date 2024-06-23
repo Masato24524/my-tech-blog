@@ -4,9 +4,8 @@
 
 /* 750px以下で適用 */
 @media (750px >= width) {
-    #profile-container {
-        display: block;
+    #footer-container {
+        display: inline-flex;
         width: 100%;
-        margin: 0 auto;
     }
 }

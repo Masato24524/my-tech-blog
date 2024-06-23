@@ -6,6 +6,7 @@ import { Header } from 'app/compornents/Header/Header';
 import { Profile } from 'app/compornents/profile/Profile';
 
 import './index.css';
+import { Footer } from 'app/compornents/Footer/Footer';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 10;
@@ -46,7 +47,7 @@ const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
 
 
       <div id='container' className='flex mt-10'>
-        <div id='main' className='w-full mt-40 ml-80'>
+        <div id='main' className='w-full mx-auto mt-40 ml-4'>
         {/* Blog List */}
           <h1 className='inline text-3xl font-bold pb-12'></h1>
           {/* 各投稿記事の表示 */}
@@ -62,9 +63,10 @@ const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
               <p className=''>{new Date(blog.publishedAt).toLocaleDateString()}</p>
             </div>
           ))}
+          {/* ページ番号の記載 */}
           <div>
             {Array.from({ length: totalPages }, (_, index) => (
-              <button className='bg-gray-300 px-2 m-5 mb-96 rounded-lg'
+              <button className='bg-gray-300 px-2 m-5 mb-10 rounded-lg'
                 key={index}
                 onClick={() => {
                   window.location.href = `/blogs?page=${index + 1}`;
@@ -79,6 +81,8 @@ const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
         {/* プロフィール欄の表示 */}
         <Profile />
       </div>
+      
+      <Footer />
     </div>
   );
 };

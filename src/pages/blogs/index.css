@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 750px以下で適用 */
+@media (750px >= width) {
+    #container {
+        display: block;
+    }
+
+    #main {
+        display: block;
+    }
+}
