@@ -1,4 +1,5 @@
 // app/blogs/[blogId]/page.tsx
+import { Header } from 'app/compornents/Header/Header';
 import { getDetail, getBlogs } from 'app/libs/client';
 import Link from 'next/link';
 
@@ -20,15 +21,20 @@ export default async function StaticDetailPage({
   const blog = await getDetail(blogId);
 
   return (
-    <>
-      <p>{blog.title}</p>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: blog.body,
-        }}
-      />
-      <br></br>
-      <Link href={'/blogs'} className="return-top">記事一覧に戻る</Link>
-    </>
+    <div className=''>
+      <Header />
+      <div className='m-10 pt-40'>
+        <p>{blog.title}</p>
+        <br></br>
+        <div className='mb-10'
+          dangerouslySetInnerHTML={{
+            __html: blog.body,
+          }}
+        />
+        <br></br>
+        <Link href={'/blogs'} className="return-top bg-gray-300">記事一覧に戻る</Link>
+      </div>
+
+    </div>
   );
 };

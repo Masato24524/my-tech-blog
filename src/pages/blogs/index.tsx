@@ -6,6 +6,7 @@ import { Header } from 'app/compornents/Header/Header';
 import { Profile } from 'app/compornents/profile/Profile';
 
 import './index.css';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -24,7 +25,7 @@ type BlogsPageProps = {
 const CustomHead = () => {
   return (
     <Head>
-      <title>サンプルページ |  {`Masato's tech Blog`} </title>;
+      <title> {`Masato's tech Blog`} </title>;
       <meta name="description" content="サンプルページの説明文" />;
       <meta name="viewport" content="width=device-width, initial-scale=1" />;
     </Head>
@@ -32,12 +33,20 @@ const CustomHead = () => {
 };
 
 const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
+
   return (
   <div>
       <CustomHead />
-      <Header />
-      <div id='container' className='flex'>
-        <div id='main' className='w-full mt-40 mx-60'>
+      {/* <Router>       */}
+        <Header />
+        {/* <Routes>
+          <Route path="/blogs" element={<BlogsPage blogs={[]} totalPages={0} currentPage={0} />} />
+        </Routes>
+      </Router> */}
+
+
+      <div id='container' className='flex mt-10'>
+        <div id='main' className='w-full mt-40 ml-80'>
         {/* Blog List */}
           <h1 className='inline text-3xl font-bold pb-12'></h1>
           {/* 各投稿記事の表示 */}
