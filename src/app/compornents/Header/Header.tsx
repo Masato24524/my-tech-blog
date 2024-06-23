@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css';
+import Link from 'next/link';
 // import { Router, useLocation } from 'react-router-dom';
 
 export function Header(): React.ReactElement {
@@ -20,10 +21,16 @@ export function Header(): React.ReactElement {
     return (
         <div>
             <header className='fixed w-full h-28 top-0 bg-white bg-center bg-cover font-medium bg-[url(/bg-main-cut.jpg)]'>
-                <a href='/blogs' className='bg-white inline-flex p-1 px-2 m-2 rounded-lg bg-opacity-70'>{`Masato's tech Blog`}</a>
+                <Link href='/blogs' className='bg-white inline-flex p-1 px-2 m-2 rounded-lg bg-opacity-70'>
+                    {`Masato's tech Blog`}
+                </Link>
                 <div className=' w-80 h-20 m-4 p-2 rounded-lg inline-flex float-right justify-center'>
-                    <a href='/blogs' className='bg-white hover:bg-pink-200 flex m-auto p-1 px-8 mr-4 rounded-lg'>{'BLOG'}</a>
-                    <a href='#' className='bg-gray-300 flex m-auto p-1 px-8 mr-10 rounded-lg'>{'WORKS'}</a>
+                    <Link href='/blogs' className='bg-white hover:bg-pink-200 flex m-auto p-1 px-8 mr-4 rounded-lg'>
+                       {'BLOG'}
+                    </Link>
+                    <Link href='#' className='bg-gray-300 flex m-auto p-1 px-8 mr-10 rounded-lg'>
+                        {'WORKS'}
+                    </Link>
                 </div>
 
             </header>
