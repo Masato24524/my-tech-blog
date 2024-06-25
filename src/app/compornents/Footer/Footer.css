@@ -8,4 +8,8 @@
         display: inline-flex;
         width: 100%;
     }
+    
+    #footer-container p {
+        left: 176px;
+    }
 }
