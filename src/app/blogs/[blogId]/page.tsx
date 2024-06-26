@@ -3,6 +3,7 @@ import { Footer } from 'app/compornents/Footer/Footer';
 import { Header } from 'app/compornents/Header/Header';
 import { getDetail, getBlogs } from 'app/libs/client';
 import Link from 'next/link';
+import React from 'react';
 
 // 静的パスを生成する関数
 export async function generateStaticParams() {

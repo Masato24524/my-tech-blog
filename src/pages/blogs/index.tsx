@@ -7,7 +7,6 @@ import { Profile } from 'app/compornents/profile/Profile';
 
 import './index.css';
 import { Footer } from 'app/compornents/Footer/Footer';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -34,17 +33,10 @@ const CustomHead = () => {
 };
 
 const BlogsPage = ({ blogs, totalPages, currentPage }: BlogsPageProps) => {
-
   return (
   <div>
       <CustomHead />
-      {/* <Router>       */}
-        <Header />
-        {/* <Routes>
-          <Route path="/blogs" element={<BlogsPage blogs={[]} totalPages={0} currentPage={0} />} />
-        </Routes>
-      </Router> */}
-
+      <Header />
 
       <div id='container' className='flex mt-10'>
         <div id='main' className='w-full mx-auto mt-40 ml-4'>
