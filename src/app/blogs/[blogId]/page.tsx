@@ -15,11 +15,7 @@ export async function generateStaticParams() {
 }
 
 // サーバーコンポーネントとしての詳細ページ
-export default async function StaticDetailPage({
-  params: { blogId },
-}: {
-  params: { blogId: string };
-}) {
+export default async function StaticDetailPage({ params: { blogId },}: { params: { blogId: string };}) {
   const blog = await getDetail(blogId);
 
   return (

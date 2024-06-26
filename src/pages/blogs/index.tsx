@@ -1,12 +1,11 @@
+import './index.css';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { getBlogs } from 'app/libs/client';
 import { Header } from 'app/compornents/Header/Header';
-import { Profile } from 'app/compornents/profile/Profile';
-
-import './index.css';
 import { Footer } from 'app/compornents/Footer/Footer';
+import { Profile } from 'app/compornents/profile/Profile';
 
 const ITEMS_PER_PAGE = 10;
 

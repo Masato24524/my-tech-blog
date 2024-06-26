@@ -15,10 +15,7 @@ export const client = createClient({
 
 // ブログ一覧を取得する関数
 export async function getBlogs(limit: number = 10, offset: number = 0) {
-    const data = await client.get({
-      endpoint: 'blogs',
-      queries: { limit, offset },
-    });
+    const data = await client.get({ endpoint: 'blogs', queries: { limit, offset }, });
     return data;
   }
   
