@@ -6,7 +6,7 @@ import { Menu } from '../Menu/Menu';
 import { useState } from 'react';
 
 export const Header: React.FC = () => {
-    const [menuOpen, setMenuOpen] = useState(true);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);

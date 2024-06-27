@@ -10,15 +10,20 @@ type HeaderProps = {
 
 export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen}) => {
     useEffect(() => {
-        const sidebar = document.querySelector('.sidebar') as HTMLElement;
         const hamburgermenu = document.querySelector('.hamburgermenu') as HTMLElement;
-        if (menuOpen == false) {
-            sidebar.style.display = 'block'
-            hamburgermenu.style.display = 'none'
-            // setMenuOpen(true);
-        } else {
-            sidebar.style.display = 'none'
+        const sidebar = document.querySelector('.sidebar') as HTMLElement;
+
+        if (!menuOpen) {
             hamburgermenu.style.display = 'block'
+            sidebar.style.display = 'none'
+            if (window.screenX >= 1024) {
+                hamburgermenu.style.display = 'none'
+                sidebar.style.display = 'none';
+            }
+            // menuOpen = true;
+        } else {
+            hamburgermenu.style.display = 'none'
+            sidebar.style.display = 'block'
             // setMenuOpen(false);
         };
     }, [menuOpen])
