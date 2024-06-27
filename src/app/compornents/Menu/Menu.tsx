@@ -12,21 +12,32 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen}) => {
     useEffect(() => {
         const hamburgermenu = document.querySelector('.hamburgermenu') as HTMLElement;
         const sidebar = document.querySelector('.sidebar') as HTMLElement;
-
-        if (!menuOpen) {
-            hamburgermenu.style.display = 'block'
-            sidebar.style.display = 'none'
-            if (window.screenX >= 1024) {
+        
+        const updateMenuDisplay = () => {
+            if (window.innerWidth >= 1024) {
                 hamburgermenu.style.display = 'none'
                 sidebar.style.display = 'none';
+            } else {
+                if (!menuOpen) {
+                    hamburgermenu.style.display = 'block'
+                    sidebar.style.display = 'none'
+                    // menuOpen = true;
+                } else {
+                    hamburgermenu.style.display = 'none'
+                    sidebar.style.display = 'block'
+                    // setMenuOpen(false);
+                }
             }
-            // menuOpen = true;
-        } else {
-            hamburgermenu.style.display = 'none'
-            sidebar.style.display = 'block'
-            // setMenuOpen(false);
         };
-    }, [menuOpen])
+
+        updateMenuDisplay();
+        window.addEventListener('resize', updateMenuDisplay);
+
+        //コンポーネントがアンマウントされたときに、イベントリスナーをクリーンアップする。
+        return () => {
+            window.removeEventListener('resize', updateMenuDisplay);
+        };
+    }, [menuOpen]);
 
     return (
         // スマホの場合のみ表示する要素
