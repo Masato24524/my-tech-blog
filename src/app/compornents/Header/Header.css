@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (1024px >= width) {
+    #header {
+        height: 80px;
+    }
+}
