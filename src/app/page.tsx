@@ -55,7 +55,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             </div>
           ))}
           {/* ページ番号の記載 */}
-          <Pagination />
+          <Pagination totalPages={totalPages} currentPage={currentPage} />
         </div>
         {/* プロフィール欄の表示 */}
         <Profile />

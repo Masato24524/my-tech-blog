@@ -3,7 +3,12 @@
 import { getBlogs } from 'app/libs/client';
 import React, { useEffect, useState } from 'react'
 
-export const Pagination = () => {
+type PaginationProps = {
+    totalPages: number;
+    currentPage: number;
+}
+
+export const Pagination: React.FC<PaginationProps> = () => {
     const [data, setData] = useState<{ totalCount: number, limit: number} | null>(null);
     const [currentPage, setCrrentPage] = useState<number>(1);
 
