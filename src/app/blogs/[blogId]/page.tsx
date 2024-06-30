@@ -30,7 +30,7 @@ export default async function StaticDetailPage({ params: { blogId },}: { params:
           }}
         />
         <br></br>
-        <Link href={'/blogs'} className="return-top bg-gray-300">記事一覧に戻る</Link>
+        <Link href={'/'} className="return-top bg-gray-300">記事一覧に戻る</Link>
       </div>
       <Footer />
     </div>
