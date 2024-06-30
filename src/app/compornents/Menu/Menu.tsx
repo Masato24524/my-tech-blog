@@ -59,7 +59,7 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen}) => {
             <div className="relative flex flex-col justify-end mb-4">
                 <ul className='sideMenu lg:hidden relative text-center h-16 z-20 w-28 mr-8 bg-gray-700 text-white'>
                     <li className='p-1 hover:bg-pink-200 border-b'>
-                        <Link href='/blogs'>BLOG</Link>
+                        <Link href='/'>BLOG</Link>
                     </li>
                     <li className='p-1'>
                         <Link href='#'>WORKS</Link>

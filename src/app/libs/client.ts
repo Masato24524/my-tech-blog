@@ -13,15 +13,29 @@ export const client = createClient({
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
 });
 
+export type Blog = {
+    id: string;
+    title: string;
+    publishedAt: string;
+}
+
+export type BlogData = {
+    totalCount: number;
+    limit: number;
+    offset: number;
+    contents: Blog[];
+}
+
 // ブログ一覧を取得する関数
-export async function getBlogs(limit: number = 10, offset: number = 0) {
-    const data = await client.get({ endpoint: 'blogs', queries: { limit, offset }, });
+export async function getBlogs(limit: number = 10, offset: number = 0): Promise<BlogData> {
+    const data = await client.get<BlogData>({
+        endpoint: 'blogs', queries: { limit, offset }, });
     return data;
   }
   
 // 特定のブログ詳細を取得する関数
-export async function getDetail(blogId: string) {
-const data = await client.get({
+export async function getDetail(blogId: string): Promise<Blog> {
+const data = await client.get<Blog>({
     endpoint: 'blogs',
     contentId: blogId,
 });
