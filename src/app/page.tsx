@@ -67,17 +67,17 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 };
 
 // ページ番号を生成
-export const BlogPagination = async (context: any) => {
-  const currentPage = parseInt(context.query.page as string, 10) || 1;
-  const { contents, totalCount } = await getBlogs(ITEMS_PER_PAGE, (currentPage - 1) * ITEMS_PER_PAGE);
+// export const BlogPagination = async (context: any) => {
+//   const currentPage = parseInt(context.query.page as string, 10) || 1;
+//   const { contents, totalCount } = await getBlogs(ITEMS_PER_PAGE, (currentPage - 1) * ITEMS_PER_PAGE);
 
-  return {
-    props: {
-      blogs: contents,
-      totalPages: Math.ceil(totalCount / ITEMS_PER_PAGE),
-      currentPage,
-    },
-  };
-};
+//   return {
+//     props: {
+//       blogs: contents,
+//       totalPages: Math.ceil(totalCount / ITEMS_PER_PAGE),
+//       currentPage,
+//     },
+//   };
+// };
 
 export default BlogsPage;
