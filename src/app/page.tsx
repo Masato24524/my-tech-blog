@@ -25,10 +25,10 @@ const CustomHead = () => {
   );
 };
 
-const BlogsPage = async () => {
+const BlogsPage = async (): Promise<JSX.Element> => {
 
   const data = await getBlogs();
-  const blogs = data.contents;
+  const blogs: Blog[] = data.contents;
   const totalPages = Math.ceil(data.totalCount / data.limit);
   const currentPage = 1;
   
