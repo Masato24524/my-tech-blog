@@ -6,6 +6,7 @@
 @media (750px >= width) {
     #container {
         display: block;
+        width: 90%;
     }
 
     #main {

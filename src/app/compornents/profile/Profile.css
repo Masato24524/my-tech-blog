@@ -6,8 +6,8 @@
 @media (750px >= width) {
     #profile-container {
         display: block;
-        width: auto;
+        width: 100%;
         height: auto;
-        margin: 0 16px;
+        margin: auto;
     }
 }
