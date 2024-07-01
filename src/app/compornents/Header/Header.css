@@ -4,6 +4,7 @@
 
 @media (1024px >= width) {
     #header {
+        width: 100vw;
         height: 80px;
     }
 }

@@ -14,11 +14,11 @@ export const Header: React.FC = () => {
     
     return (
         <div>
-            <header id='header' className='fixed flex z-0 w-full h-28 top-0 bg-white bg-center bg-cover font-medium bg-[url(/OIG2-cut.jpg)]'>
+            <header id='header' className='fixed flex z-0 w-screen h-28 top-0 bg-white bg-center bg-cover font-medium bg-[url(/OIG2-cut.jpg)]'>
                 <Link href='/' className='bg-white h-8 p-1 px-2 m-2 rounded-lg bg-opacity-70'>
                     {`Masato's tech Blog`}
                 </Link>
-                <div className='flex-grow'></div>
+                <div className='flex-grow w-10'></div>
                     <ul className='hidden lg:flex h-20 m-4 p-2 rounded-lg '>
                         <li className=''>
                             {/* PCの場合のみ表示する要素 */}

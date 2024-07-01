@@ -42,11 +42,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   };
 
   return (
-    <body>
+    <body className='w-screen'>
       <CustomHead />
       <Header />
 
-      <div id='container' className='flex mt-10'>
+      <div id='container' className='flex w-full h-auto mt-10'>
         <div id='main' className='w-full mx-auto mt-40 ml-4'>
         {/* Blog List */}
           <h1 className='inline text-3xl font-bold pb-12'></h1>

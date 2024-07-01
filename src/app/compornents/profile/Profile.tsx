@@ -3,7 +3,7 @@ import './Profile.css';
 
 export function Profile(): React.ReactElement {
     return (
-        <div id='profile-container' className="inline-flex float-right w-1/3 h-auto top-0 mt-44 mb-10 mr-10 ml-10 pb-10 border border-gray-300 rounded-lg">
+        <div id='profile-container' className="inline-flex float-right w-1/3 h-auto top-0 mt-44 mr-10 ml-10 pb-8 border border-gray-300 rounded-lg">
             <div className="p-2">
                 {/* <p className='text-2xl'>&nbsp;</p> */}
                 <br></br>
