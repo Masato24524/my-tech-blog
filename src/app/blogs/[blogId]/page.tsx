@@ -22,7 +22,7 @@ export default async function StaticDetailPage({ params: { blogId },}: { params:
     <div className=''>
       <Header />
       <div className='m-10 pt-40'>
-        <p>{blog.title}</p>
+        <h2 className='pb-12 text-lg font-bold'>{blog.title}</h2>
         <br></br>
         <div className='mb-10'
           dangerouslySetInnerHTML={{

@@ -1,7 +1,7 @@
 import './page.css'
 import Head from 'next/head';
 import Link from 'next/link';
-import { getBlogs } from 'app/libs/client';
+import { getBlogs, getDetail } from 'app/libs/client';
 import { Header } from 'app/compornents/Header/Header';
 import { Footer } from 'app/compornents/Footer/Footer';
 import { Profile } from 'app/compornents/profile/Profile';
@@ -10,6 +10,7 @@ import Pagination from './compornents/Pagination/Pagination';
 const ITEMS_PER_PAGE = 10;
 
 type Blog = {
+  body: string;
   id: string;
   title: string;
   publishedAt: string;
@@ -31,9 +32,17 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   const blogs: Blog[] = data.contents;
   const totalPages = Math.ceil(data.totalCount / data.limit);
   const currentPage = 1;
+
+  // const blog = await getDetail(blogId);
   
+  const maxInnerHtml = (body: string, maxLength: number) => {
+  if (body.length <= maxLength )
+    return body; 
+    return body.slice(0, maxLength) + '...';
+  };
+
   return (
-  <div>
+    <body>
       <CustomHead />
       <Header />
 
@@ -50,8 +59,14 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                   {blog.title}
                 </Link>
               </h2>
+              {/* 記事内容のプレビュー */}
+              <div className='mb-10' dangerouslySetInnerHTML={{
+                  __html: maxInnerHtml(blog.body, 20),
+              }}
+              /> 
+
               {/* 日付の生成 */}
-              <p className=''>{new Date(blog.publishedAt).toLocaleDateString()}</p>
+              <p className='text-sm'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString()}</p>
             </div>
           ))}
           {/* ページ番号の記載 */}
@@ -60,9 +75,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
         {/* プロフィール欄の表示 */}
         <Profile />
       </div>
-      
       <Footer />
-    </div>
+    </body>
   );
 };
 
