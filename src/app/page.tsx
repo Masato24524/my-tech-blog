@@ -18,12 +18,21 @@ type Blog = {
   body: string;
 };
 
-const CustomHead = () => {
+const CustomHead = async () => {
+  const data = await getBlogs();
+  const blogs: Blog[] = data.contents;
   return (
     <Head>
       <title> {`Masato's tech Blog`} </title>
-      <meta name="description" content="サンプルページの説明文" />
+      <meta name="description" content="本ブログは未経験からフロントエンドエンジニアを目指している、自身のポートフォリオも兼ねています。ブログページをNext.js/Vercel＋microCMSで構成しました。" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta property="og:type" content="ページの種類" />
+      <meta property="og:url" content="ページのURL" />
+      {/* <meta property="og:image" content="アイキャッチのURL" /> */}
+      {/* <meta property="og:title" content={blogs.title} /> */}
+      <meta property="og:description" content="デスクリプション" />
+      <meta property="og:locale" content="ja_JP" />
+
     </Head>
   );
 };
