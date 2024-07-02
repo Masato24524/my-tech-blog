@@ -32,6 +32,14 @@ body {
   }
 }
 
+.content h1 {
+  @apply text-3xl font-semibold mb-4 mt-8;
+}
+
 .content h2 {
-  @apply text-3xl font-semibold mb-4 mt-6;
+  @apply text-2xl font-semibold mb-4 mt-6 pt-1 pb-1 bg-green-400 text-white;
+}
+
+.content h3 {
+  @apply text-2xl font-semibold mb-4 mt-5;
 }
