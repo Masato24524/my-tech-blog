@@ -35,7 +35,7 @@ export async function getBlogs(limit: number = 10, offset: number = 0): Promise<
             limit,
             offset,
             filters: 'publishedAt[less_than]=now()',
-            cache: 'no-cache' //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
+            // cache: 'no-cache' //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
         },
     });
     data.contents.forEach(blog => {
@@ -49,7 +49,7 @@ export async function getDetail(blogId: string): Promise<Blog> {
 const data = await client.get<Blog>({
     endpoint: 'blogs',
     contentId: blogId,
-    queries: { cache: 'no-cache' }, //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
+    // queries: { cache: 'no-cache' }, //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
 });
 return data;
 }
