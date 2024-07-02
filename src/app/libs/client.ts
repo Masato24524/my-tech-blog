@@ -29,13 +29,14 @@ export type BlogData = {
 
 // ブログ一覧を取得する関数
 export async function getBlogs(limit: number = 10, offset: number = 0): Promise<BlogData> {
+    const timestamp = new Date().getTime();
     const data = await client.get<BlogData>({
-        endpoint: 'blogs',
+        endpoint: `blogs/?timestamp=${timestamp}`,
         queries: {
             limit,
             offset,
             filters: 'publishedAt[less_than]=now()',
-            cache: 'no-cache' //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
+            // cache: 'no-cache' //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
         },
     });
     data.contents.forEach(blog => {
