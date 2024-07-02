@@ -2,6 +2,7 @@
 import { Footer } from 'app/compornents/Footer/Footer';
 import { Header } from 'app/compornents/Header/Header';
 import { getDetail, getBlogs } from 'app/libs/client';
+import { timeStamp } from 'console';
 import Link from 'next/link';
 import React from 'react';
 
@@ -15,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 // サーバーコンポーネントとしての詳細ページ
-export default async function StaticDetailPage({ params: { blogId },}: { params: { blogId: string };}) {
+export default async function StaticDetailPage({ params: { blogId } }: { params: { blogId: string };}) {
   const blog = await getDetail(blogId);
 
   return (

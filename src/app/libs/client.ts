@@ -46,10 +46,11 @@ export async function getBlogs(limit: number = 10, offset: number = 0): Promise<
   
 // 特定のブログ詳細を取得する関数
 export async function getDetail(blogId: string): Promise<Blog> {
-const data = await client.get<Blog>({
-    endpoint: 'blogs',
-    contentId: blogId,
-    queries: { cache: 'no-cache' }, //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
-});
+    const timestamp = new Date().getTime();
+    const data = await client.get<Blog>({
+        endpoint: `blogs/${blogId}?timestamp=${timestamp}`,
+        contentId: blogId,
+    // queries: { cache: 'no-cache' }, //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
+    });
 return data;
 }
