@@ -83,7 +83,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               const idPhoto: number = Math.floor(Math.random()*1000);
             
               return (
-                <div key={blog.id} className='m-2 p-2 rounded-lg border-gray-300'>
+                <div key={blog.id} className='m-2 mb-8 p-4 bg-white rounded-lg shadow-md'>
                 {/* 記事のタイトル */}
                 <h2 className='pb-2 text-lg font-bold'>
                   <Link href={`/blogs/${blog.id}`}>
