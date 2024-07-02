@@ -6,6 +6,8 @@ import { Header } from 'app/compornents/Header/Header';
 import { Footer } from 'app/compornents/Footer/Footer';
 import { Profile } from 'app/compornents/profile/Profile';
 import Pagination from './compornents/Pagination/Pagination';
+import { JSDOM } from 'jsdom';
+
 
 const ITEMS_PER_PAGE = 10;
 
@@ -19,12 +21,31 @@ type Blog = {
 const CustomHead = () => {
   return (
     <Head>
-      <title> {`Masato's tech Blog`} </title>;
-      <meta name="description" content="サンプルページの説明文" />;
-      <meta name="viewport" content="width=device-width, initial-scale=1" />;
+      <title> {`Masato's tech Blog`} </title>
+      <meta name="description" content="サンプルページの説明文" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
   );
 };
+
+// HTMLタグを安全に表示する関数
+const sanitizeHtml = (htmlString: string): string => {
+  const { window } = new JSDOM;
+  const { DOMParser } = window;
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+
+  return doc.body.innerHTML;
+}
+
+// 文字列を指定の文字数でカットする関数
+const truncateString = (str: string, maxLength: number): string => {
+  if (str.length <= maxLength) {
+    return str;
+  }
+  return str.substring(0, maxLength) + '...';
+}
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const data = await getBlogs();
@@ -35,7 +56,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // const blog = await getDetail(blogId);
 
   return (
-    <body className='w-screen'>
+    <div className='w-screen'>
       <CustomHead />
       <Header />
 
@@ -45,10 +66,10 @@ const BlogsPage = async (): Promise<JSX.Element> => {
           <h1 className='inline text-3xl font-bold pb-12'></h1>
           {/* 各投稿記事の表示 */}
           {blogs.map((blog: Blog) => {
-              const maxInnerHtml = (body: string, length: number) => {
-                return body.length > length ? `${body.substring(0, length)}...`: body; 
-                // return body.slice(0, maxLength) + '...';
-              };
+              // const maxInnerHtml = (body: string, length: number) => {
+              //   return body.length > length ? `${body.substring(0, length)}...`: body; 
+              //   // return body.slice(0, maxLength) + '...';
+              // };
             
               const idPhoto: number = Math.floor(Math.random()*1000);
             
@@ -61,12 +82,13 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                   </Link>
                 </h2>
                 <div className='flex ml-2 mb-2'>
-                  <img className='w-1/2 mr-4' src={`https://picsum.photos/id/${idPhoto}/1200/800.jpg`} alt='No image' />
+                  <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg`} alt='No image' />
                   {/* 記事内容のプレビュー */}
-                  <div className='mb-10' dangerouslySetInnerHTML={{
-                      __html: maxInnerHtml(blog.body, 20),
-                  }}
-                  /> 
+                  <div className='mb-10'>
+                    {/* 危険なHTMLを安全に表示  */}
+                    <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(truncateString(blog.body, 150)) }} />
+                  {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
+                  </div> 
                 </div>
                 {/* 日付の生成 */}
                 <p className='text-sm'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString()}</p>
@@ -80,7 +102,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
         <Profile />
       </div>
       <Footer />
-    </body>
+    </div>
   );
 };
 
