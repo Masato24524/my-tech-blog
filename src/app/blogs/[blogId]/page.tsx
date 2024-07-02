@@ -19,7 +19,7 @@ export default async function StaticDetailPage({ params: { blogId },}: { params:
   const blog = await getDetail(blogId);
 
   return (
-    <div className=''>
+    <div className='content'>
       <Header />
       <div className='m-10 pt-40'>
         <h2 className='pb-12 text-lg font-bold'>{blog.title}</h2>

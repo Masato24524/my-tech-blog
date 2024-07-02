@@ -1,20 +1,19 @@
 import './page.css'
 import Head from 'next/head';
 import Link from 'next/link';
-import { getBlogs, getDetail } from 'app/libs/client';
+import { getBlogs } from 'app/libs/client';
 import { Header } from 'app/compornents/Header/Header';
 import { Footer } from 'app/compornents/Footer/Footer';
 import { Profile } from 'app/compornents/profile/Profile';
 import Pagination from './compornents/Pagination/Pagination';
-import { log } from 'console';
 
 const ITEMS_PER_PAGE = 10;
 
 type Blog = {
-  body: string;
   id: string;
   title: string;
   publishedAt: string;
+  body: string;
 };
 
 const CustomHead = () => {
@@ -28,21 +27,12 @@ const CustomHead = () => {
 };
 
 const BlogsPage = async (): Promise<JSX.Element> => {
-
   const data = await getBlogs();
   const blogs: Blog[] = data.contents;
   const totalPages = Math.ceil(data.totalCount / data.limit);
   const currentPage = 1;
 
   // const blog = await getDetail(blogId);
-  
-  const maxInnerHtml = (body: string, maxLength: number) => {
-  if (body.length <= maxLength )
-    return body; 
-    return body.slice(0, maxLength) + '...';
-  };
-
-
 
   return (
     <body className='w-screen'>
@@ -55,8 +45,13 @@ const BlogsPage = async (): Promise<JSX.Element> => {
           <h1 className='inline text-3xl font-bold pb-12'></h1>
           {/* 各投稿記事の表示 */}
           {blogs.map((blog: Blog) => {
+              const maxInnerHtml = (body: string, length: number) => {
+                return body.length > length ? `${body.substring(0, length)}...`: body; 
+                // return body.slice(0, maxLength) + '...';
+              };
+            
               const idPhoto: number = Math.floor(Math.random()*1000);
-              const photoUrl = `https://picsum.photos/id/${idPhoto}/1200/800.jpg`;
+            
               return (
                 <div key={blog.id} className='border m-4 p-2 rounded-lg border-gray-300'>
                 {/* 記事のタイトル */}
@@ -66,7 +61,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                   </Link>
                 </h2>
                 <div className='flex ml-2 mb-2'>
-                  <img className='w-1/2 mr-4' src={photoUrl} alt='No image' />
+                  <img className='w-1/2 mr-4' src={`https://picsum.photos/id/${idPhoto}/1200/800.jpg`} alt='No image' />
                   {/* 記事内容のプレビュー */}
                   <div className='mb-10' dangerouslySetInnerHTML={{
                       __html: maxInnerHtml(blog.body, 20),

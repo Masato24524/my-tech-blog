@@ -31,3 +31,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.content h2 {
+  @apply text-3xl font-semibold mb-4 mt-6;
+}
