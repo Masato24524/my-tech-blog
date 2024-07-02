@@ -60,7 +60,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       <CustomHead />
       <Header />
 
-      <div id='container' className='flex w-4/5 h-auto mt-4 mx-auto'>
+      <div id='container' className='flex w-5/6 h-auto mt-4 mx-auto'>
         <div id='main' className='w-full mx-auto mt-40 ml-4'>
         {/* Blog List */}
           <h1 className='inline text-3xl font-bold pb-12'></h1>
@@ -74,9 +74,9 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               const idPhoto: number = Math.floor(Math.random()*1000);
             
               return (
-                <div key={blog.id} className='border m-4 p-2 rounded-lg border-gray-300'>
+                <div key={blog.id} className='m-2 p-2 rounded-lg border-gray-300'>
                 {/* 記事のタイトル */}
-                <h2 className='pb-10 text-lg font-bold'>
+                <h2 className='pb-2 text-lg font-bold'>
                   <Link href={`/blogs/${blog.id}`}>
                     {blog.title}
                   </Link>
@@ -84,14 +84,14 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                 <div className='flex ml-2 mb-2'>
                   <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg`} alt='No image' />
                   {/* 記事内容のプレビュー */}
-                  <div className='mb-10'>
+                  <div className='text-sm mb-1'>
                     {/* 危険なHTMLを安全に表示  */}
-                    <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(truncateString(blog.body, 150)) }} />
+                    <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(truncateString(blog.body, 150)) + `...` }} />
                   {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
                   </div> 
                 </div>
                 {/* 日付の生成 */}
-                <p className='text-sm'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString()}</p>
+                <p className='text-sm mb-8'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString()}</p>
               </div>
               );
           })}

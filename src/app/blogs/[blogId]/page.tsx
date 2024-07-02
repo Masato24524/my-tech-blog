@@ -21,7 +21,7 @@ export default async function StaticDetailPage({ params: { blogId },}: { params:
   return (
     <div className='content'>
       <Header />
-      <div className='m-10 pt-20'>
+      <div className='m-10 pt-20 leading-10'>
         <h1 className='pb-1 text-lg font-bold'>{blog.title}</h1>
         <p>{new Date(blog.publishedAt).toLocaleDateString()}</p>
         {/* <br></br> */}
