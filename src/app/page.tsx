@@ -84,8 +84,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               const timestamp: number = new Date().getTime();
             
               return (
-                <Link href={`/blogs/${blog.id}`}>
-                  <div key={blog.id} className='m-2 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100'>
+                <Link href={`/blogs/${blog.id}`} key={blog.id}>
+                  <div className='m-2 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100'>
                     {/* 記事のタイトル */}
                     <h2 className='pb-2 text-lg font-bold'>
                         {blog.title}
