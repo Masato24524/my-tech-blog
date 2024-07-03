@@ -81,6 +81,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               // };
             
               const idPhoto: number = Math.floor(Math.random()*1000);
+              const timestamp: number = new Date().getTime();
             
               return (
                 <div key={blog.id} className='m-2 mb-8 p-4 text-gray-950 bg-white rounded-lg shadow-md'>
@@ -91,7 +92,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                   </Link>
                 </h2>
                 <div className='flex ml-2 mb-2'>
-                  <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg`} alt='No image' />
+                  <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`} alt='No image' />
                   {/* 記事内容のプレビュー */}
                   <div className='text-sm mb-1'>
                     {/* 危険なHTMLを安全に表示  */}
