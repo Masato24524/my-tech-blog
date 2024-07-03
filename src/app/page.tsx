@@ -101,7 +101,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                   </div> 
                 </div>
                 {/* 日付の生成 */}
-                <p className='text-sm mb-8'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString()}</p>
+                <p className='text-sm mb-8'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}</p>
               </div>
               );
           })}
