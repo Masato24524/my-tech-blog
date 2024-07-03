@@ -84,29 +84,29 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               const timestamp: number = new Date().getTime();
             
               return (
-                <div key={blog.id} className='m-2 mb-8 p-4 text-gray-950 bg-white rounded-lg shadow-md'>
-                {/* 記事のタイトル */}
-                <h2 className='pb-2 text-lg font-bold'>
-                  <Link href={`/blogs/${blog.id}`}>
-                    {blog.title}
-                  </Link>
-                </h2>
-                <div className='flex ml-2 mb-2'>
-                  <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`} alt='No image' />
-                  {/* 記事内容のプレビュー */}
-                  <div className='text-sm mb-1'>
-                    {/* 危険なHTMLを安全に表示  */}
-                    <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(truncateString(blog.body, 150)) + `...` }} />
-                  {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
-                  </div> 
-                </div>
-                {/* 日付の生成 */}
-                <p className='text-sm mb-8'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}</p>
-              </div>
+                <Link href={`/blogs/${blog.id}`}>
+                  <div key={blog.id} className='m-2 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100'>
+                    {/* 記事のタイトル */}
+                    <h2 className='pb-2 text-lg font-bold'>
+                        {blog.title}
+                    </h2>
+                    <div className='flex ml-2 mb-2'>
+                      <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`} alt='No image' />
+                      {/* 記事内容のプレビュー */}
+                      <div className='text-sm mb-1'>
+                        {/* 危険なHTMLを安全に表示  */}
+                        <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(truncateString(blog.body, 150)) + `...` }} />
+                      {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
+                      </div> 
+                    </div>
+                    {/* 日付の生成 */}
+                    <p className='text-sm mb-4'>&nbsp;🕒{new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}</p>
+                  </div>
+                </Link>
               );
           })}
           {/* ページ番号の記載 */}
