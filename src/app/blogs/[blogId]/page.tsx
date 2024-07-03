@@ -6,6 +6,8 @@ import { timeStamp } from 'console';
 import Link from 'next/link';
 import React from 'react';
 
+import './page.css';
+
 // 静的パスを生成する関数
 export async function generateStaticParams() {
   const { contents } = await getBlogs();
@@ -20,9 +22,9 @@ export default async function StaticDetailPage({ params: { blogId } }: { params:
   const blog = await getDetail(blogId);
 
   return (
-    <div className='content bg-gray-100'>
+    <div id='' className='content bg-gray-100'>
       <Header />
-      <div className='mt-40 m-20 p-8 pt-20 leading-10 bg-white shadow-md'>
+      <div id='blog-container' className='mt-40 m-20 p-8 pt-20 leading-10 bg-white shadow-md'>
         <h1 className='pb-1 text-lg font-bold'>{blog.title}</h1>
         <p>{new Date(blog.publishedAt).toLocaleDateString()}</p>
         {/* <br></br> */}
