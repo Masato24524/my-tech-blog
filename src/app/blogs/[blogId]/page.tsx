@@ -70,7 +70,7 @@ export default async function StaticDetailPage({ params: { blogId } }: { params:
         {/* <br></br> */}
 
         {/* 記事本文 */}
-        <div className='mb-10 pt-4'
+        <div className='blog-doc inline-block mb-10 pt-4'
           dangerouslySetInnerHTML={{
             __html: blog.body,
           }}
