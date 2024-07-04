@@ -1,5 +1,4 @@
 import './page.css'
-import Head from 'next/head';
 import Link from 'next/link';
 import { getBlogs } from 'app/libs/client';
 import { Header } from 'app/compornents/Header/Header';
@@ -7,7 +6,7 @@ import { Footer } from 'app/compornents/Footer/Footer';
 import { Profile } from 'app/compornents/profile/Profile';
 import Pagination from './compornents/Pagination/Pagination';
 import { JSDOM } from 'jsdom';
-
+import { CustomHead } from './compornents/CustomHead/CustomHead';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -16,25 +15,6 @@ type Blog = {
   title: string;
   publishedAt: string;
   body: string;
-};
-
-const CustomHead = async () => {
-  const data = await getBlogs();
-  const blogs: Blog[] = data.contents;
-  return (
-    <Head>
-      <title> {`Masato's tech Blog`} </title>
-      <meta name="description" content="本ブログは未経験からフロントエンドエンジニアを目指している、自身のポートフォリオも兼ねています。ブログページをNext.js/Vercel＋microCMSで構成しました。" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta property="og:type" content="ページの種類" />
-      <meta property="og:url" content="ページのURL" />
-      {/* <meta property="og:image" content="アイキャッチのURL" /> */}
-      {/* <meta property="og:title" content={blogs.title} /> */}
-      <meta property="og:description" content="デスクリプション" />
-      <meta property="og:locale" content="ja_JP" />
-
-    </Head>
-  );
 };
 
 // HTMLタグを安全に表示する関数
@@ -65,8 +45,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // const blog = await getDetail(blogId);
 
   return (
-    <div className='w-screen'>
-      <CustomHead />
+    <body className='w-screen'>
+      {/* <CustomHead /> */}
       <Header />
 
       <div id='container' className='flex w-5/6 h-auto mt-4 mx-auto'>
@@ -93,7 +73,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                     <div className='flex ml-2 mb-2'>
                       <img className='w-1/2 h-1/2 mr-4' src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`} alt='No image' />
                       {/* 記事内容のプレビュー */}
-                      <div className='text-sm mb-1'>
+                      <div className='text-base leading-relaxed mb-1'>
                         {/* 危険なHTMLを安全に表示  */}
                         <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(truncateString(blog.body, 150)) + `...` }} />
                       {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
@@ -116,7 +96,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
         <Profile />
       </div>
       <Footer />
-    </div>
+    </body>
   );
 };
 

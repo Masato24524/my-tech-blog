@@ -38,7 +38,7 @@ body {
 }
 
 .content h2 {
-  @apply text-2xl font-semibold mb-4 mt-6 pt-1 pb-1 bg-green-400 text-white;
+  @apply text-2xl font-semibold mb-4 mt-6 p-4 bg-blue-50 text-blue-500 border-l-4 border-blue-500;
 }
 
 .content h3 {

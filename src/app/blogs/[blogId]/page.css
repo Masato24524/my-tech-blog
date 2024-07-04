@@ -5,7 +5,6 @@
 /* 750px以下で適用 */
 @media (750px >= width) {
     #blog-container {
-        @apply m-2 text-base;
+        @apply m-2 mt-24 pt-2 text-base;
     }
-
 }
