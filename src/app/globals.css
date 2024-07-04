@@ -45,20 +45,32 @@ body {
   @apply text-2xl font-semibold mb-4 mt-5;
 }
 
+p:has(span.cms-space) {
+  margin-bottom: 16px;
+}
+
 .indent-5 {
   margin-left: 1.25rem;
 }
 
+pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
 code {
   display: inline-block;
   max-width: 100%;
-  padding: 0.1em 0.25em; /* 文字周りの余白 */
+  padding: 0.1em 0.35em; /* 文字周りの余白 */
   color: #cbc9c9; /* 文字色 */
   background-color: #151617; /* 背景色 */
   border-radius: 3px; /* 角丸 */
   border: solid 1px #d6dde4; /* 枠線 */
   overflow: hidden;
+  font-size: x-small;
+  font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont, "Segoe UI", Meiryo, monospace;
+  overflow-x: auto; /* 横スクロールを追加 */
+  white-space: pre; /* 改行を無視して連続する空白を保持 */
 }
 
 figure {
