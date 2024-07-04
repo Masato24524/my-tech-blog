@@ -45,16 +45,14 @@ body {
   @apply text-2xl font-semibold mb-4 mt-5;
 }
 
-#blog-container {
-  width: 100%;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  word-break: break-all;
+.indent-5 {
+  margin-left: 1.25rem;
 }
+
 
 code {
   display: inline-block;
-  max-width: 50%;
+  max-width: 100%;
   padding: 0.1em 0.25em; /* 文字周りの余白 */
   color: #cbc9c9; /* 文字色 */
   background-color: #151617; /* 背景色 */
@@ -64,9 +62,21 @@ code {
 }
 
 figure {
-  max-width: 50%;
+  max-width: 100%;
 }
 
-.indent-5 {
-  margin-left: 1.25rem;
+/* 固有タグ */
+#blog-container {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  word-break: break-all;
 }
+
+#blog-doc {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  word-break: break-all;
+}
+

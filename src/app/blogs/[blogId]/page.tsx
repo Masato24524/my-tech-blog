@@ -58,6 +58,7 @@ export default async function StaticDetailPage({ params: { blogId } }: { params:
     {/* <CustomHead /> */}
     <Header />
       <div id='blog-container' className='mt-40 m-10 p-8 pt-10 leading-10 bg-white text-gray-950 shadow-md'>
+        {/* 記事のタイトル */}
         <h1 className='text-lg font-bold'>{blog.title}</h1>
         {/* 日付の生成 */}
         <p>{new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
@@ -70,7 +71,7 @@ export default async function StaticDetailPage({ params: { blogId } }: { params:
         {/* <br></br> */}
 
         {/* 記事本文 */}
-        <div className='blog-doc inline-block mb-10 pt-4'
+        <div id='blog-doc' className='inline-block mb-10 pt-4'
           dangerouslySetInnerHTML={{
             __html: blog.body,
           }}
