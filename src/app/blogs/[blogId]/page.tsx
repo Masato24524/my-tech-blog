@@ -23,11 +23,13 @@ export async function generateMetadata({ params }: { params: { blogId: string };
   const idPhoto: number = Math.floor(Math.random()*1000);
   const blog = await getDetail(params.blogId);
   if (!blog || !blog.meta) {
+    console.error('Blog or meta data is undefined', { blog });
     throw new Error('Meta data is undefined')
   }
   // const { meta } = blog;
   const { title, description } = blog.meta;
   if (!title || !description) {
+    console.error('Title or description is undefined', { title, description });
     throw new Error('Meta data is undefined')
   }
 
