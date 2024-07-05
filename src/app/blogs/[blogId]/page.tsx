@@ -22,24 +22,24 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { blogId: string };}): Promise<Metadata> {
   const blog = await getDetail(params.blogId);
   const idPhoto: number = Math.floor(Math.random()*1000);
-  const { meta:{ title, description} = {} } = blog;
-  if (!title || !description) {
+  const { meta } = blog;
+  if (!meta || !meta.title || !meta.description) {
     throw new Error('Meta data is undefined')
   }
 
   return {
-    title: title,
-    description: description,
+    title: meta.title,
+    description: meta.description,
     openGraph: {
-      title: title,
-      description: description,
+      title: meta.title,
+      description: meta.description,
       type: 'article',
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: title,
-      description: description,
+      title: meta.title,
+      description: meta.description,
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
   };
