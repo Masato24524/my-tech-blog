@@ -20,10 +20,14 @@ export async function generateStaticParams() {
 
 //詳細ページのメタデータを生成する関数
 export async function generateMetadata({ params }: { params: { blogId: string };}): Promise<Metadata> {
-  const blog = await getDetail(params.blogId);
   const idPhoto: number = Math.floor(Math.random()*1000);
-  const { meta } = blog;
-  if (!blog ||!blog.meta || !blog.meta.title || !blog.meta.description) {
+  const blog = await getDetail(params.blogId);
+  if (!blog || !blog.meta) {
+    throw new Error('Meta data is undefined')
+  }
+  // const { meta } = blog;
+  const { title, description } = blog.meta;
+  if (!title || !description) {
     throw new Error('Meta data is undefined')
   }
 
