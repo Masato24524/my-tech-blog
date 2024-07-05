@@ -23,23 +23,23 @@ export async function generateMetadata({ params }: { params: { blogId: string };
   const blog = await getDetail(params.blogId);
   const idPhoto: number = Math.floor(Math.random()*1000);
   const { meta } = blog;
-  if (!meta || !meta.title || !meta.description) {
+  if (!blog ||!blog.meta || !blog.meta.title || !blog.meta.description) {
     throw new Error('Meta data is undefined')
   }
 
   return {
-    title: meta.title,
-    description: meta.description,
+    title: blog.meta.title,
+    description: blog.meta.description,
     openGraph: {
-      title: meta.title,
-      description: meta.description,
+      title: blog.meta.title,
+      description: blog.meta.description,
       type: 'article',
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: meta.title,
-      description: meta.description,
+      title: blog.meta.title,
+      description: blog.meta.description,
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
   };
