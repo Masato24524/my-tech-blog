@@ -22,6 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { blogId: string };}): Promise<Metadata> {
   const idPhoto: number = Math.floor(Math.random()*1000);
   const blog = await getDetail(params.blogId);
+  console.log('fetched blog:', blog); //デバッグ用ログ
   if (!blog || !blog.meta) {
     console.error('Blog or meta data is undefined', { blog });
     throw new Error('Meta data is undefined')
