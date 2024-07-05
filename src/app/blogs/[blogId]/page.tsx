@@ -23,30 +23,33 @@ export async function generateMetadata({ params }: { params: { blogId: string };
   const idPhoto: number = Math.floor(Math.random()*1000);
   const blog = await getDetail(params.blogId);
   console.log('fetched blog:', blog); //デバッグ用ログ
-  if (!blog || !blog.meta) {
-    console.error('Blog or meta data is undefined', { blog });
-    throw new Error('Meta data is undefined')
-  }
-  // const { meta } = blog;
-  const { title, description } = blog.meta;
-  if (!title || !description) {
-    console.error('Title or description is undefined', { title, description });
-    throw new Error('Meta data is undefined')
-  }
+
+  const title = blog.meta?.title || 'デフォルトタイトル'; //metaデータがない場合
+  const description = blog.meta?.description || 'デフォルトデスクリプション'; //metaデータがない場合
+
+  // if (!blog || !blog.meta) {
+  //   console.error('Blog or meta data is undefined', { blog });
+  //   throw new Error('Meta data is undefined')
+  // }
+  // const { title, description } = blog.meta;
+  // if (!title || !description) {
+  //   console.error('Title or description is undefined', { title, description });
+  //   throw new Error('Meta data is undefined')
+  // }
 
   return {
-    title: blog.meta.title,
-    description: blog.meta.description,
+    title: title,
+    description: description,
     openGraph: {
-      title: blog.meta.title,
-      description: blog.meta.description,
+      title: title,
+      description: description,
       type: 'article',
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: blog.meta.title,
-      description: blog.meta.description,
+      title: title,
+      description: description,
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
   };
