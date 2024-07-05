@@ -4,7 +4,10 @@
 
 /* 750px以下で適用 */
 @media (750px >= width) {
+    #content {
+        @apply pr-4
+    }
     #blog-container {
-        @apply m-2 mt-24 pt-2 text-base;
+        @apply w-full m-2 mt-24 pt-2 pl-4 pr-4 text-base;
     }
 }

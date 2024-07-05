@@ -6,10 +6,11 @@
 @media (750px >= width) {
     #footer-container {
         display: inline-flex;
-        width: 100%;
+        width: 100vw;
     }
     
     #footer-container p {
-        left: 176px;
+        left: 195px;
+        right: 20px;
     }
 }

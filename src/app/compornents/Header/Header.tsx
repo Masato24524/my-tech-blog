@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
     
     return (
         <div>
-            <header id='header' className='fixed flex z-0 w-screen h-28 top-0 bg-white bg-center bg-cover font-medium bg-[url(/OIG2-cut.jpg)]'>
+            <header id='header' className='fixed flex z-0 w-full h-28 top-0 bg-white bg-center bg-cover font-medium bg-[url(/OIG2-cut.jpg)]'>
                 <Link href='/' className='h-8 p-1 px-2 m-2 rounded-lg bg-white bg-opacity-70 text-gray-950'>
                     {`Masato's tech Blog`}
                 </Link>

@@ -6,8 +6,6 @@ import { Footer } from 'app/compornents/Footer/Footer';
 import { Profile } from 'app/compornents/profile/Profile';
 import Pagination from './compornents/Pagination/Pagination';
 import { JSDOM } from 'jsdom';
-import { CustomHead } from './compornents/CustomHead/CustomHead';
-import { log } from 'console';
 
 const ITEMS_PER_PAGE = 10;
 
