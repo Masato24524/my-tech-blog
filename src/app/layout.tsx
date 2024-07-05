@@ -9,6 +9,7 @@ const inter = Inter({
   variable: "--font-noto-sans-jp", 
 });
 
+//ページ一覧のメタデータ
 export const metadata: Metadata = {
   title: "Masato's tech Blog",
   description: "本ブログは未経験からフロントエンドエンジニアを目指している、自身のポートフォリオも兼ねています。ブログページをNext.js/Vercel＋microCMSで構成しました。",

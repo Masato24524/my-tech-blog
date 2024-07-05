@@ -18,6 +18,21 @@ export type Blog = {
     title: string;
     publishedAt: string;
     body: string;
+    description?: string;
+    image?: {
+        url: string;
+        width: number;
+        height: number;
+    }
+    meta?: {
+        title: string;
+        description: string;
+        image: {
+            url: string;
+            width: number;
+            height: number;
+        }
+    }
 }
 
 export type BlogData = {
@@ -43,7 +58,7 @@ export async function getBlogs(limit: number = 10, offset: number = 0): Promise<
         blog.publishedAt = new Date(blog.publishedAt).toISOString();
     })
     return data;
-  }
+}
   
 // 特定のブログ詳細を取得する関数
 export async function getDetail(blogId: string): Promise<Blog> {
@@ -53,5 +68,5 @@ export async function getDetail(blogId: string): Promise<Blog> {
         contentId: blogId,
     // queries: { cache: 'no-cache' }, //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
     });
-return data;
+    return data;
 }

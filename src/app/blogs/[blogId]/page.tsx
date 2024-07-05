@@ -7,7 +7,6 @@ import React from 'react';
 
 import './page.css';
 import X_ShareButton from 'app/compornents/X_ShareButton/X_ShareButton';
-import { CustomHead } from 'app/compornents/CustomHead/CustomHead';
 import { Metadata } from 'next';
 
 // 静的パスを生成する関数
@@ -19,31 +18,28 @@ export async function generateStaticParams() {
   }));
 }
 
-// type Props = {
-//   params: {
-//     blogId: string;
-//   };
-// };
-
-//メタデータを生成する関数
+//詳細ページのメタデータを生成する関数
 export async function generateMetadata({ params }: { params: { blogId: string };}): Promise<Metadata> {
-  // const post = await fetch(`https://my-tech-blog-five.vercel.app/blogs/${blogId}`).then((res) => res.json());
   const blog = await getDetail(params.blogId);
   const idPhoto: number = Math.floor(Math.random()*1000);
+  const { meta:{ title, description} = {} } = blog;
+  if (!title || !description) {
+    throw new Error('Meta data is undefined')
+  }
 
   return {
-    title: blog.title,
-    description: "",
+    title: title,
+    description: description,
     openGraph: {
-      title: blog.title,
-      description: "",
+      title: title,
+      description: description,
       type: 'article',
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: blog.title,
-      description: "",
+      title: title,
+      description: description,
       images: `https://picsum.photos/seed/${idPhoto}/1200/800.jpg`,
     },
   };

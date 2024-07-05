@@ -7,6 +7,7 @@ import { Profile } from 'app/compornents/profile/Profile';
 import Pagination from './compornents/Pagination/Pagination';
 import { JSDOM } from 'jsdom';
 import { CustomHead } from './compornents/CustomHead/CustomHead';
+import { log } from 'console';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -45,7 +46,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // const blog = await getDetail(blogId);
 
   return (
-    <body className='w-screen'>
+    <body>
       {/* <CustomHead /> */}
       <Header />
 
