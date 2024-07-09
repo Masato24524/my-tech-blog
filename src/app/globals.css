@@ -24,7 +24,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  @apply bg-gray-100
+  @apply bg-gray-100;
 }
 
 @layer utilities {
@@ -53,6 +53,11 @@ p:has(span.cms-space) {
   margin-left: 1.25rem;
 }
 
+ul li {
+  list-style: initial;
+  margin-left: 2.5rem;
+}
+
 pre {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -68,7 +73,8 @@ code {
   border: solid 1px #d6dde4; /* 枠線 */
   overflow: hidden;
   font-size: x-small;
-  font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont, "Segoe UI", Meiryo, monospace;
+  font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Meiryo, monospace;
   overflow-x: auto; /* 横スクロールを追加 */
   white-space: pre; /* 改行を無視して連続する空白を保持 */
 }
@@ -91,4 +97,3 @@ figure {
   word-break: break-word;
   word-break: break-all;
 }
-
