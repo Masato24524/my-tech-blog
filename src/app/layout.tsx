@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-// import { Noto_Sans_JP} from "next/font/google";
+import { Noto_Sans_JP} from "next/font/google";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-const inter = Inter({ 
+const notoSansJp = Noto_Sans_JP({ 
   subsets: ["latin"],
   variable: "--font-noto-sans-jp", 
 });
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode;}>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body className={notoSansJp.variable}>
         {children}
       </body>
       {/* GoogleAnalyticsコンポーネントの追加 */}
