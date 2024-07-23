@@ -55,7 +55,7 @@ p:has(span.cms-space) {
 
 ul li {
   list-style: initial;
-  margin-left: 2.5rem;
+  /* margin-left: 2.5rem; */
 }
 
 pre {

@@ -35,7 +35,7 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen}) => {
                     // sideMenu.style.display = 'block'
                     sideMenu.style.opacity = '100'
                     // sideMenu.style.marginTop = '70px'
-                    sideMenu.style.transform = 'translateY(115px)'
+                    sideMenu.style.transform = 'translateY(145px)'
                     sideMenu.style.transitionDuration = '300ms'
                     // mt-[70px] 
                     // setMenuOpen(false);
@@ -57,12 +57,15 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen}) => {
         // <div>
 
             <div className="relative flex flex-col justify-end mb-4">
-                <ul className='sideMenu lg:hidden relative text-center h-16 z-20 w-28 mr-8 bg-gray-700 text-white'>
-                    <li className='p-1 hover:bg-pink-200 border-b'>
-                        <Link href='/'>BLOG</Link>
+                <ul className='sideMenu lg:hidden relative text-center h-32 z-20 w-28 mr-8 bg-gray-700 text-white'>
+                    <li className='p-1 hover:bg-pink-200 border-b list-none'>
+                        <Link href='/'>Blog</Link>
                     </li>
-                    <li className='p-1'>
-                        <Link href='#'>WORKS</Link>
+                    <li className='p-1 hover:bg-pink-200 border-b list-none'>
+                        <Link href='/portfolio'>Portfolio</Link>
+                    </li>
+                    <li className='p-1 list-none'>
+                        <Link href='#'>Works</Link>
                     </li>
                 </ul>
                 <img src='../bars_24.svg' onClick={toggleMenu} className='hamburgermenu lg:hidden float-right ml-auto z-40 w-12 h-12 mr-8 bg-white rounded-md'/>

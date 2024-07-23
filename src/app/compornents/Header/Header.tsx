@@ -18,17 +18,22 @@ export const Header: React.FC = () => {
                 <Link href='/' className='h-8 p-1 px-2 m-2 rounded-lg bg-white bg-opacity-70 text-gray-950'>
                     {`Masato's tech Blog`}
                 </Link>
-                <div className='flex-grow w-10'></div>
-                    <ul className='hidden lg:flex h-20 m-4 p-2 rounded-lg '>
-                        <li className=''>
+                <div className='flex-grow w-12'></div>
+                    <ul className='hidden lg:flex h-20 m-4 p-2 rounded-lg'>
+                        <li className='list-none mr-1'>
                             {/* PCの場合のみ表示する要素 */}
-                            <Link href='/' className='bg-white hover:bg-pink-200 flex m-auto p-1 px-8 mr-4 rounded-lg'>
-                                {'BLOG'}
+                            <Link href='/' className='bg-white hover:bg-pink-200 flex m-auto p-1 px-8 mr-1 rounded-lg'>
+                                {'Blog'}
                             </Link>
                         </li>
-                        <li className=''>
-                            <Link href='#' className='bg-gray-300 flex m-auto p-1 px-8 mr-10 rounded-lg'>
-                                {'WORKS'}
+                        <li className=' list-none mr-2'>
+                            <Link href='/portfolio' className='bg-white hover:bg-pink-200 flex m-auto p-1 px-8 rounded-lg'>
+                                {'Portfolio'}
+                            </Link>
+                        </li>
+                        <li className='list-none'>
+                            <Link href='#' className='bg-gray-300 flex m-auto p-1 px-8 mr-8 rounded-lg'>
+                                {'Works'}
                             </Link>
                         </li>
                     </ul>
