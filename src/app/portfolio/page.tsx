@@ -2,6 +2,7 @@ import { Footer } from 'app/compornents/Footer/Footer'
 import { Header } from 'app/compornents/Header/Header'
 import React from 'react'
 import Link from 'next/link'
+import './page.css'
 
 const page = () => {
   return (

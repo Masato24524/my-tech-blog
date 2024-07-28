@@ -5,7 +5,7 @@
 a[href^="http"] {
     text-decoration: underline;
     color: blue;
-  }
+}
 
 /* 750px以下で適用 */
 @media (750px >= width) {

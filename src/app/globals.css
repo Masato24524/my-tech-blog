@@ -53,6 +53,11 @@ p:has(span.cms-space) {
   margin-left: 1.25rem;
 }
 
+a[href^="http"] {
+  text-decoration: none;
+  color: inherit;
+}
+
 ul li {
   list-style: initial;
   margin-left: 2.5rem;
