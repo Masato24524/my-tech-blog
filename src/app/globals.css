@@ -55,24 +55,37 @@ p:has(span.cms-space) {
 
 ul li {
   list-style: initial;
-  /* margin-left: 2.5rem; */
+  margin-left: 2.5rem;
+}
+
+ol li{
+  list-style: decimal;
+  margin-left: 2.5rem;
+}
+
+a[href^="http"] {
+  text-decoration: underline;
+  color: blue;
 }
 
 pre {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  font-size: .82rem;
 }
 
 code {
   display: inline-block;
   max-width: 100%;
-  padding: 0.1em 0.35em; /* 文字周りの余白 */
+  padding: 0.7em 15rem 1em 1.5rem; /* 文字周りの余白 */
+  line-height: 1.6;
   color: #cbc9c9; /* 文字色 */
   background-color: #151617; /* 背景色 */
   border-radius: 3px; /* 角丸 */
   border: solid 1px #d6dde4; /* 枠線 */
   overflow: hidden;
-  font-size: x-small;
+  font-size: .82rem;
+  font-weight: 50;
   font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Meiryo, monospace;
   overflow-x: auto; /* 横スクロールを追加 */

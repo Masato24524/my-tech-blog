@@ -8,6 +8,6 @@
         @apply pr-4
     }
     #blog-container {
-        @apply w-full m-2 mt-24 pt-2 pl-4 pr-4 text-base;
+        @apply w-full m-2 mt-24 pt-2 pl-4 pr-4;
     }
 }

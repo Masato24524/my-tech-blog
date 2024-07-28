@@ -12,7 +12,7 @@ export function Profile(): React.ReactElement {
                 <br></br>
                 <p>未経験からフロントエンジニアを目指し学習中です。</p>
                 <br></br>
-                <a className='bg-black text-white mt-4 py-1 px-2 rounded-md' href="https://x.com/masato24524">
+                <a id="profile" className='bg-black text-white mt-4 py-1 px-2 rounded-md' href="https://x.com/masato24524">
                 &nbsp;&#x1D54F;&nbsp;:&nbsp;masato24524
                     {/* <img src="logo-handle.jpg" className='mt-5 ml-1 w-24 h-6'></img> */}
                 </a>
