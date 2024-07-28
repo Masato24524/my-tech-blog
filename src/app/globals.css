@@ -63,10 +63,6 @@ ol li{
   margin-left: 2.5rem;
 }
 
-a[href^="http"] {
-  text-decoration: underline;
-  color: blue;
-}
 
 pre {
   overflow-x: auto;
