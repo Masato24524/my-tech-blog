@@ -71,10 +71,9 @@ a[href^="http"] {
 pre {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  font-size: .82rem;
 }
 
-code {
+pre code {
   display: inline-block;
   max-width: 100%;
   padding: 0.7em 15rem 1em 1.5rem; /* 文字周りの余白 */
