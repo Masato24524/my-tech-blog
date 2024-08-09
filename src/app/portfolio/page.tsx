@@ -10,13 +10,13 @@ const page = () => {
         <Header />
           <div
             id="container" 
-            className="flex w-[90%]"
+            className="flex w-[90%] m-auto text-center"
           >
             <div 
               id="household-app"
-              className="w-4/5 h-1/3 mt-40 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center">
+              className="w-[600px] h-1/3 mt-40 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center">
               <Link href="https://masato24524.github.io/household-app-temp/">
-                <img className="w-[400px] h-[300px] mb-4 p-8 pb-4" src="/household.png" alt="" />
+                <img className="w-[400px] h-[300px] m-auto mb-4 p-8 pb-4" src="/household.png" alt="" />
                 <p className="pt-4 pb-2 font-bold bg-gray-200 text-center">
                 　　　　　家計簿アプリ💰（仮リリース版）<br />
                 </p>
@@ -28,9 +28,9 @@ const page = () => {
             </div>
             <div 
               id="netflix-clone-app"
-              className="w-4/5 h-1/3 mt-40 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center">
+              className="w-[600px] h-1/3 mt-40 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center">
               <Link href="https://netflix-clone-app-smoky.vercel.app/">
-                <img className="w-[400px] h-[300px] mb-4 p-8 pl-16 pb-4" src="/netflix-clone.png" alt="netflix-clone-app" />
+                <img className="w-[400px] h-[300px] m-auto mb-4 p-8 pl-16 pb-4" src="/netflix-clone.png" alt="netflix-clone-app" />
                 <p className="pt-4 pr-4 pb-2 font-bold bg-gray-200 text-center">
                 　　　　　Nextflixクローンアプリ🎬（仮リリース版）<br />
                 </p>
@@ -42,7 +42,9 @@ const page = () => {
             </div>
           </div>
             
-            <p className="pt-12 pb-20 pl-20 text-sm">
+            <p 
+              id="caution"
+              className="pt-12 pb-20 pl-20 text-sm">
                 【注意点】<br />
                 　・本ページ内のアプリはポートフォリオ用のサンプルのため、データは予告なく削除される可能性があります。<br />
                 　 また、現在作成中のものがあり、仕様は予告なく変更される可能性があります。<br />

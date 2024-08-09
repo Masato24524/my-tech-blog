@@ -12,9 +12,23 @@ a[href^="http"] {
     #container {
         display: block;
         width: 90%;
+        margin-left: 10px;
+    }
+    #household-app {
+        width: 95%;
+        margin-left: 20px;
     }
     #netflix-clone-app {
+        width: 95%;
         margin-top: 10px;
-        margin-bottom: 10px;
+        margin-left: 20px;
+        margin-bottom: 30px;
     }
-}
+    #caution {
+        width: 95%;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-left: 20px;
+        padding: 20px 10px;
+    }
+};
