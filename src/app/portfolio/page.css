@@ -6,3 +6,15 @@ a[href^="http"] {
     text-decoration: none;
     color: inherit;
 }
+
+/* 750px以下で適用 */
+@media (750px >= width) {
+    #container {
+        display: block;
+        width: 90%;
+    }
+    #netflix-clone-app {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
