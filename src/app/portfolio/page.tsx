@@ -8,10 +8,10 @@ const page = () => {
   return (
     <body>
       <Header />
-      <div id="container" className="flex w-[90%] m-auto text-center">
+      <div id="container" className="flex w-[90%] m-auto mt-48 text-center">
         <div
           id="household-app"
-          className="w-[600px] h-1/3 mt-40 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
+          className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
         >
           <Link href="https://masato24524.github.io/household-app-temp/">
             <img
@@ -32,7 +32,7 @@ const page = () => {
         </div>
         <div
           id="netflix-clone-app"
-          className="w-[600px] h-1/3 mt-40 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
+          className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
         >
           <Link href="https://netflix-clone-app-smoky.vercel.app/">
             <img

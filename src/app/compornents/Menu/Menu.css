@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (1024px >= width) {
+  #menu-container {
+    margin-bottom: 16px;
+  }
+}

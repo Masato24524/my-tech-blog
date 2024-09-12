@@ -4,13 +4,14 @@
 
 /* 750px以下で適用 */
 @media (750px >= width) {
-    #container {
-        display: block;
-        width: 90%;
-    }
+  #container {
+    display: block;
+    width: 90%;
+    margin-top: 160px;
+  }
 
-    #main {
-        display: block;
-        margin-left: auto;
-    }
+  #main {
+    display: block;
+    margin-left: auto;
+  }
 }
