@@ -6,16 +6,10 @@ import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "./compornents/Pagination/Pagination";
 import { JSDOM } from "jsdom";
+import { Blog } from "./libs/client";
+import { Tag } from "./libs/client";
 
 const ITEMS_PER_PAGE = 10;
-
-type Blog = {
-  id: string;
-  title: string;
-  publishedAt: string;
-  updatedAt: string;
-  body: string;
-};
 
 // HTMLタグを安全に表示する関数
 const sanitizeHtml = (htmlString: string): string => {
@@ -37,7 +31,7 @@ const truncateString = (str: string, maxLength: number): string => {
 };
 
 const BlogsPage = async (): Promise<JSX.Element> => {
-  const data = await getBlogs();
+  const { data, tags } = await getBlogs();
   const blogs: Blog[] = data.contents;
   const totalPages = Math.ceil(data.totalCount / data.limit);
   const currentPage = 1;
@@ -59,6 +53,14 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             //   return body.length > length ? `${body.substring(0, length)}...`: body;
             //   // return body.slice(0, maxLength) + '...';
             // };
+
+            // 各ブログのタグを取得
+            const blogTags =
+              blog.tag?.map((tagId: Tag) =>
+                tags.contents.find((tag) => tag.id === tagId.id)
+              ) ?? [];
+
+            // console.log("blogTags", blogTags);
 
             const idPhoto: number = Math.floor(Math.random() * 1000);
             const timestamp: number = new Date().getTime();
@@ -91,8 +93,24 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                     <div className="w-1/2">
                       {/* 記事のタイトル */}
                       <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
+
+                      {/* タグの表示 */}
+                      <div>
+                        {blogTags.map(
+                          (tag: Tag | undefined) =>
+                            tag && (
+                              <span
+                                key={tag.id}
+                                className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
+                              >
+                                &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
+                              </span>
+                            )
+                        )}
+                      </div>
+
                       {/* 日付の生成 */}
-                      <p className="text-xs mb-4 text-gray-600">
+                      <p className="text-xs mb-2 text-gray-600">
                         &nbsp;🕒{publishedDate}
                         {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
                         {updatedDate > publishedDate && (
@@ -103,8 +121,9 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                           </>
                         )}
                       </p>
+
                       {/* 記事内容のプレビュー */}
-                      <div className="text-sm leading-relaxed mb-1">
+                      <div className="text-sm leading-relaxed mt-2 mb-1">
                         {/* 危険なHTMLを安全に表示  */}
                         <div
                           dangerouslySetInnerHTML={{

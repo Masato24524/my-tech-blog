@@ -1,5 +1,6 @@
 "use client";
 
+import "./Menu.css";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
@@ -58,9 +59,10 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen }) => {
 
   return (
     // スマホの場合のみ表示する要素
-    // <div>
-
-    <div className="relative flex flex-col justify-end mb-20">
+    <div
+      id="menu-container"
+      className="relative flex flex-col justify-end mb-20"
+    >
       <ul className="sideMenu lg:hidden relative text-center h-32 z-20 w-28 mr-8 bg-gray-700 text-white">
         <li className="ml-0 p-1 hover:bg-pink-200 border-b list-none">
           <Link href="/">Blog</Link>
@@ -86,6 +88,5 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen }) => {
 
       {/* </div> */}
     </div>
-    // </div>
   );
 };

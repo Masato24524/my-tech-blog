@@ -34,6 +34,12 @@ export type Blog = {
       height: number;
     };
   };
+  tag?: [
+    {
+      id: string;
+      tag: string;
+    }
+  ];
 };
 
 export type BlogData = {
@@ -43,11 +49,22 @@ export type BlogData = {
   contents: Blog[];
 };
 
+export type Tag = {
+  id: string;
+  // name: string;
+  tag: string;
+};
+
+export type TagData = {
+  totalCount: number;
+  contents: Tag[];
+};
+
 // ブログ一覧を取得する関数
 export async function getBlogs(
   limit: number = 10,
   offset: number = 0
-): Promise<BlogData> {
+): Promise<{ data: BlogData; tags: TagData }> {
   const timestamp = new Date().getTime();
   const data = await client.get<BlogData>({
     endpoint: `blogs/?timestamp=${timestamp}`,
@@ -58,10 +75,18 @@ export async function getBlogs(
       // cache: 'no-cache' //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
     },
   });
+  console.log(data);
+
+  // タグデータを取得
+  const tags = await client.get<TagData>({
+    endpoint: `tags`,
+  });
+  console.log(tags);
+
   data.contents.forEach((blog) => {
     blog.publishedAt = new Date(blog.publishedAt).toISOString();
   });
-  return data;
+  return { data, tags };
 }
 
 // 特定のブログ詳細を取得する関数
