@@ -72,7 +72,7 @@ export async function getBlogs(
       limit,
       offset,
       filters: "publishedAt[less_than]=now()",
-      cache: "no-cache", //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
+      // cache: "no-cache", //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
     },
   });
   // console.log(`Requested limit: ${limit}`);
