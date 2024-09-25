@@ -75,7 +75,10 @@ export async function getBlogs(
       cache: "no-cache", //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
     },
   });
+<<<<<<< HEAD
   // console.log(`Requested limit: ${limit}`);
+=======
+>>>>>>> 4369c8afd29b32db38426bbacf965cd77298eab7
   console.log(data);
 
   // タグデータを取得
