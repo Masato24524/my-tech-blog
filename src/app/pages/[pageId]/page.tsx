@@ -4,12 +4,12 @@ import { getBlogs } from "app/libs/client";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
-import Pagination from "./compornents/Pagination/Pagination";
 import { JSDOM } from "jsdom";
-import { Blog } from "./libs/client";
-import { Tag } from "./libs/client";
+import { Blog } from "../../libs/client";
+import { Tag } from "../../libs/client";
+import Pagination from "app/compornents/Pagination/Pagination";
 
-// const ITEMS_PER_PAGE = 10;
+// const PER_PAGE = limit;
 
 // HTMLタグを安全に表示する関数
 const sanitizeHtml = (htmlString: string): string => {
@@ -30,13 +30,22 @@ const truncateString = (str: string, maxLength: number): string => {
   return str.substring(0, maxLength) + "...";
 };
 
-const BlogsPage = async (): Promise<JSX.Element> => {
-  const { data, tags } = await getBlogs();
+const BlogsPageId = async ({
+  params,
+}: {
+  params: { pageId: string };
+}): Promise<JSX.Element> => {
+  const currentPage = parseInt(params.pageId) || 1;
+
+  const limit = 5; //デフォルト値と同じとする
+  const offset = limit * (currentPage - 1);
+
+  const { data, tags } = await getBlogs(limit, offset);
   const blogs: Blog[] = data.contents;
   const totalPages = Math.ceil(data.totalCount / data.limit);
-  const currentPage = 1;
 
-  // const blog = await getDetail(blogId);
+  console.log("pageId", params.pageId);
+  console.log("offset", offset);
 
   return (
     <body>
@@ -165,4 +174,4 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 //   };
 // };
 
-export default BlogsPage;
+export default BlogsPageId;

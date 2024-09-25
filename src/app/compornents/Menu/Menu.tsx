@@ -68,7 +68,7 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen }) => {
           <Link href="/">Blog</Link>
         </li>
         <li className="ml-0 p-1 hover:bg-pink-200 border-b list-none">
-          <Link href="/portfolio">Portfolio</Link>
+          <Link href="/pages/portfolio">Portfolio</Link>
         </li>
         <li className="ml-0 p-1 list-none">
           <Link href="#">Works</Link>

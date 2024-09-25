@@ -1,53 +1,51 @@
 "use client";
 
-import { getBlogs } from "app/libs/client";
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 type PaginationProps = {
   totalPages: number;
-  currentPage: number;
+  initialPage: number;
 };
 
-export const Pagination: React.FC<PaginationProps> = () => {
-  const [data, setData] = useState<{
-    totalCount: number;
-    limit: number;
-  } | null>(null);
-  const [currentPage, setCrrentPage] = useState<number>(1);
+export const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  initialPage,
+}) => {
+  // const [currentPage, setCurrentPage] = useState(initialPage || 1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getBlogs();
-      setData({
-        totalCount: result.data.totalCount,
-        limit: result.data.limit,
-      });
-    };
+  const renderPageLink = (page: number): JSX.Element => {
+    // const isDisabled = initialPage === page;
+    return (
+      <Link
+        href={page === 1 ? "/" : `/pages/${page}`}
+        // href={`/pages/${page}`}
+        className={`text-white p-4 py-3 m-2 mb-10 rounded-md ${
+          initialPage === page
+            ? "bg-blue-500 cursor-not-allowed"
+            : "bg-gray-400"
+        }`}
+      >
+        {page}
+      </Link>
+    );
+  };
 
-    fetchData();
-  }, []);
+  // const handlePageChange = (newPage: number) => {
+  //   setCurrentPage(newPage);
+  // };
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
-  const totalPages = Math.ceil(data.totalCount / data.limit);
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
+  console.log(totalPages);
 
   return (
     <div>
       {/* ページ番号の記載 */}
-      <div>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            className="bg-gray-300 px-2 m-5 mb-10 rounded-lg"
-            key={index}
-            onClick={() => {
-              window.location.href = `/blogs?page=${index + 1}`;
-            }}
-            disabled={currentPage === index + 1}
-          >
-            {index + 1}
-          </button>
+      <div className="flex mb-10">
+        {pageNumbers.map((number) => (
+          <div key={number}>{renderPageLink(number)}</div>
         ))}
       </div>
     </div>

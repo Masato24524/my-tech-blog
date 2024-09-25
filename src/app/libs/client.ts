@@ -62,19 +62,20 @@ export type TagData = {
 
 // ブログ一覧を取得する関数
 export async function getBlogs(
-  limit: number = 10,
+  limit: number = 5,
   offset: number = 0
 ): Promise<{ data: BlogData; tags: TagData }> {
   const timestamp = new Date().getTime();
   const data = await client.get<BlogData>({
-    endpoint: `blogs/?timestamp=${timestamp}`,
+    endpoint: `blogs/?timestamp=${timestamp}&limit=${limit}`, //limit値がバグで反映されないため、直接URLに指定
     queries: {
       limit,
       offset,
       filters: "publishedAt[less_than]=now()",
-      // cache: 'no-cache' //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
+      cache: "no-cache", //キャッシュを無効化する。localhost用設定のため、不要であれば削除。
     },
   });
+  // console.log(`Requested limit: ${limit}`);
   console.log(data);
 
   // タグデータを取得
