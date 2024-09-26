@@ -20,7 +20,7 @@ const page = () => {
               alt=""
             />
             <p className="pt-4 pb-2 font-bold bg-gray-200 text-center">
-              　　　　　家計簿アプリ💰
+              　家計簿アプリ💰
               <br />
             </p>
             <p className="pb-4 text-gray-600 bg-gray-200">
