@@ -76,7 +76,7 @@ export async function getBlogs(
     },
   });
   // console.log(`Requested limit: ${limit}`);
-  console.log(data);
+  // console.log(data);
 
   // タグデータを取得
   const tags = await client.get<TagData>({
