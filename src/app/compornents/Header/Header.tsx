@@ -57,7 +57,7 @@ export const Header: React.FC = () => {
           </li>
           <li className=" list-none mr-2 ml-2">
             <Link
-              href="/portfolio"
+              href="/pages/portfolio"
               className="bg-white hover:bg-pink-200 flex m-auto p-1 px-8 rounded-lg"
             >
               {"Portfolio"}
