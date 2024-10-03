@@ -8,12 +8,16 @@ type MaplistProps = {
 };
 
 const Maplist: React.FC<MaplistProps> = ({ getTagId }) => {
+  const categoryTag: string = getTagId[0].tag;
+
   return (
-    <div className="mt-44 pl-12 text-sm" id="container">
+    <div className="mb-2 pl-12 text-sm" id="container">
       <Link href="/"> 🏠HOME(Blog) {`>`} </Link>
       {getTagId.map((tagId) => (
-        <span key={tagId.id}>{tagId.tag}</span>
-      ))}
+        <span key={tagId.id}>
+          <Link href={`/category/${categoryTag}`}>{tagId.tag}</Link>
+        </span>
+      ))}{" "}
       {` >`}
     </div>
   );

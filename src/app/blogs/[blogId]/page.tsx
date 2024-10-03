@@ -72,55 +72,60 @@ export default async function StaticDetailPage({
   return (
     <div id="content" className="w-full pr-20 bg-gray-100">
       <Header />
-      <Maplist getTagId={getTagId} />
-      <div
-        id="blog-container"
-        className="w-full mt-4 m-10 p-8 pt-10 leading-10 bg-white text-gray-950 shadow-md"
-      >
-        {/* 記事のタイトル */}
-        <h1 className="text-lg font-bold">{blog.title}</h1>
-
-        {/* 日付の生成 */}
-        <p>
-          {new Date(blog.publishedAt).toLocaleDateString("ja-JP", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-
-        <div className="flex h-8 w-full m-auto items-center">
-          {/* Xのシェアポスト用のボタンを配置 */}
-          <X_ShareButton />
-
-          {/* タグの表示 */}
-          <div>
-            {getTagId.map((tagId: Tag) => (
-              <span
-                key={tagId.id}
-                className="ml-2 p-[2px] text-sm rounded-xl text-white bg-blue-500"
-              >
-                &nbsp;📁&nbsp;{tagId.tag}&nbsp;&nbsp;
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* <br></br> */}
-
-        {/* 記事本文 */}
+      <div className="mt-44">
+        <Maplist getTagId={getTagId} />
         <div
-          id="blog-doc"
-          className="inline-block mb-10 pt-4"
-          dangerouslySetInnerHTML={{
-            __html: blog.body,
-          }}
-        />
-        <br></br>
-        <Link href={"/"} className="return-top bg-gray-300">
-          記事一覧に戻る
-        </Link>
+          id="blog-container"
+          className="w-full mt-4 m-10 p-8 pt-10 leading-10 bg-white text-gray-950 shadow-md"
+        >
+          {/* 記事のタイトル */}
+          <h1 className="text-lg font-bold">{blog.title}</h1>
+
+          {/* 日付の生成 */}
+          <p>
+            {new Date(blog.publishedAt).toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+
+          <div className="flex h-8 w-full m-auto items-center">
+            {/* Xのシェアポスト用のボタンを配置 */}
+            <X_ShareButton />
+
+            {/* タグの表示 */}
+            <div>
+              {getTagId.map((tagId: Tag) => (
+                <span
+                  key={tagId.id}
+                  className="ml-2 p-[2px] text-sm rounded-xl text-white bg-blue-500"
+                >
+                  <Link href={`/category/${tagId.tag}`}>
+                    &nbsp;📁&nbsp;{tagId.tag}&nbsp;&nbsp;
+                  </Link>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* <br></br> */}
+
+          {/* 記事本文 */}
+          <div
+            id="blog-doc"
+            className="inline-block mb-10 pt-4"
+            dangerouslySetInnerHTML={{
+              __html: blog.body,
+            }}
+          />
+          <br></br>
+          <Link href={"/"} className="return-top bg-gray-300">
+            記事一覧に戻る
+          </Link>
+        </div>
       </div>
+
       <Footer />
     </div>
   );

@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
         /> */}
         <Link
           href="/"
-          className="h-8 p-1 px-2 m-2 rounded-lg bg-white bg-opacity-70 text-gray-950"
+          className="h-8 p-1 px-2 m-2 rounded-lg bg-white bg-opacity-80 text-gray-950"
         >
           {`Masato's tech Blog`}
         </Link>
