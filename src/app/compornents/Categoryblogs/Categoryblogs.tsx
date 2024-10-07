@@ -3,9 +3,7 @@ import { sanitizeHtml, truncateString } from "app/page";
 import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
-import Pagination, {
-  CategoryPagination,
-} from "../CategoryPagination/CategoryPagination";
+import { CategoryPagination } from "../CategoryPagination/CategoryPagination";
 
 type CategoryblogsProps = {
   currentPage: number;
@@ -112,9 +110,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                                 key={tag.id}
                                 className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
                               >
-                                <Link href={`/category/${tag.tag}`}>
-                                  &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
-                                </Link>
+                                &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
                               </span>
                             )
                         )}

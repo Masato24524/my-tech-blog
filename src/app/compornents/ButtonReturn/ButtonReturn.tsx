@@ -12,6 +12,10 @@ const ButtonReturn = () => {
       setShowButton(window.scrollY > 100); //100px以上スクロールしたら表示
     };
     window.addEventListener("scroll", handleScroll);
+    // コンポーネントがアンマウントされたときにリスナーをクリーンアップ
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   //トップへのスクロールを実行する関数

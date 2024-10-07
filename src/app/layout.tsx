@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import ButtonReturn from "./compornents/ButtonReturn/ButtonReturn";
@@ -23,9 +22,9 @@ export const metadata: Metadata = {
     siteName: "Masato's tech Blog",
     images: [
       {
-        url: "",
-        width: "",
-        height: "",
+        url: "/my-icon.jpg",
+        width: "80",
+        height: "80",
       },
     ],
     locale: "ja_JP",
@@ -41,9 +40,9 @@ export default function RootLayout({
       <body className={notoSansJp.variable}>
         {children}
         <ButtonReturn />
+        {/* GoogleAnalyticsコンポーネントの追加 */}
+        <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
       </body>
-      {/* GoogleAnalyticsコンポーネントの追加 */}
-      <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
     </html>
   );
 }
