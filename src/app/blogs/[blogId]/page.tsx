@@ -9,6 +9,7 @@ import "./page.css";
 import X_ShareButton from "app/compornents/X_ShareButton/X_ShareButton";
 import { Metadata } from "next";
 import Maplist from "app/compornents/Maplist/Maplist";
+import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
@@ -127,6 +128,7 @@ export default async function StaticDetailPage({
       </div>
 
       <Footer />
+      <ButtonReturn />
     </div>
   );
 }

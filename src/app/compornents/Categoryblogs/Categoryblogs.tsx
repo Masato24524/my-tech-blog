@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
 import { CategoryPagination } from "../CategoryPagination/CategoryPagination";
+import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
 type CategoryblogsProps = {
   currentPage: number;
@@ -154,6 +155,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
         initialPage={currentPage}
         categoryName={categoryName}
       />
+      <ButtonReturn />
     </>
   );
 };

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import ButtonReturn from "./compornents/ButtonReturn/ButtonReturn";
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
@@ -38,10 +37,12 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={notoSansJp.variable}>
+        {/* <ButtonReturnProvider> */}
         {children}
-        <ButtonReturn />
+        {/* <ButtonReturn /> */}
         {/* GoogleAnalyticsコンポーネントの追加 */}
         <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
+        {/* </ButtonReturnProvider> */}
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
-import Link from "next/link";
 import "./Maplist.css";
 import React from "react";
 import { Tag } from "app/libs/client";
+import Link from "next/link";
 
 type MaplistProps = {
   getTagId: Tag[];

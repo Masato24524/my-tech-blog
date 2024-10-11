@@ -1,9 +1,9 @@
 "use client";
 
 import "./Header.css";
-import Link from "next/link";
 import { Menu } from "../Menu/Menu";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);

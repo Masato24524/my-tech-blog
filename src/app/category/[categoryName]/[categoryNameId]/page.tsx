@@ -1,11 +1,8 @@
 import "./page.css";
-import { client, getBlogs, getDetail, TagData } from "app/libs/client";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
-import Pagination from "app/compornents/Pagination/Pagination";
 import Categoryblogs from "app/compornents/Categoryblogs/Categoryblogs";
-import Maplist from "app/compornents/Maplist/Maplist";
 
 const BlogsCategoryName = async ({
   params,

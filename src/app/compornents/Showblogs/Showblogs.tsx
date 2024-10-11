@@ -2,6 +2,7 @@ import { Blog, getBlogs, Tag } from "app/libs/client";
 import { sanitizeHtml, truncateString } from "app/page";
 import Link from "next/link";
 import React from "react";
+import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
 type ShowblogsProps = {
   currentPage: number;
@@ -47,60 +48,63 @@ const Showblogs: React.FC<ShowblogsProps> = async ({ currentPage }) => {
         );
 
         return (
-          <Link href={`/blogs/${blog.id}`} key={blog.id}>
-            <div className="m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
-              <div className="flex ml-2 mb-2">
-                <img
-                  className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
-                  src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
-                  alt="No image"
-                />
-                <div className="w-1/2">
-                  {/* 記事のタイトル */}
-                  <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
+          <>
+            <Link href={`/blogs/${blog.id}`} key={blog.id}>
+              <div className="m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+                <div className="flex ml-2 mb-2">
+                  <img
+                    className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
+                    src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
+                    alt="No image"
+                  />
+                  <div className="w-1/2">
+                    {/* 記事のタイトル */}
+                    <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
 
-                  {/* タグの表示 */}
-                  <div>
-                    {blogTags.map(
-                      (tag: Tag | undefined) =>
-                        tag && (
-                          <span
-                            key={tag.id}
-                            className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
-                          >
-                            &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
-                          </span>
-                        )
-                    )}
-                  </div>
+                    {/* タグの表示 */}
+                    <div>
+                      {blogTags.map(
+                        (tag: Tag | undefined) =>
+                          tag && (
+                            <span
+                              key={tag.id}
+                              className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
+                            >
+                              &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
+                            </span>
+                          )
+                      )}
+                    </div>
 
-                  {/* 日付の生成 */}
-                  <p className="text-xs mb-2 text-gray-600">
-                    &nbsp;🕒{publishedDate}
-                    {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
-                    {updatedDate > publishedDate && (
-                      <>
-                        {" "}
-                        &nbsp;↻
-                        {updatedDate}
-                      </>
-                    )}
-                  </p>
+                    {/* 日付の生成 */}
+                    <p className="text-xs mb-2 text-gray-600">
+                      &nbsp;🕒{publishedDate}
+                      {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
+                      {updatedDate > publishedDate && (
+                        <>
+                          {" "}
+                          &nbsp;↻
+                          {updatedDate}
+                        </>
+                      )}
+                    </p>
 
-                  {/* 記事内容のプレビュー */}
-                  <div className="text-sm leading-relaxed mt-2 mb-1">
-                    {/* 危険なHTMLを安全に表示  */}
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: sanitizeHtml(truncateString(blog.body, 140)),
-                      }}
-                    />
-                    {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
+                    {/* 記事内容のプレビュー */}
+                    <div className="text-sm leading-relaxed mt-2 mb-1">
+                      {/* 危険なHTMLを安全に表示  */}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: sanitizeHtml(truncateString(blog.body, 140)),
+                        }}
+                      />
+                      {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+            <ButtonReturn />
+          </>
         );
       })}
     </>
