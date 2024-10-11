@@ -70,7 +70,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({ currentPage }) => {
                               key={tag.id}
                               className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
                             >
-                              &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
+                              &nbsp;📁&nbsp;{tag?.tag || ""}&nbsp;&nbsp;
                             </span>
                           )
                       )}
