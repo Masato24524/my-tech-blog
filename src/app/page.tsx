@@ -4,27 +4,7 @@ import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "./compornents/Pagination/Pagination";
-import { JSDOM } from "jsdom";
 import Showblogs from "./compornents/Showblogs/Showblogs";
-
-// HTMLタグを安全に表示する関数
-export const sanitizeHtml = (htmlString: string): string => {
-  const { window } = new JSDOM();
-  const { DOMParser } = window;
-
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, "text/html");
-
-  return doc.body.innerHTML;
-};
-
-// 文字列を指定の文字数でカットする関数
-export const truncateString = (str: string, maxLength: number): string => {
-  if (str.length <= maxLength) {
-    return str;
-  }
-  return str.substring(0, maxLength) + "...";
-};
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const { data } = await getBlogs();

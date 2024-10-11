@@ -1,5 +1,5 @@
 import { Blog, getBlogs, Tag } from "app/libs/client";
-import { sanitizeHtml, truncateString } from "app/page";
+import { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
