@@ -8,7 +8,7 @@ type MaplistProps = {
 };
 
 const Maplist: React.FC<MaplistProps> = ({ getTagId }) => {
-  const categoryTag: string = getTagId[0].tag;
+  const categoryTag: string = getTagId[0]?.tag;
 
   return (
     <div className="mb-2 pl-12 text-sm" id="container">
