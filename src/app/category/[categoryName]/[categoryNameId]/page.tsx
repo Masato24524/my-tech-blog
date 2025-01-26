@@ -12,9 +12,9 @@ const BlogsCategoryName = async ({
   const categoryName = decodeURI(params.categoryName);
   console.log("categoryName", categoryName);
 
-  const categoryNameId = params.categoryNameId;
+  const categoryNameId: number = Number(params.categoryNameId); //categoryNameIdがstringで渡されている場合を考慮
   const currentPage = categoryNameId;
-  console.log("currentPage", currentPage);
+  console.log("currentPageA", currentPage);
 
   const limit = 5; //デフォルト値と同じとする
   const offset = limit * (currentPage - 1);

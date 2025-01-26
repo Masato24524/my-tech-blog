@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a[href^="http"] {
+  text-decoration: underline;
+  color: blue;
+}
+
+/* 750px以下で適用 */
+@media (750px >= width) {
+  #content {
+    @apply pr-4;
+  }
+  #blog-container {
+    @apply w-full m-2 mt-8 pt-2 pl-4 pr-4;
+  }
+}

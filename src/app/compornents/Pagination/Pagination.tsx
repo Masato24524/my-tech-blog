@@ -5,11 +5,13 @@ import Link from "next/link";
 type PaginationProps = {
   totalPages: number;
   initialPage: number;
+  pagenationOffset: number;
 };
 
 export const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   initialPage,
+  pagenationOffset,
 }) => {
   // const [currentPage, setCurrentPage] = useState(initialPage || 1);
 

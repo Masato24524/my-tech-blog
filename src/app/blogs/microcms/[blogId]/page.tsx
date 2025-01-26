@@ -1,7 +1,7 @@
 // app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
-import { getDetail, TagData, client, Tag } from "app/libs/client";
+import { getDetail, TagData, client, Tag } from "app/api/microcms/route";
 import Link from "next/link";
 import React from "react";
 

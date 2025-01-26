@@ -1,4 +1,4 @@
-import { Blog, getBlogs, Tag } from "app/libs/client";
+import { Blog, getBlogs, Tag } from "app/api/microcms/route";
 import { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";

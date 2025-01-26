@@ -13,8 +13,6 @@ export const CategoryPagination: React.FC<PaginationProps> = ({
   initialPage,
   categoryName,
 }) => {
-  // const [currentPage, setCurrentPage] = useState(initialPage || 1);
-
   const renderPageLink = (page: number): JSX.Element => {
     // const isDisabled = initialPage === page;
     return (

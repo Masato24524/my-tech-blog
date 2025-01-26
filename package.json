@@ -11,6 +11,7 @@
   "dependencies": {
     "@next/third-parties": "^15.0.0-canary.51",
     "dotenv": "^16.4.5",
+    "gray-matter": "^4.0.3",
     "jsdom": "^24.1.0",
     "marked": "^13.0.1",
     "microcms-js-sdk": "^3.1.1",

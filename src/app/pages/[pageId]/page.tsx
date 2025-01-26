@@ -1,10 +1,11 @@
 import "./page.css";
-import { getBlogs } from "app/libs/client";
+import { Blog, getBlogs } from "app/api/microcms/route";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
+import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
   params,
@@ -14,11 +15,28 @@ const BlogsPageId = async ({
   const currentPage = parseInt(params.pageId) || 1;
   console.log("currentPage", currentPage);
 
-  const limit = 5; //デフォルト値と同じとする
-  const offset = limit * (currentPage - 1);
+  const limit = 100; //デフォルト値と同じとする
+  const offset = 0;
+  // const offset = 5 * (currentPage - 1);
 
   const { data } = await getBlogs(limit, offset);
-  const totalPages = Math.ceil(data.totalCount / data.limit);
+  const repoData = await getBlogsRepo();
+
+  //md_datasから記事をマージ
+  const allBlogs: Blog[] = [
+    ...data.contents,
+    ...repoData.map((mdData) => ({
+      source: mdData.source,
+      id: mdData.id,
+      title: mdData.title,
+      body: mdData.content,
+      publishedAt: mdData.date || "",
+      updatedAt: mdData.date || "",
+    })),
+  ];
+
+  const pagenationOffset = 4;
+  const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
 
   console.log("pageId", params.pageId);
   console.log("offset", offset);
@@ -34,10 +52,17 @@ const BlogsPageId = async ({
           <h1 className="inline text-3xl font-bold pb-12"></h1>
 
           {/* 各投稿記事の表示 */}
-          <Showblogs currentPage={currentPage} />
+          <Showblogs
+            currentPage={currentPage}
+            pagenationOffset={pagenationOffset}
+          />
 
           {/* ページ番号の記載 */}
-          <Pagination totalPages={totalPages} initialPage={currentPage} />
+          <Pagination
+            totalPages={totalPages}
+            initialPage={currentPage}
+            pagenationOffset={pagenationOffset}
+          />
         </div>
         {/* プロフィール欄の表示 */}
         <Profile />

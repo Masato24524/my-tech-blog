@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import "./Footer.css";
-import { client, Tag, TagData } from "app/libs/client";
+import { client, Tag, TagData } from "app/api/microcms/route";
+// import { client, Tag, TagData } from "app/libs/client";
 import Link from "next/link";
 
 export function Footer(): React.ReactElement {
