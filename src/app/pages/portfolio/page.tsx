@@ -67,7 +67,7 @@ const page = () => {
         　（利益の損失、データの喪失、業務の中断、コンピュータの故障など）について、当サイトは一切の責任を負いません。
         <br />
       </p>
-      <Footer />
+      <Footer fetchedData={undefined} />
     </body>
   );
 };

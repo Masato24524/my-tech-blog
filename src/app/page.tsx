@@ -1,29 +1,76 @@
 import "./page.css";
-import { Blog, getBlogs } from "app/api/microcms/route";
+import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "./compornents/Pagination/Pagination";
 import Showblogs from "./compornents/Showblogs/Showblogs";
-import { getBlogsRepo } from "./api/github/route";
+import { GithubPost, MicrocmsPost } from "./types/type";
+// import { getBlogsRepo } from "./api/github/route";
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const limit = 100;
   const offset = 0;
 
-  const { data } = await getBlogs(limit, offset);
+  const API_URL = process.env.API_URL;
+  console.log("API_URL:", process.env.API_URL); // 確認用
+
+  const getBlogs = async () => {
+    const response = await fetch(`${API_URL}/api/microcms`, {
+      next: {
+        revalidate: 60,
+      },
+    });
+    console.log("responseToppage", response);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    // console.log("dataP-2", data);
+    return data;
+  };
+  const { data } = await getBlogs();
+  console.log("dataP", JSON.stringify(data, null, 2));
+  // const { data } = await getBlogs(limit, offset);
+
+  const getBlogsRepo = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/github`, {
+        next: {
+          revalidate: 60,
+        },
+      });
+      // next: {
+      //   revalidate: 0;
+      // }
+
+      // レスポンスのステータスをチェック
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const repoData = await response.json();
+      return repoData;
+    } catch (error) {
+      console.error("Fetching error:", error);
+      return null;
+    }
+  };
   const repoData = await getBlogsRepo();
+  // console.log("repoData", repoData);
+
   //md_datasから記事をマージ
   const allBlogs: Blog[] = [
     ...data.contents,
-    ...repoData.map((mdData) => ({
-      source: mdData.source,
-      id: mdData.id,
-      title: mdData.title,
-      body: mdData.content,
-      publishedAt: mdData.date || "",
-      updatedAt: mdData.date || "",
-    })),
+    ...(repoData
+      ? repoData.map((mdData: GithubPost) => ({
+          source: mdData.source,
+          id: mdData.id,
+          title: mdData.title,
+          body: mdData.content,
+          publishedAt: mdData.date || "",
+          updatedAt: mdData.date || "",
+        }))
+      : []),
   ];
 
   console.log("allBlogs", allBlogs.length);
@@ -48,6 +95,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
           <Showblogs
             currentPage={currentPage}
             pagenationOffset={pagenationOffset}
+            fetchedData={data}
+            fetchedRepoData={repoData}
           />
 
           {/* ページ番号の記載 */}
@@ -60,7 +109,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
         {/* プロフィール欄の表示 */}
         <Profile />
       </div>
-      <Footer />
+      <Footer fetchedData={data} />
     </body>
   );
 };

@@ -1,5 +1,8 @@
 import { headers } from "next/headers";
 import matter from "gray-matter";
+import { remark } from "remark";
+import html from "remark-html";
+import { NextRequest, NextResponse } from "next/server";
 
 // if (!process.env.NEXT_PUBLIC_SERVICE_DOMAIN) {
 //   throw new Error("MICROCMS_SERVICE_DOMAIN is requierd");
@@ -60,96 +63,136 @@ export type TagData = {
 };
 
 // ブログ一覧を取得する関数
-export async function getBlogsRepo(
-  limit: number = 5,
-  offset: number = 0
-): Promise<md_datas[]> {
-  const timestamp = new Date().getTime();
-  const zennArticles: Promise<any> = await fetch(
-    "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/",
-    {
-      headers: {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
-      },
-      // キャッシュの設定
-      next: { revalidate: 3600 }, // 1時間ごとに再取得
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  try {
+    // console.log("API called");
+    // async function GET(): Promise<md_datas[]> {
+    // const timestamp = new Date().getTime();
+    const response = await fetch(
+      "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/",
+      {
+        headers: {
+          Authorization: `token ${process.env.GITHUB_TOKEN}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+        // キャッシュの設定
+        next: { revalidate: 3600 }, // 1時間ごとに再取得
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`GitHub API error! status: ${response.status}`);
     }
-  )
-    // if (zennArticles.ok) {
-    //   throw new Error(`HTTP error! status: $(zennArticles).status}`);
-    // }
     // console.log(`repo's(zennArticles)`, zennArticles);
     // const fileData = await(zennArticles).json();
     // const content = atob(fileData.content);
     // console.log("Markdown content:", content);
-    .then((res) => {
-      return res.json();
-    })
-    .catch((error) => {
-      console.error("Error fething(zennArticles):", error);
-      throw new Error("データ取得中にエラーが発生しました");
-    });
-  console.log("zennArticlesLog", zennArticles);
 
-  // 上記のメタ情報からファイルデータを取得
-  const md_datas: md_datas[] = await (async (zennArticles: any) => {
-    if (!zennArticles) {
-      return [];
-    }
+    // .then((res) => {
+    //   return res.json();
+    // })
+    // .catch((error) => {
+    //   console.error("Error fething(zennArticles):", error);
+    //   throw new Error("データ取得中にエラーが発生しました");
+    // });
 
-    return (await Promise.all(
-      zennArticles.map(async (article: any) => {
-        const md_data = await fetch(
-          "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/" +
-            article.name,
-          {
-            headers: {
-              Authorization: `token ${process.env.GITHUB_TOKEN}`,
-            },
-            next: { revalidate: 3600 }, // 1時間ごとに再取得
+    const zennArticles = await response.json();
+    // console.log("zennArticlesLog", zennArticles);
+
+    // 上記のメタ情報からファイルデータを取得
+    const md_datas: md_datas[] = await (async (zennArticles: any) => {
+      if (!zennArticles) {
+        return [];
+      }
+
+      return (await Promise.all(
+        zennArticles.map(async (article: any) => {
+          const md_data = await fetch(
+            "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/" +
+              article.name,
+            {
+              headers: {
+                Authorization: `token ${process.env.GITHUB_TOKEN}`,
+                Accept: "application/vnd.github.v3+json",
+              },
+              next: { revalidate: 3600 }, // 1時間ごとに再取得
+            }
+          )
+            .then((res: any) => {
+              return res.json();
+            })
+            .catch((error: any) => {
+              console.log("Error fetching md_data:", error);
+              return null; // エラー時に null を返す
+            });
+
+          // console.log("md_data", md_data);
+          //取得したデータをbase64からutf-8に変換
+          const buffer: any = Buffer.from(md_data.content, "base64");
+          // console.log("buffer", buffer);
+          const fileContents = buffer.toString("utf-8");
+          // console.log("fileContents", fileContents);
+
+          // mdファイルの構文を解析してメタ情報とコンテンツをオブジェクトに格納する
+          const matterResult: any = matter(fileContents);
+          // console.log("matterResult", matterResult); // matterResult の内容を確認
+          if (!matterResult.data.published) {
+            // 一時的に published が falseの場合で記事取得
+            return null; // published でない場合は null を返す
           }
-        )
-          .then((res: any) => {
-            return res.json();
-          })
-          .catch((error: any) => {
-            console.log("Error fetching md_data:", error);
-            return null; // エラー時に null を返す
-          });
+          return {
+            source: "github",
+            id: article.name.replace(/\.md$/, ""),
+            ...(matterResult.data as {
+              title: string;
+              date: string;
+              topics: string;
+            }),
+            content: matterResult.content,
+          };
+        })
+      )) as any[]; // 型アサーションを追加
+    })(zennArticles);
+    // console.log("md_datas", md_datas);
 
-        // console.log("md_data", md_data);
-        //取得したデータをbase64からutf-8に変換
-        const buffer: any = Buffer.from(md_data.content, "base64");
-        // console.log("buffer", buffer);
-        const fileContents = buffer.toString("utf-8");
-        console.log("fileContents", fileContents);
+    const removeFlasyDatas = md_datas.filter(Boolean);
+    // console.log("removeFlasyDatas", removeFlasyDatas);
 
-        // mdファイルの構文を解析してメタ情報とコンテンツをオブジェクトに格納する
-        const matterResult: any = matter(fileContents);
-        // console.log("matterResult", matterResult); // matterResult の内容を確認
-        if (matterResult.data.published) {
-          // 一時的に published が falseの場合で記事取得
-          return null; // published でない場合は null を返す
-        }
+    const contentHtmlArray = await Promise.all(
+      removeFlasyDatas.map(async (item) => {
+        const processed = await remark().use(html).process(item.content);
+        // console.log("processed", processed);
+        const contentHtml = processed.toString();
+
         return {
-          source: "github",
-          id: article.name.replace(/\.md$/, ""),
-          ...(matterResult.data as {
-            title: string;
-            date: string;
-            topics: string;
-          }),
-          content: matterResult.content,
+          ...item,
+          content: contentHtml,
         };
       })
-    )) as any[]; // 型アサーションを追加
-  })(zennArticles);
-  console.log("md_datas", md_datas);
+    );
 
-  const removeFlasyDatas = md_datas.filter(Boolean);
-  console.log("removeFlasyDatas", removeFlasyDatas);
-  return removeFlasyDatas;
+    // console.log("contentHtmlArray: ", contentHtmlArray);
+
+    // const contentHtml = processedContent.toString();
+    return NextResponse.json(contentHtmlArray);
+  } catch (error) {
+    console.error("Server Error:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
+// export async function GET(request: Request) {
+//   const url = new URL(request.url);
+
+//   try {
+//     const getBlogsRepo = blogsRepo();
+//     return NextResponse.json(getBlogsRepo);
+//   } catch (error) {
+//     NextResponse.json({ error: error.message }, { status: 500 });
+//   }
+// }
 
 // タグデータを取得
 //   const tags = await client.get<TagData>({

@@ -1,11 +1,12 @@
 import "./page.css";
-import { Blog, getBlogs } from "app/api/microcms/route";
+import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
-import { getBlogsRepo } from "app/api/github/route";
+import { GithubPost, MicrocmsPost } from "app/types/type";
+// import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
   params,
@@ -19,13 +20,31 @@ const BlogsPageId = async ({
   const offset = 0;
   // const offset = 5 * (currentPage - 1);
 
-  const { data } = await getBlogs(limit, offset);
+  const API_URL = process.env.API_URL;
+
+  const getBlogs = async () => {
+    const response = await fetch(`${API_URL}/api/microcms`);
+    const data = await response.json();
+    return data;
+  };
+  const { data } = await getBlogs();
+  // const { data } = await getBlogs(limit, offset);
+
+  const getBlogsRepo = async () => {
+    const response = await fetch(`${API_URL}/api/github`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const repoData = await response.json();
+    return repoData;
+  };
   const repoData = await getBlogsRepo();
+  // const repoData = await getBlogsRepo();
 
   //md_datasから記事をマージ
   const allBlogs: Blog[] = [
     ...data.contents,
-    ...repoData.map((mdData) => ({
+    ...repoData.map((mdData: GithubPost) => ({
       source: mdData.source,
       id: mdData.id,
       title: mdData.title,
@@ -55,6 +74,8 @@ const BlogsPageId = async ({
           <Showblogs
             currentPage={currentPage}
             pagenationOffset={pagenationOffset}
+            fetchedData={data}
+            fetchedRepoData={repoData}
           />
 
           {/* ページ番号の記載 */}
@@ -67,7 +88,7 @@ const BlogsPageId = async ({
         {/* プロフィール欄の表示 */}
         <Profile />
       </div>
-      <Footer />
+      <Footer fetchedData={data} />
     </body>
   );
 };

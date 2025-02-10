@@ -1,4 +1,4 @@
-import { Blog, getBlogs } from "app/api/microcms/route";
+import { Blog, getBlogs } from "app/api/microcms/utils";
 // import { Blog, getBlogs, Tag } from "app/libs/client";
 import { Tag } from "app/api/github/route";
 
@@ -6,16 +6,20 @@ import { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
-import { getBlogsRepo } from "app/api/github/route";
+// import { getBlogsRepo } from "app/api/github/route";
 import { title } from "process";
+
+import { GithubPost, MicrocmsPost } from "../../types/type";
 
 interface ShowblogsProps {
   currentPage: number;
   pagenationOffset: number;
+  fetchedData: MicrocmsPost;
+  fetchedRepoData: GithubPost[];
 }
 
-interface MicrocmsPost {
-  source: "microcms";
+interface CombinedBlogs {
+  source: "microcms" | "github";
   id: string;
   title: string;
   body: string;
@@ -23,43 +27,63 @@ interface MicrocmsPost {
   updatedAt: string;
 }
 
-interface GithubPost {
-  source: "github";
-  id: string;
-  title: string;
-  content: string;
-  date?: string;
-}
-
 const Showblogs: React.FC<ShowblogsProps> = async ({
   currentPage,
   pagenationOffset,
+  fetchedData,
+  fetchedRepoData,
 }) => {
   const limit = 100; //デフォルト値と同じとする
   const offset = 0;
   // const offset = 5 * (currentPage - 1);
   console.log("currentPage", currentPage);
   console.log("offsetA", offset);
+  // console.log("fetchedData", fetchedData);
 
-  const { data, tags } = await getBlogs(limit, offset);
-  console.log("dataC", data);
-  const repoData = await getBlogsRepo();
+  // const getBlogs = async () => {
+  //   const response = await fetch("http://localhost:3000/api/microcms");
+  //   const data = await response.json();
+  //   return data;
+  // };
+  const data: any = fetchedData;
+  // const { data } = await getBlogs();
+
+  // const { data, tags } = await getBlogs(limit, offset);
+  console.log("dataS", data);
+  const API_URL = process.env.API_URL;
+
+  const getBlogsRepo = async () => {
+    const response = await fetch(`${API_URL}/api/github`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const repoData = await response.json();
+    return repoData;
+  };
+  const repoData = fetchedRepoData;
+  // const repoData = await getBlogsRepo();
   // console.log("repoData", repoData);
   // console.log("repoData.date", repoData[0].date);
 
   //md_datasから記事をマージ
-  const allBlogs: Blog[] = [
-    ...data.contents,
-    ...repoData.map((mdData) => ({
-      source: mdData.source,
-      id: mdData.id,
-      title: mdData.title,
-      body: mdData.content,
-      publishedAt: mdData.date || "",
-      updatedAt: mdData.date || "",
-      tag: mdData.topics ? mdData.topics.map((tag) => ({ tag: tag })) : [],
-    })),
-  ];
+  let allBlogs: Blog[] = [];
+
+  if (repoData) {
+    allBlogs = [
+      ...data.contents,
+      ...repoData.map((mdData: GithubPost) => ({
+        source: mdData.source,
+        id: mdData.id,
+        title: mdData.title,
+        body: mdData.content,
+        publishedAt: mdData.date || "",
+        updatedAt: mdData.date || "",
+        tag: mdData.topics ? mdData.topics.map((tag) => ({ tag: tag })) : [],
+      })),
+    ];
+  } else {
+    allBlogs = [...data.contents];
+  }
 
   // publishedAtの順で並べ替え
   allBlogs.sort((a, b) => {
@@ -77,7 +101,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
     currentPage * pagenationOffset
   );
   // const blogs = allBlogs.slice(offset, offset + 5);
-  console.log("blogs", JSON.stringify(blogs, null, 2));
+  // console.log("blogs", JSON.stringify(blogs, null, 2));
 
   // const blogs: Blog[] = data.contents;
   //   const totalPages = Math.ceil(data.totalCount / data.limit);
@@ -94,7 +118,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
           // tags.contents.find((tag) => tag.tag === tagName.tag)
           [];
 
-        console.log("blogTags", blogTags);
+        // console.log("blogTags", blogTags);
 
         const idPhoto: number = Math.floor(Math.random() * 1000);
         const timestamp: number = new Date().getTime();

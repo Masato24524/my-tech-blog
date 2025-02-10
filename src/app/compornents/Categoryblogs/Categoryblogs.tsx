@@ -1,46 +1,61 @@
-import { Blog, getBlogs, Tag } from "app/api/microcms/route";
+import { Blog, getBlogs, Tag } from "app/api/microcms/utils";
 import { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
 import { CategoryPagination } from "../CategoryPagination/CategoryPagination";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
+import { MicrocmsPost } from "app/types/type";
 
 type CategoryblogsProps = {
   currentPage: number;
   categoryName: string;
   categoryNameId?: number;
+  fetchedData: MicrocmsPost;
 };
 
 const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   currentPage,
   categoryName,
   categoryNameId,
+  fetchedData,
 }) => {
   const limit = 100; //全ての記事を取得する　※100記事以上になったら要修正
   const offset = 0;
 
-  const { data, tags } = await getBlogs(limit, offset);
-  const blogs: Blog[] = data.contents;
-  console.log("tags", tags);
-  console.log("blogsA", blogs);
+  // const { data } = await getBlogs(limit, offset);
+  const blogs: any = fetchedData;
+  // const blogs: Blog[] = await getBlogs();
+
+  // console.log("tags", tags);
+  console.log("blogsC", JSON.stringify(blogs, null, 2));
   //   const totalPages = Math.ceil(data.totalCount / data.limit);
   //   const currentPage = 1;
 
   // プロップスから渡されたcategoryNameと一致するタグを取得
-  const faundTag = tags.contents.find(
-    (tag: Tag) => tag.tag === decodeURI(categoryName)
-  );
+  const foundTag = blogs.contents
+    .map((blog: any) =>
+      blog.tag.find((tag: any) => tag.tag === decodeURI(categoryName))
+    )
+    .filter(Boolean);
+  console.log("foundTag", foundTag);
 
   // 一致するタグがあれば、idとtagをセット。なければ空の配列。
-  const getTagId: Tag[] = faundTag
-    ? [{ id: faundTag.id, tag: faundTag.tag }]
-    : [];
+  const getTagId: Tag[] =
+    foundTag.length > 0
+      ? foundTag.map((tag: any) => ({ id: tag.id, tag: tag.tag }))
+      : [];
+  console.log("getTagId", getTagId);
+  const uniqueTag = Array.from(
+    new Map(getTagId.map((tag) => [tag.tag, tag])).values()
+  );
+  console.log("uniqueTag", uniqueTag);
 
   // 一致するブログ記事をフィルタリング
-  const matchingBlogs = blogs.filter((blog: Blog) =>
+  const matchingBlogs = blogs.contents.filter((blog: Blog) =>
     blog.tag?.some((tag) => tag.tag === decodeURI(categoryName))
   );
+  // console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
 
   // フィルタリング後の記事数に基づいてtotalPagesを計算
   const totalMatchingBlogs = matchingBlogs.length;
@@ -53,15 +68,15 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   return (
     <>
       {/* パンくずリストの表示 */}
-      <Maplist getTagId={getTagId} />
+      <Maplist getTagId={uniqueTag} />
       {/* 各投稿記事の表示 */}
       {matchingBlogs.map((blog: Blog) => {
         // 各ブログのタグを取得
-        const blogTags =
-          blog.tag?.map((tagId: Tag) =>
-            tags.contents.find((tag) => tag.id === tagId.id)
-          ) ?? [];
-        console.log("blogTags", blogTags);
+        // const blogTags =
+        //   blog.tag?.map((tagId: Tag) =>
+        //     tags.contents.find((tag) => tag.id === tagId.id)
+        //   ) ?? [];
+        // console.log("blogTags", blogTags);
 
         const idPhoto: number = Math.floor(Math.random() * 1000);
         const timestamp: number = new Date().getTime();
@@ -90,7 +105,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
         ) {
           return (
             <div key={blog.id}>
-              <Link href={`/blogs/${blog.id}`} key={blog.id}>
+              <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
                 <div className="m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
                   <div className="flex ml-2 mb-2">
                     <img
@@ -103,7 +118,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                       <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
 
                       {/* タグの表示 */}
-                      <div>
+                      {/* <div>
                         {blogTags.map(
                           (tag: Tag | undefined) =>
                             tag && (
@@ -115,7 +130,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                               </span>
                             )
                         )}
-                      </div>
+                      </div> */}
 
                       {/* 日付の生成 */}
                       <p className="text-xs mb-2 text-gray-600">

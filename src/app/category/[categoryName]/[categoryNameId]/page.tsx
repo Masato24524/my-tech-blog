@@ -3,6 +3,7 @@ import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Categoryblogs from "app/compornents/Categoryblogs/Categoryblogs";
+import { Blog } from "app/api/microcms/utils";
 
 const BlogsCategoryName = async ({
   params,
@@ -24,6 +25,42 @@ const BlogsCategoryName = async ({
 
   console.log("pageId", params.categoryNameId);
   console.log("offset", offset);
+
+  const API_URL = process.env.API_URL;
+
+  const getBlogs = async () => {
+    const response = await fetch(`${API_URL}/api/microcms`, {
+      cache: "no-cache",
+    });
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    // console.log("dataP-2", data);
+    return data;
+  };
+  const { data } = await getBlogs();
+  console.log("categoryNameData", JSON.stringify(data, null, 2));
+
+  // fetchedDataとして渡す前にデータの存在確認
+  if (!data) {
+    console.error("Data is undefined");
+    return <div>データの読み込みに失敗しました</div>;
+  }
+
+  const allBlogs: Blog[] = [
+    ...data.contents,
+    // ...(repoData
+    //   ? repoData.map((mdData: GithubPost) => ({
+    //       source: mdData.source,
+    //       id: mdData.id,
+    //       title: mdData.title,
+    //       body: mdData.content,
+    //       publishedAt: mdData.date || "",
+    //       updatedAt: mdData.date || "",
+    //     }))
+    //   : []),
+  ];
 
   // const blog = await getDetail(blogId);
 
@@ -53,6 +90,7 @@ const BlogsCategoryName = async ({
             currentPage={currentPage}
             categoryName={categoryName}
             categoryNameId={categoryNameId}
+            fetchedData={data}
           />
 
           {/* ページ番号の記載 */}
@@ -63,7 +101,7 @@ const BlogsCategoryName = async ({
           <Profile />
         </div>
       </div>
-      <Footer />
+      <Footer fetchedData={data} />
     </body>
   );
 };

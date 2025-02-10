@@ -20,7 +20,24 @@ const BlogsCategoryName = async ({
   console.log("pageId", params.categoryName);
   console.log("offset", offset);
 
+  const API_URL = process.env.API_URL;
+  console.log("API_URL:", process.env.API_URL); // 確認用
+
+  const getBlogs = async () => {
+    const response = await fetch(`${API_URL}/api/microcms`, {
+      cache: "no-cache",
+    });
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    // console.log("dataP-2", data);
+    return data;
+  };
+
+  const { data } = await getBlogs();
   // const blog = await getDetail(blogId);
+  console.log("blogsCategoryName", data);
 
   // タグデータを取得
   // const tags = await client.get<TagData>({
@@ -47,6 +64,7 @@ const BlogsCategoryName = async ({
           <Categoryblogs
             currentPage={currentPage}
             categoryName={categoryName}
+            fetchedData={data}
           />
         </div>
         {/* プロフィール欄の表示 */}
@@ -54,7 +72,7 @@ const BlogsCategoryName = async ({
           <Profile />
         </div>
       </div>
-      <Footer />
+      <Footer fetchedData={data} />
     </body>
   );
 };

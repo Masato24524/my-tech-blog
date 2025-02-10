@@ -1,7 +1,7 @@
 // app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
-import { getBlogsRepo } from "app/api/github/route";
+// import { getBlogsRepo } from "app/api/github/route";
 // import { getDetail, TagData, client, Tag } from "app/api/microcms/route";
 import Link from "next/link";
 import React from "react";
@@ -11,6 +11,7 @@ import X_ShareButton from "app/compornents/X_ShareButton/X_ShareButton";
 import { Metadata } from "next";
 import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
+import parse from "html-react-parser";
 
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
@@ -58,11 +59,24 @@ export default async function StaticDetailPage({
 }: {
   params: { blogId: string };
 }) {
-  const repoDatas = await getBlogsRepo();
-  // const blog = await getDetail(blogId);
-  console.log("repoDatas", repoDatas);
+  const API_URL = process.env.API_URL;
 
-  const blog = repoDatas.find((repoData) => repoData.id === blogId);
+  const getBlogsRepo = async () => {
+    const response = await fetch(`${API_URL}/api/github`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const repoDatas = await response.json();
+    return repoDatas;
+  };
+  const repoDatas = await getBlogsRepo();
+
+  // const repoDatas = await getBlogsRepo();
+  // const blog = await getDetail(blogId);
+  // console.log("repoDatas", repoDatas);
+
+  const blog = repoDatas.find((repoData: any) => repoData.id === blogId);
+  console.log("blogDB", blog);
 
   // タグデータを取得
   // const tags = await client.get<TagData>({
@@ -118,13 +132,13 @@ export default async function StaticDetailPage({
           {/* <br></br> */}
 
           {/* 記事本文 */}
-          <div
-            id="blog-doc"
-            className="inline-block mb-10 pt-4"
-            dangerouslySetInnerHTML={{
+          <div id="blog-doc" className="inline-block mb-10 pt-4">
+            {parse(blog.content)}
+          </div>
+          {/* dangerouslySetInnerHTML={{
               __html: blog.content,
             }}
-          />
+          /> */}
           <br></br>
           <Link href={"/"} className="return-top bg-gray-300">
             記事一覧に戻る
@@ -132,7 +146,7 @@ export default async function StaticDetailPage({
         </div>
       </div>
 
-      <Footer />
+      <Footer fetchedData={repoDatas} />
       <ButtonReturn />
     </div>
   );
