@@ -16,13 +16,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   console.log("API_URL:", process.env.API_URL); // 確認用
 
   const getBlogs = async () => {
-    // Next.jsのサーバーコンポーネントでの絶対パスの構築
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-
     try {
-      const response = await fetch(`${baseUrl}/api/microcms`, {
+      const response = await fetch(`${API_URL}/api/microcms`, {
         next: {
           revalidate: 60,
         },
@@ -43,7 +38,6 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       console.error("Fetching error:", {
         message: error.message,
         stack: error.stack,
-        baseUrl,
         vercelUrl: process.env.VERCEL_URL,
       });
       throw error;
