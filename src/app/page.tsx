@@ -17,7 +17,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const getBlogs = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/microcms`, {
+      const response = await fetch(`/api/microcms`, {
         next: {
           revalidate: 60,
         },
