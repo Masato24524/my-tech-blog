@@ -17,9 +17,9 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const getBlogs = async () => {
     // Next.jsのサーバーコンポーネントでの絶対パスの構築
-    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-    const host = process.env.VERCEL_URL || "localhost:3000";
-    const baseUrl = `${protocol}://${host}`;
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
     const response = await fetch(`${baseUrl}/api/microcms`, {
       next: {
         revalidate: 60,
