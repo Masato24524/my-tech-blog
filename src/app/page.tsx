@@ -20,18 +20,34 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     const baseUrl = process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000";
-    const response = await fetch(`${baseUrl}/api/microcms`, {
-      next: {
-        revalidate: 60,
-      },
-    });
-    console.log("responseToppage", response);
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
+
+    try {
+      const response = await fetch(`${baseUrl}/api/microcms`, {
+        next: {
+          revalidate: 60,
+        },
+      });
+      console.log("responseToppage", response);
+      // レスポンスの詳細をログ出力
+      console.log("Response status:", response.status);
+      console.log("Response headers:", Object.fromEntries(response.headers));
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("dataP-2", data);
+
+      return data;
+    } catch (error: any) {
+      console.error("Fetching error:", {
+        message: error.message,
+        stack: error.stack,
+        baseUrl,
+        vercelUrl: process.env.VERCEL_URL,
+      });
+      throw error;
     }
-    const data = await response.json();
-    // console.log("dataP-2", data);
-    return data;
   };
   const { data } = await getBlogs();
   console.log("dataP", JSON.stringify(data, null, 2));
