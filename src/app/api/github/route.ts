@@ -72,7 +72,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/",
       {
         headers: {
-          Authorization: `token ${process.env.GITHUB_TOKEN}`,
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           Accept: "application/vnd.github.v3+json",
         },
         // キャッシュの設定

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-browserslist": "npx update-browserslist-db@latest"
   },
   "dependencies": {
     "@next/third-parties": "^15.0.0-canary.51",

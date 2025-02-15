@@ -2,8 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import "./Footer.css";
-// import { client, Tag, TagData } from "app/api/microcms/utils"; #utilsをインポートするとセキュリティ問題があるため使わない
+// import { client, Tag, TagData } from "app/api/microcms/utils";
+// utilsをインポートするとセキュリティ問題があるため使わない
+
 // import { client, Tag, TagData } from "app/libs/client";
+
 import Link from "next/link";
 import { get } from "http";
 import { MicrocmsPost } from "app/types/type";
