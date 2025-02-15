@@ -16,7 +16,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   console.log("API_URL:", process.env.API_URL); // 確認用
 
   const getBlogs = async () => {
-    const response = await fetch(`${API_URL}/api/microcms`, {
+    // Next.jsのサーバーコンポーネントでの絶対パスの構築
+    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+    const host = process.env.VERCEL_URL || "localhost:3000";
+    const baseUrl = `${protocol}://${host}`;
+    const response = await fetch(`${baseUrl}/api/microcms`, {
       next: {
         revalidate: 60,
       },
