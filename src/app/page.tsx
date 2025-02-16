@@ -18,9 +18,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   const getBlogs = async () => {
     try {
       // process.env.VERCEL_URLを使用して本番環境のURLを構築
-      const baseUrl = process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : "http://localhost:3000";
+      const baseUrl =
+        process.env.NODE_ENV === "development" || "build"
+          ? "http://localhost:3000"
+          : process.env.API_URL; // カスタムドメイン
+      console.log("baseUrl", baseUrl);
       const response = await fetch(`${baseUrl}/api/microcms`, {
         next: {
           revalidate: 60,
@@ -42,6 +44,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       console.error("Fetching error:", {
         message: error.message,
         stack: error.stack,
+        apiUrl: process.env.API_URL,
         vercelUrl: process.env.VERCEL_URL,
       });
       throw error;
