@@ -18,10 +18,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   const getBlogs = async () => {
     try {
       // process.env.VERCEL_URLを使用して本番環境のURLを構築
-      const baseUrl =
-        process.env.NODE_ENV === "development" || "build"
-          ? "http://localhost:3000"
-          : process.env.API_URL; // カスタムドメイン
+      const baseUrl = process.env.API_URL;
       console.log("baseUrl", baseUrl);
       const response = await fetch(`${baseUrl}/api/microcms`, {
         next: {
