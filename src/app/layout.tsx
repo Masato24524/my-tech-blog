@@ -3,6 +3,8 @@ import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
+export const dynamic = "force-dynamic";
+
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto-sans-jp",

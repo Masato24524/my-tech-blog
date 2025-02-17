@@ -49,7 +49,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   // const { data } = await getBlogs();
 
   // const { data, tags } = await getBlogs(limit, offset);
-  console.log("dataS", data);
+  // console.log("dataS", data);
   const API_URL = process.env.API_URL;
 
   const getBlogsRepo = async () => {

@@ -20,11 +20,19 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       // process.env.VERCEL_URLを使用して本番環境のURLを構築
       const baseUrl = process.env.API_URL;
       console.log("baseUrl", baseUrl);
-      const response = await fetch(`${baseUrl}/api/microcms`, {
-        next: {
-          revalidate: 60,
-        },
-      });
+      const vercelUrl = process.env.VERCEL_URL;
+      const response =
+        process.env.NODE_ENV === "development"
+          ? await fetch(`http://localhost:3000/api/microcms`, {
+              next: {
+                revalidate: 60,
+              },
+            })
+          : await fetch("/api/microcms", {
+              next: {
+                revalidate: 60,
+              },
+            });
       console.log("responseToppage", response);
       // レスポンスの詳細をログ出力
       console.log("Response status:", response.status);
