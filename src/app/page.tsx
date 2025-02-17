@@ -30,7 +30,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
                 revalidate: 60,
               },
             })
-          : await fetch("/api/microcms", {
+          : await fetch(`${API_URL}/api/microcms`, {
               cache: "no-store",
               // next: {
               //   revalidate: 60,
