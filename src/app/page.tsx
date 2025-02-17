@@ -8,6 +8,8 @@ import Showblogs from "./compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "./types/type";
 // import { getBlogsRepo } from "./api/github/route";
 
+export const dynamic = "force-dynamic";
+
 const BlogsPage = async (): Promise<JSX.Element> => {
   const limit = 100;
   const offset = 0;
@@ -29,9 +31,10 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               },
             })
           : await fetch("/api/microcms", {
-              next: {
-                revalidate: 60,
-              },
+              cache: "no-store",
+              // next: {
+              //   revalidate: 60,
+              // },
             });
       console.log("responseToppage", response);
       // レスポンスの詳細をログ出力
@@ -39,14 +42,14 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       console.log("Response headers:", Object.fromEntries(response.headers));
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        throw new Error(`Fetching Error on top pages.tsx: ${response.status}`);
       }
       const data = await response.json();
       console.log("dataP-2", data);
 
       return data;
     } catch (error: any) {
-      console.error("Fetching error:", {
+      console.error("Fetching error on top pages.tsx:", {
         message: error.message,
         stack: error.stack,
         apiUrl: process.env.API_URL,
@@ -56,7 +59,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     }
   };
   const { data } = await getBlogs();
-  console.log("dataP", JSON.stringify(data, null, 2));
+  // console.log("dataP", JSON.stringify(data, null, 2));
   // const { data } = await getBlogs(limit, offset);
 
   const getBlogsRepo = async () => {
@@ -72,12 +75,12 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
       // レスポンスのステータスをチェック
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        throw new Error(`Fetching Error Zenn articles: ${response.status}`);
       }
       const repoData = await response.json();
       return repoData;
     } catch (error) {
-      console.error("Fetching error:", error);
+      console.error("Fetching error Zenn articles:", error);
       return null;
     }
   };
