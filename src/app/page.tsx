@@ -65,9 +65,10 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   const getBlogsRepo = async () => {
     try {
       const response = await fetch(`${API_URL}/api/github`, {
-        next: {
-          revalidate: 60,
-        },
+        cache: "no-store",
+        // next: {
+        //   revalidate: 60,
+        // },
       });
       // next: {
       //   revalidate: 0;
@@ -85,7 +86,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     }
   };
   const repoData = await getBlogsRepo();
-  // console.log("repoData", repoData);
+  console.log("repoData", repoData);
 
   //md_datasから記事をマージ
   const allBlogs: Blog[] = [
