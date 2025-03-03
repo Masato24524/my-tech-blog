@@ -12,7 +12,10 @@ export function Profile(): React.ReactElement {
         <img src="/my-icon.jpg" className="rounded-full max-w-20" />
         <p className="text-2xl">Masato</p>
         <br></br>
-        <p>未経験からフロントエンジニアを目指し学習中です。</p>
+        <p>元機械設計技術者。</p>
+        <p>
+          独学でNext.js、TypeScriptなどを学習し、未経験からITエンジニアへキャリアチェンジしました。
+        </p>
         <br></br>
         <a
           id="profile"
@@ -24,7 +27,7 @@ export function Profile(): React.ReactElement {
         </a>
         <br></br>
         <br></br>
-        <p>JavaScript, TypeScript, React, Next.js</p>
+        <p>JavaScript, TypeScript, React, Next.js ,Python</p>
       </div>
     </div>
   );

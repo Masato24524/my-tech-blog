@@ -55,20 +55,20 @@ export const Header: React.FC = () => {
               {"Blog"}
             </Link>
           </li>
+          <li className="list-none ml-2">
+            <Link
+              href="/pages/works"
+              className="bg-white hover:bg-pink-200 flex m-auto p-1 px-8 mr-2 rounded-lg"
+            >
+              {"Works"}
+            </Link>
+          </li>
           <li className=" list-none mr-2 ml-2">
             <Link
               href="/pages/portfolio"
-              className="bg-white hover:bg-pink-200 flex m-auto p-1 px-8 rounded-lg"
+              className="bg-white hover:bg-pink-200 flex m-auto p-1 px-7 mr-8 rounded-lg"
             >
               {"Portfolio"}
-            </Link>
-          </li>
-          <li className="list-none ml-2">
-            <Link
-              href="#"
-              className="bg-gray-300 flex m-auto p-1 px-8 mr-8 rounded-lg"
-            >
-              {"Works"}
             </Link>
           </li>
         </ul>

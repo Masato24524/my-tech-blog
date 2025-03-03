@@ -155,13 +155,13 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                     <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
 
                     {/* タグの表示 */}
-                    <div className="">
+                    <div className="flex flex-wrap">
                       {blogTags.map(
                         (tag: Tag | undefined) =>
                           tag && (
                             <span
                               key={tag.id}
-                              className="p-[2px] mr-2 text-sm rounded-xl text-white bg-blue-500"
+                              className="p-[2px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-blue-500"
                             >
                               &nbsp;📁&nbsp;{tag?.tag || ""}&nbsp;&nbsp;
                             </span>
