@@ -13,6 +13,8 @@ import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 import parse from "html-react-parser";
 
+export const dynamic = "force-dynamic";
+
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
 //   const { contents } = await getBlogs();
@@ -62,7 +64,9 @@ export default async function StaticDetailPage({
   const API_URL = process.env.API_URL;
 
   const getBlogsRepo = async () => {
-    const response = await fetch(`${API_URL}/api/github`);
+    const response = await fetch(`${API_URL}/api/github`, {
+      cache: "no-store",
+    });
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -73,7 +77,7 @@ export default async function StaticDetailPage({
 
   // const repoDatas = await getBlogsRepo();
   // const blog = await getDetail(blogId);
-  // console.log("repoDatas", repoDatas);
+  console.log("repoDatas", repoDatas);
 
   const blog = repoDatas.find((repoData: any) => repoData.id === blogId);
   console.log("blogDB", blog);
@@ -146,7 +150,7 @@ export default async function StaticDetailPage({
         </div>
       </div>
 
-      <Footer fetchedData={repoDatas} />
+      <Footer fetchedData={undefined} />
       <ButtonReturn />
     </div>
   );
