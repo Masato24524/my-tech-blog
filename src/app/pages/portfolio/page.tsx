@@ -27,6 +27,33 @@ const page = () => {
               　日付ごとの収支が登録できる家計簿アプリです。
               <br />
               　<br />
+              <p className="text-left pl-8">技術スタック：</p>
+              <p className="pl-16 pb-2 text-gray-600 bg-gray-200 flex flex-wrap">
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;React.js&nbsp;&nbsp;
+                </span>
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;TypeScript&nbsp;&nbsp;
+                </span>
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;Next.js&nbsp;&nbsp;
+                </span>
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;Material-UI&nbsp;&nbsp;
+                </span>
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;Chart.js&nbsp;&nbsp;
+                </span>
+              </p>
+              <div className="pl-16 pb-2 text-gray-600 bg-gray-200 flex flex-wrap">
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;※Docker&nbsp;&nbsp;
+                </span>
+                <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                  &nbsp;&nbsp;※Amazon ECS/ECR&nbsp;&nbsp;
+                </span>
+              </div>
+              <div>※Dockerでコンテナ化し、Amazon ECS/ECRにデプロイ</div>
             </p>
           </Link>
         </div>
@@ -49,6 +76,17 @@ const page = () => {
               <br />
               　映画をクリックすると、YouTubeのプロモーション映像が流れます。
               <br />
+              <br />
+              技術スタック：
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                &nbsp;&nbsp;React.js&nbsp;&nbsp;
+              </span>
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                &nbsp;&nbsp;TypeScript&nbsp;&nbsp;
+              </span>
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                &nbsp;&nbsp;Next.js&nbsp;&nbsp;
+              </span>
             </p>
           </Link>
         </div>

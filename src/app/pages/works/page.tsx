@@ -29,6 +29,18 @@ const page = () => {
               言語更新に合わせGCPサービス（GmailAPI、CloudTasksなど）の置き換えも行いました。
               　<br />
             </p>
+            <p className="text-left pl-8">技術スタック：</p>
+            <p className="pl-16 pb-2 text-gray-600 bg-gray-200 flex flex-wrap">
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                &nbsp;&nbsp;Angular.js&nbsp;&nbsp;
+              </span>
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                &nbsp;&nbsp;Python&nbsp;&nbsp;
+              </span>
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                &nbsp;&nbsp;GCP&nbsp;&nbsp;
+              </span>
+            </p>
           </Link>
         </div>
         {/* <div
