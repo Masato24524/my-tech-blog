@@ -24,20 +24,19 @@ const page = () => {
               <br />
             </p>
             <p className="pb-4 text-gray-600 bg-gray-200">
-              　バックエンドで使用されているPython2.7を、Python3.9へバージョンアップする業務を担当。
+              バックエンドで使用されているPython2.7から、Python3.9へのバージョンアップを担当。
               <br />
-              言語更新に合わせGCPサービス（GmailAPI、CloudTasksなど）の置き換えも行いました。
+              言語更新に合わせGCPサービス（GmailAPI、CloudTasksなど）の置き換えも実施。
               　<br />
             </p>
-            <p className="text-left pl-8">技術スタック：</p>
-            <p className="pl-16 pb-2 text-gray-600 bg-gray-200 flex flex-wrap">
+            <p className="pb-2 text-gray-600 bg-gray-200 justify-center flex flex-wrap">
               <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
                 &nbsp;&nbsp;Angular.js&nbsp;&nbsp;
               </span>
               <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
                 &nbsp;&nbsp;Python&nbsp;&nbsp;
               </span>
-              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+              <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-orange-500">
                 &nbsp;&nbsp;GCP&nbsp;&nbsp;
               </span>
             </p>

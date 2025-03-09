@@ -27,7 +27,7 @@ export function Profile(): React.ReactElement {
         </a>
         <br></br>
         <br></br>
-        <p>JavaScript, TypeScript, React, Next.js ,Python</p>
+        <p>JavaScript, TypeScript, React, Next.js, Python</p>
       </div>
     </div>
   );
