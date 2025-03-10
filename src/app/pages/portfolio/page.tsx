@@ -50,10 +50,15 @@ const page = () => {
                     &nbsp;&nbsp;※Docker&nbsp;&nbsp;
                   </span>
                   <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-orange-500">
-                    &nbsp;&nbsp;※Amazon ECS/ECR&nbsp;&nbsp;
+                    &nbsp;&nbsp;※Google Artifact Registory&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-orange-500">
+                    &nbsp;&nbsp;※Google Cloud Run&nbsp;&nbsp;
                   </span>
                 </div>
-                <div>※Dockerでコンテナ化し、Amazon ECS/ECRにデプロイ</div>
+                <div>
+                  ※Dockerでコンテナ化し、Artifact Registory, Cloud Runでデプロイ
+                </div>
               </div>
             </p>
           </Link>
