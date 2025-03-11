@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 750px以下で適用 */
+@media (750px >= width) {
+    #footer-container {
+        display: inline-flex;
+        width: 100vw;
+    }
+    
+    #footer-container p {
+        left: 195px;
+        right: 20px;
+    }
+}
