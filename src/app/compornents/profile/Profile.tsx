@@ -21,7 +21,7 @@ export function Profile(): React.ReactElement {
           <a
             id="profile"
             className="bg-black mt-4 mr-2 py-1 px-[12px] rounded-full text-2xl"
-            href="https://x.com/masato24524"
+            href="https://x.com/ma_sato2024"
           >
             &#x1D54F;
             {/* <img src="logo-handle.jpg" className='mt-5 ml-1 w-24 h-6'></img> */}
