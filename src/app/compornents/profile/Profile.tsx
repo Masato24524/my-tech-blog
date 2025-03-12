@@ -9,7 +9,7 @@ export function Profile(): React.ReactElement {
       <div className="p-2">
         {/* <p className='text-2xl'>&nbsp;</p> */}
         <br></br>
-        <img src="/my-icon2.jpg" className="rounded-full max-w-20 mx-auto" />
+        <img src="/my-icon3.jpg" className="rounded-full max-w-20 mx-auto" />
         <p className="text-2xl text-center">Masato</p>
         <br></br>
         <p>元機械設計技術者。</p>
