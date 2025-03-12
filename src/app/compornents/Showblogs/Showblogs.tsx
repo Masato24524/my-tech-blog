@@ -143,17 +143,16 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
         return (
           <>
             <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
-              <div className="m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
-                <div className="flex ml-2 mb-2">
+              <div className="w-auto h-full m-2 mt-0 mb-4 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+                {/* 記事のタイトル */}
+                <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
+                <div className="flex mb-2">
                   <img
                     className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
                     src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
                     alt="No image"
                   />
                   <div className="w-1/2">
-                    {/* 記事のタイトル */}
-                    <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
-
                     {/* タグの表示 */}
                     <div className="flex flex-wrap">
                       {blogTags.map(
@@ -181,18 +180,18 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                         </>
                       )}
                     </p>
-
-                    {/* 記事内容のプレビュー */}
-                    <div className="text-sm leading-relaxed mt-2 mb-1">
-                      {/* 危険なHTMLを安全に表示  */}
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: sanitizeHtml(truncateString(blog.body, 140)),
-                        }}
-                      />
-                      {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
-                    </div>
                   </div>
+                </div>
+                {/* 記事内容のプレビュー */}
+                <div className="text-sm leading-relaxed mt-2 mb-1">
+                  {/* 危険なHTMLを安全に表示  */}
+                  <div
+                    className="break-words"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitizeHtml(truncateString(blog.body, 180)),
+                    }}
+                  />
+                  {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
                 </div>
               </div>
             </Link>
