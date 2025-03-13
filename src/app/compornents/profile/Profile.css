@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 #profile {
-    color: white;
-    text-decoration: none;
+  /* color: white; */
+  text-decoration: none;
 }
 
 /* 750px以下で適用 */
 @media (750px >= width) {
-    #profile-container {
-        display: block;
-        width: 100%;
-        height: auto;
-        margin: auto;
-    }
+  #profile-container {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
 }

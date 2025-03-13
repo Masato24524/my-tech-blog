@@ -4,7 +4,7 @@ export function Profile(): React.ReactElement {
   return (
     <div
       id="profile-container"
-      className="inline-flex float-right w-1/3 h-min top-0 mt-[0px] ml-8 p-4 pb-8 text-gray-950 bg-white shadow-md"
+      className="inline-flex float-right w-1/4 h-min top-0 mt-[0px] ml-8 p-4 pb-8 text-gray-950 bg-white shadow-md"
     >
       <div className="p-2">
         {/* <p className='text-2xl'>&nbsp;</p> */}
@@ -17,18 +17,25 @@ export function Profile(): React.ReactElement {
           独学でNext.js、TypeScriptなどを学習し、未経験からITエンジニアへキャリアチェンジしました。
         </p>
         <br></br>
-        <div className="text-center">
+        <div className="flex w-full mx-auto justify-center">
           <a
             id="profile"
-            className="bg-black mt-4 mr-2 py-1 px-[12px] rounded-full text-2xl"
+            className="text-black mt-4 mr-2 py-1 px-[12px] rounded-full text-2xl border border-black"
             href="https://x.com/ma_sato2024"
           >
             &#x1D54F;
             {/* <img src="logo-handle.jpg" className='mt-5 ml-1 w-24 h-6'></img> */}
           </a>
           <a
-            id="profile"
-            className="bg-black mt-4 py-1 px-[8px] rounded-full text-2xl"
+            id="zenn"
+            className="bg-white w-10 mt-4 mr-2 py-1 px-[8px] rounded-full border border-black"
+            href="https://zenn.dev/masato24524"
+          >
+            <img src="/logo-zenn.png" className="mt-1 h-6"></img>
+          </a>
+          <a
+            id="contact"
+            className="bg-white mt-4 py-1 px-[8px] rounded-full text-2xl border border-black"
             href="/pages/contact"
           >
             ✉
@@ -37,7 +44,9 @@ export function Profile(): React.ReactElement {
         </div>
         <br></br>
         <br></br>
-        <p>JavaScript, TypeScript, React, Next.js, Python</p>
+        <p className="text-center">
+          JavaScript, TypeScript, React, Next.js, Python
+        </p>
       </div>
     </div>
   );
