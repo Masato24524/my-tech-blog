@@ -118,10 +118,6 @@ export default async function StaticDetailPage({
         >
           {/* 記事のタイトル */}
           <h1 className="text-lg font-bold">{blog.title}</h1>
-          <img
-            src="https://raw.githubusercontent.com/Masato24524/Zenn-contents/main/images/49aef95c1253c2/image-1.png"
-            alt="test"
-          />
 
           {/* 日付の生成 */}
           <p>
