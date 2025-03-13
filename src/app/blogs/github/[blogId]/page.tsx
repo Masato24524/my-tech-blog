@@ -93,9 +93,23 @@ export default async function StaticDetailPage({
   // );
   // console.log("getTagId", getTagId);
 
+  const GITHUB_BASE_URL =
+    "https://raw.githubusercontent.com/Masato24524/Zenn-contents/main";
+
+  const convertImagePaths = (htmlContent: string) => {
+    return htmlContent.replace(
+      /<img src="\/images\/([^"]+)"/g,
+      `<img src="${GITHUB_BASE_URL}/images/$1"`
+    );
+  };
+
+  const blogContent = convertImagePaths(blog.content);
+  console.log("blogContent", JSON.stringify(blogContent, null, 2));
+
   return (
     <div id="content" className="w-full pr-20 bg-gray-100">
       <Header />
+
       <div className="mt-44">
         {/* <Maplist getTagId={getTagId} /> */}
         <div
@@ -104,6 +118,10 @@ export default async function StaticDetailPage({
         >
           {/* 記事のタイトル */}
           <h1 className="text-lg font-bold">{blog.title}</h1>
+          <img
+            src="https://raw.githubusercontent.com/Masato24524/Zenn-contents/main/images/49aef95c1253c2/image-1.png"
+            alt="test"
+          />
 
           {/* 日付の生成 */}
           <p>
@@ -137,7 +155,7 @@ export default async function StaticDetailPage({
 
           {/* 記事本文 */}
           <div id="blog-doc" className="inline-block mb-10 pt-4">
-            {parse(blog.content)}
+            {parse(blogContent)}
           </div>
           {/* dangerouslySetInnerHTML={{
               __html: blog.content,
