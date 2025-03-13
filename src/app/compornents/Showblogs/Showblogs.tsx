@@ -145,7 +145,9 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
             <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
               <div className="w-auto h-full m-2 mt-0 mb-4 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
                 {/* 記事のタイトル */}
-                <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
+                <h2 className="min-h-16 pb-2 text-xl font-bold">
+                  {blog.title}
+                </h2>
                 <div className="flex mb-2">
                   <img
                     className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
@@ -188,7 +190,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                   <div
                     className="break-words"
                     dangerouslySetInnerHTML={{
-                      __html: sanitizeHtml(truncateString(blog.body, 180)),
+                      __html: sanitizeHtml(truncateString(blog.body, 200)),
                     }}
                   />
                   {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
