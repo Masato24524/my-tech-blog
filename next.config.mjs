@@ -11,7 +11,11 @@ const nextConfig = {
 
   //Claudflare用の設定
   experimental: {
-    runtime: "edge",
+    appDir: true,
+    serverComponentsExternalPackages: ["@cloudflare/react"],
+  },
+  images: {
+    unoptimized: true, // Cloudflareの制約に対応
   },
 };
 
