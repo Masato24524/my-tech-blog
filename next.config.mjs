@@ -13,7 +13,16 @@ const nextConfig = {
   images: {
     unoptimized: true, // Cloudflareの制約に対応
   },
-  output: "export",
+  output: "standalone",
+  // Cloudflare Pagesのファイルサイズ制限に対応するための設定
+  webpack: (config) => {
+    config.optimization.splitChunks = {
+      chunks: "all",
+      maxInitialRequests: 25,
+      minSize: 20000,
+      maxSize: 20000000, // 20MB以下のチャンクに分割
+    };
+  },
 };
 
 export default nextConfig;
