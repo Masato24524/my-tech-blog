@@ -17,6 +17,7 @@ const nextConfig = {
   images: {
     unoptimized: true, // Cloudflareの制約に対応
   },
+  output: "standalone",
 };
 
 export default nextConfig;
