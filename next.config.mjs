@@ -22,6 +22,7 @@ const nextConfig = {
       minSize: 20000,
       maxSize: 20000000, // 20MB以下のチャンクに分割
     };
+    return config;
   },
 };
 
