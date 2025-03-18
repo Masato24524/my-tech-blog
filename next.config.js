@@ -7,12 +7,10 @@ const nextConfig = {
   },
   images: {
     domains: ["www.masato-tech-blog.com", "masato-tech-blog.com"],
+    unoptimized: true, // Cloudflareの制約に対応
   },
 
   //Claudflare用の設定
-  images: {
-    unoptimized: true, // Cloudflareの制約に対応
-  },
   output: "standalone",
   trailingSlash: true,
   // Cloudflare Pagesのファイルサイズ制限に対応するための設定
@@ -31,4 +29,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.export = nextConfig;
