@@ -10,14 +10,10 @@ const nextConfig = {
   },
 
   //Claudflare用の設定
-  experimental: {
-    appDir: true,
-    serverComponentsExternalPackages: ["@cloudflare/react"],
-  },
   images: {
     unoptimized: true, // Cloudflareの制約に対応
   },
-  output: "standalone",
+  output: "export",
 };
 
 export default nextConfig;
