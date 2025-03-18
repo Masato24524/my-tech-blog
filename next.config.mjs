@@ -14,6 +14,7 @@ const nextConfig = {
     unoptimized: true, // Cloudflareの制約に対応
   },
   output: "standalone",
+  trailingSlash: true,
   // Cloudflare Pagesのファイルサイズ制限に対応するための設定
   webpack: (config) => {
     config.optimization.splitChunks = {
