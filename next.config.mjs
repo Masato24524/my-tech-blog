@@ -8,6 +8,11 @@ const nextConfig = {
   images: {
     domains: ["www.masato-tech-blog.com", "masato-tech-blog.com"],
   },
+
+  //Claudflare用の設定
+  experimental: {
+    runtime: "edge",
+  },
 };
 
 export default nextConfig;
