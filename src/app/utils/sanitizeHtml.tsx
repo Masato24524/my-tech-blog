@@ -1,3 +1,5 @@
+"use client";
+
 import DOMPurify from "isomorphic-dompurify";
 
 // HTMLタグを安全に表示する関数
@@ -45,3 +47,22 @@ export const truncateString = (str: string, maxLength: number): string => {
   }
   return str.substring(0, maxLength) + "...";
 };
+
+// SafeHtmlコンポーネント
+const SafeHtml = ({ blogBody }: any) => {
+  return (
+    <div>
+      <div className="text-sm leading-relaxed mt-2 mb-1">
+        {/* 危険なHTMLを安全に表示  */}
+        <div
+          className="break-words"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHtml(truncateString(blogBody, 200)),
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default SafeHtml;

@@ -2,7 +2,7 @@ import { Blog, getBlogs } from "app/api/microcms/utils";
 // import { Blog, getBlogs, Tag } from "app/libs/client";
 import { Tag } from "app/api/github/route";
 
-import { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
+import SafeHtml, { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
@@ -185,13 +185,14 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                   </div>
                 </div>
                 {/* 記事内容のプレビュー */}
+                <SafeHtml blogBody={blog.body} />
                 <div className="text-sm leading-relaxed mt-2 mb-1">
                   {/* 危険なHTMLを安全に表示  */}
                   <div
                     className="break-words"
-                    dangerouslySetInnerHTML={{
-                      __html: sanitizeHtml(truncateString(blog.body, 200)),
-                    }}
+                    // dangerouslySetInnerHTML={{
+                    //   __html: sanitizeHtml(truncateString(blog.body, 200)),
+                    // }}
                   />
                   {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
                 </div>

@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import "./page.css";
 import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
@@ -133,7 +135,6 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     <body>
       {/* <CustomHead /> */}
       <Header />
-
       <div id="container" className="flex w-11/12 h-auto mt-60 mx-auto">
         <div id="main" className="grid grid-cols-2 gap-y-8 w-full mx-auto ml-4">
           {/* Blog List */}
