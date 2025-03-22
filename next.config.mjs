@@ -14,6 +14,9 @@ const nextConfig = {
   output: "standalone",
   trailingSlash: true,
   // Cloudflare Pagesのファイルサイズ制限に対応するための設定
+  experimental: {
+    optimizePackageImports: true,
+  },
   webpack: (config) => {
     config.optimization.splitChunks = {
       chunks: "all",
@@ -29,4 +32,4 @@ const nextConfig = {
   },
 };
 
-module.export = nextConfig;
+export default nextConfig;
