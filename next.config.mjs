@@ -15,14 +15,14 @@ const nextConfig = {
   trailingSlash: true,
   // Cloudflare Pagesのファイルサイズ制限に対応するための設定
   experimental: {
-    optimizePackageImports: true,
+    // optimizePackageImports: true,　// Next.js14では使用できない
   },
   webpack: (config) => {
     config.optimization.splitChunks = {
       chunks: "all",
       maxInitialRequests: 25,
-      minSize: 20000,
-      maxSize: 20000000, // 20MB以下のチャンクに分割
+      minSize: 10000,
+      maxSize: 10000000, // 20MB以下のチャンクに分割
     };
 
     // キャッシュファイルを生成しない設定を追加
