@@ -1,9 +1,14 @@
 {
   "version": 1,
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+  "include": ["/*"],
+  "exclude": [
+    "/_next/*",
+    "/static/*",
+    "/*.ico",
+    "/*.png",
+    "/*.svg",
+    "/*.jpg",
+    "/*.js",
+    "/*.css"
   ]
 }
