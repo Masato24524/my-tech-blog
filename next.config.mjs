@@ -22,7 +22,7 @@ const nextConfig = {
       chunks: "all",
       maxInitialRequests: 25,
       minSize: 10000,
-      maxSize: 10000000, // 20MB以下のチャンクに分割
+      maxSize: 10000000, // 10MB以下のチャンクに分割
     };
 
     // キャッシュファイルを生成しない設定を追加
