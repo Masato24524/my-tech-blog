@@ -1,0 +1,13 @@
+# トップページとその他のpage.tsxファイル用のルート設定
+[[routes]]
+pattern = "/*"
+script = "app"  # appディレクトリをスクリプトルートとして指定
+
+# APIエンドポイント用の設定
+[[routes]]
+pattern = "/api/github*"
+script = "api/github"
+
+[[routes]]
+pattern = "/api/microcms*"
+script = "api/microcms"

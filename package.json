@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "update-browserslist": "npx update-browserslist-db@latest"
+    "update-browserslist": "npx update-browserslist-db@latest",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static"
   },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.13.10",
