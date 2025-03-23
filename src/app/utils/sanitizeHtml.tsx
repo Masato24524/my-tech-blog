@@ -1,11 +1,10 @@
 "use client";
 
-import DOMPurify from "isomorphic-dompurify";
+import DOMPurify from "dompurify";
 
 // HTMLタグを安全に表示する関数
 export const sanitizeHtml = (htmlString: string): string => {
   // DOMPurifyを使用してHTMLをサニタイズする
-  // isomorphic-dompurifyはサーバーサイドとクライアントサイドの両方で動作
   const sanitized = DOMPurify.sanitize(htmlString, {
     // 必要に応じてオプションを設定
     ALLOWED_TAGS: [
