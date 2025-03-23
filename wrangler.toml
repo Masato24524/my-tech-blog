@@ -1,4 +1,14 @@
+# wrangler.toml
+name = "my-tech-blog"
+
+# 重要: 出力ディレクトリを指定
+pages_build_output_dir = ".next"
+
 # トップページとその他のpage.tsxファイル用のルート設定
+[[routes]]
+pattern = "/"
+script = "app/page"
+
 [[routes]]
 pattern = "/*"
 script = "app"  # appディレクトリをスクリプトルートとして指定
@@ -6,8 +16,8 @@ script = "app"  # appディレクトリをスクリプトルートとして指�
 # APIエンドポイント用の設定
 [[routes]]
 pattern = "/api/github*"
-script = "api/github"
+script = "app/api/github/route"
 
 [[routes]]
 pattern = "/api/microcms*"
-script = "api/microcms"
+script = "app/api/microcms/route"
