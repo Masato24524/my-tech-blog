@@ -5,19 +5,8 @@ name = "my-tech-blog"
 pages_build_output_dir = ".next"
 
 # トップページとその他のpage.tsxファイル用のルート設定
-[[routes]]
-pattern = "/"
-script = "app/page"
-
-[[routes]]
-pattern = "/*"
-script = "app"  # appディレクトリをスクリプトルートとして指定
-
-# APIエンドポイント用の設定
-[[routes]]
-pattern = "/api/github*"
-script = "app/api/github/route"
-
-[[routes]]
-pattern = "/api/microcms*"
-script = "app/api/microcms/route"
+[routes]
+"/" = { script = "app/page" }
+"/*" = { script = "app" }
+"/api/github*" = { script = "app/api/github/route" }
+"/api/microcms*" = { script = "app/api/microcms/route" }
