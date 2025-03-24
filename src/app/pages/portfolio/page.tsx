@@ -13,7 +13,7 @@ const page = () => {
           id="household-app"
           className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
         >
-          <Link href="https://household-app-440645188294.asia-northeast1.run.app">
+          <Link href="https://masato24524.github.io/household-app-temp/">
             <img
               className="w-[400px] h-[300px] m-auto mb-4 p-8 pb-4"
               src="/household.png"
