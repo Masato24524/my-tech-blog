@@ -13,7 +13,7 @@ const page = () => {
           id="household-app"
           className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
         >
-          <Link href="https://masato24524.github.io/household-app-temp/">
+          <Link href="https://household-app-440645188294.asia-northeast1.run.app">
             <img
               className="w-[400px] h-[300px] m-auto mb-4 p-8 pb-4"
               src="/household.png"
@@ -63,7 +63,7 @@ const page = () => {
             </p>
           </Link>
         </div>
-        <div
+        {/* <div
           id="netflix-clone-app"
           className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
         >
@@ -94,7 +94,7 @@ const page = () => {
               </span>
             </p>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <p id="caution" className="pt-12 pb-20 pl-20 text-sm">
