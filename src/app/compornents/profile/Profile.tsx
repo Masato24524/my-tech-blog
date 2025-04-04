@@ -17,6 +17,14 @@ export function Profile(): React.ReactElement {
           独学でNext.js、TypeScriptなどを学習し、未経験からITエンジニアへキャリアチェンジしました。
         </p>
         <br></br>
+
+        <p className="">技術スタック：</p>
+        <p className="">JavaScript, TypeScript, React, Next.js, Python, Java</p>
+        <br></br>
+        <p className="text-sm">
+          お仕事のご相談を受け付けています。 <br />
+          下記の問い合わせフォームよりご連絡ください。
+        </p>
         <div className="flex w-full mx-auto justify-center">
           <a
             id="profile"
@@ -43,10 +51,6 @@ export function Profile(): React.ReactElement {
           </a>
         </div>
         <br></br>
-        <br></br>
-        <p className="text-center">
-          JavaScript, TypeScript, React, Next.js, Python
-        </p>
       </div>
     </div>
   );
