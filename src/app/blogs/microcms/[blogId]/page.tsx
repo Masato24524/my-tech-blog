@@ -95,7 +95,7 @@ export default async function StaticDetailPage({
   // const getTagId = tags.filter((tagId) =>
   //   blog.tag?.some((blogTag) => blogTag.tag === tagId.tag)
   // );
-  console.log("getTagId", getTagId);
+  // console.log("getTagId", getTagId);
 
   return (
     <div id="content" className="w-full pr-20 bg-gray-100">

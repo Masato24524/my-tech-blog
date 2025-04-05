@@ -6,6 +6,7 @@ import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "app/types/type";
+import { pagenationOffsetNum } from "app/utils/constants";
 // import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
@@ -54,7 +55,7 @@ const BlogsPageId = async ({
     })),
   ];
 
-  const pagenationOffset = 4;
+  const pagenationOffset = pagenationOffsetNum;
   const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
 
   console.log("pageId", params.pageId);

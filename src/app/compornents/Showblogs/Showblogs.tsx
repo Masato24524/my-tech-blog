@@ -92,7 +92,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
     return dateB - dateA;
   });
 
-  console.log("allBlogs", allBlogs.length);
+  // console.log("allBlogs", allBlogs.length);
   // console.log("publishedAt", blogs[6].publishedAt);
 
   // const pagenationOffset = 4;

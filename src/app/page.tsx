@@ -10,6 +10,9 @@ import Showblogs from "./compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "./types/type";
 // import { getBlogsRepo } from "./api/github/route";
 
+import { pagenationOffsetNum } from "./utils/constants";
+import page from "./pages/contact/page";
+
 export const dynamic = "force-dynamic";
 
 const BlogsPage = async (): Promise<JSX.Element> => {
@@ -38,16 +41,16 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               //   revalidate: 60,
               // },
             });
-      console.log("responseToppage", response);
+      // console.log("responseToppage", response.json());
       // レスポンスの詳細をログ出力
-      console.log("Response status:", response.status);
-      console.log("Response headers:", Object.fromEntries(response.headers));
+      // console.log("Response status:", response.status);
+      // console.log("Response headers:", Object.fromEntries(response.headers));
 
       if (!response.ok) {
         throw new Error(`Fetching Error on top pages.tsx: ${response.status}`);
       }
       const data = await response.json();
-      console.log("dataP-2", data);
+      // console.log("dataP-2", data);
 
       return data;
     } catch (error: any) {
@@ -88,7 +91,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     }
   };
   const repoData = await getBlogsRepo();
-  console.log("repoData", repoData);
+  // console.log("repoData", repoData);
 
   //md_datasから記事をマージ
   const allBlogs: Blog[] = [
@@ -105,8 +108,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       : []),
   ];
 
-  console.log("allBlogs", allBlogs.length);
-  console.log("allBlogs:", JSON.stringify(allBlogs, null, 2));
+  // console.log("allBlogs", allBlogs.length);
+  // console.log("allBlogs:", JSON.stringify(allBlogs, null, 2));
 
   //Tagデータのマージ
   const allTags: string[] = [
@@ -122,13 +125,13 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const uniqueTags = Array.from(new Set(allTags));
 
-  console.log("allTags:", JSON.stringify(allTags, null, 2));
-  console.log("uniqueTags:", JSON.stringify(uniqueTags, null, 2));
+  // console.log("allTags:", JSON.stringify(allTags, null, 2));
+  // console.log("uniqueTags:", JSON.stringify(uniqueTags, null, 2));
 
-  const pagenationOffset = 8;
+  const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 
   const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
-  console.log("totalPages", totalPages);
+  // console.log("totalPages", totalPages);
   const currentPage = 1;
 
   return (
