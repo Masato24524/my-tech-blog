@@ -13,7 +13,7 @@ import { GithubPost, MicrocmsPost } from "./types/type";
 import { pagenationOffsetNum } from "./utils/constants";
 import page from "./pages/contact/page";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const limit = 100;
@@ -36,10 +36,10 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               },
             })
           : await fetch(`${API_URL}/api/microcms`, {
-              cache: "no-store",
-              // next: {
-              //   revalidate: 60,
-              // },
+              // cache: "no-store",
+              next: {
+                revalidate: 60,
+              },
             });
       // console.log("responseToppage", response.json());
       // レスポンスの詳細をログ出力
