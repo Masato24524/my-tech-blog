@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import gfm from "remark-gfm";
 import { NextRequest, NextResponse } from "next/server";
 
 // if (!process.env.NEXT_PUBLIC_SERVICE_DOMAIN) {
@@ -160,7 +161,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const contentHtmlArray = await Promise.all(
       removeFlasyDatas.map(async (item) => {
-        const processed = await remark().use(html).process(item.content);
+        const processed = await remark()
+          .use(gfm)
+          .use(html)
+          .process(item.content);
         // console.log("processed", processed);
         const contentHtml = processed.toString();
 

@@ -77,12 +77,11 @@ export default async function StaticDetailPage({
   };
   const repoDatas = await getBlogsRepo();
 
-  // const repoDatas = await getBlogsRepo();
   // const blog = await getDetail(blogId);
-  console.log("repoDatas", repoDatas);
+  // console.log("repoDatas", repoDatas);
 
   const blog = repoDatas.find((repoData: any) => repoData.id === blogId);
-  console.log("blogDB", blog);
+  // console.log("blogDB", blog);
 
   // タグデータを取得
   // const tags = await client.get<TagData>({
@@ -106,7 +105,7 @@ export default async function StaticDetailPage({
   };
 
   const blogContent = convertImagePaths(blog.content);
-  console.log("blogContent", JSON.stringify(blogContent, null, 2));
+  // console.log("blogContent", JSON.stringify(blogContent, null, 2));
 
   return (
     <div id="content" className="w-full pr-20 bg-gray-100">
