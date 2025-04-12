@@ -1,4 +1,4 @@
-// export const runtime = "edge";
+export const runtime = "edge";
 
 // app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
@@ -14,8 +14,9 @@ import { Metadata } from "next";
 import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 import parse from "html-react-parser";
+import ParseHtml from "app/utils/parse";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
@@ -67,7 +68,10 @@ export default async function StaticDetailPage({
 
   const getBlogsRepo = async () => {
     const response = await fetch(`${API_URL}/api/github`, {
-      cache: "no-store",
+      // cache: "no-store",
+      next: {
+        revalidate: 60,
+      },
     });
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
@@ -94,6 +98,7 @@ export default async function StaticDetailPage({
   // );
   // console.log("getTagId", getTagId);
 
+  // imageタグをhttpのパスに変換する関数
   const GITHUB_BASE_URL =
     "https://raw.githubusercontent.com/Masato24524/Zenn-contents/main";
 
@@ -151,13 +156,13 @@ export default async function StaticDetailPage({
           {/* <br></br> */}
 
           {/* 記事本文 */}
-          <div id="blog-doc" className="inline-block mb-10 pt-4">
-            {parse(blogContent)}
-          </div>
-          {/* dangerouslySetInnerHTML={{
-              __html: blog.content,
-            }}
-          /> */}
+          {/* Node.js環境の記事表示 */}
+          {/* <div id="blog-doc" className="inline-block mb-10 pt-4"> */}
+          {/* {parse(blogContent)} */}
+          {/* </div> */}
+
+          {/* パースをuse clientで実行 */}
+          <ParseHtml blogContent={blogContent} />
           <br></br>
           <Link href={"/"} className="return-top bg-gray-300">
             記事一覧に戻る

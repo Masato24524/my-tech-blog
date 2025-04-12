@@ -1,5 +1,5 @@
 import { Blog, getBlogs, Tag } from "app/api/microcms/utils";
-import { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
+import SafeHtml, { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
@@ -148,13 +148,15 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                       {/* 記事内容のプレビュー */}
                       <div className="text-sm leading-relaxed mt-2 mb-1">
                         {/* 危険なHTMLを安全に表示  */}
-                        <div
+                        {/* <div
                           dangerouslySetInnerHTML={{
                             __html: sanitizeHtml(
                               truncateString(blog.body, 140)
                             ),
                           }}
-                        />
+                        /> */}
+                        <SafeHtml blogBody={blog.body} />
+
                         {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
                       </div>
                     </div>

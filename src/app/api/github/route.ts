@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { headers } from "next/headers";
 import matter from "gray-matter";
 import { remark } from "remark";
@@ -77,7 +79,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
           Accept: "application/vnd.github.v3+json",
         },
         // キャッシュの設定
-        next: { revalidate: 3600 }, // 1時間ごとに再取得
+        next: { revalidate: 60 }, // 1分ごとに再取得
       }
     );
 
@@ -116,7 +118,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 Authorization: `token ${process.env.GITHUB_TOKEN}`,
                 Accept: "application/vnd.github.v3+json",
               },
-              next: { revalidate: 3600 }, // 1時間ごとに再取得
+              next: { revalidate: 60 }, // 1分ごとに再取得
             }
           )
             .then((res: any) => {

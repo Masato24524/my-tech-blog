@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 // app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
@@ -11,6 +13,7 @@ import { Metadata } from "next";
 import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 import parse from "html-react-parser";
+import ParseHtml from "app/utils/parse";
 
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
@@ -140,9 +143,11 @@ export default async function StaticDetailPage({
           {/* <br></br> */}
 
           {/* 記事本文 */}
-          <div id="blog-doc" className="inline-block mb-10 pt-4">
-            {parse(blog.body)}
-          </div>
+          {/* <div id="blog-doc" className="inline-block mb-10 pt-4"> */}
+          {/* {parse(blog.body)} */}
+          {/* </div> */}
+
+          <ParseHtml blogContent={blog.body} />
 
           {/* dangerouslySetInnerHTML={{
               __html: blog.body,
