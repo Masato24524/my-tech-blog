@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
         </li>
         <li className="list-none ml-2">
           <Link
-            href="/pages/works"
+            href="/works"
             className="bg-white hover:bg-pink-200 flex m-auto p-1 px-8 mr-2 rounded-lg"
           >
             {"Works"}
@@ -64,7 +64,7 @@ export const Header: React.FC = () => {
         </li>
         <li className=" list-none mr-2 ml-2">
           <Link
-            href="/pages/portfolio"
+            href="/portfolio"
             className="bg-white hover:bg-pink-200 flex m-auto p-1 px-7 mr-8 rounded-lg"
           >
             {"Portfolio"}

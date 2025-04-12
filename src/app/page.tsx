@@ -11,7 +11,7 @@ import { GithubPost, MicrocmsPost } from "./types/type";
 // import { getBlogsRepo } from "./api/github/route";
 
 import { pagenationOffsetNum } from "./utils/constants";
-import page from "./pages/contact/page";
+import page from "./contact/page";
 
 // export const dynamic = "force-dynamic";
 

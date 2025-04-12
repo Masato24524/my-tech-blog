@@ -48,7 +48,7 @@ export function Profile(): React.ReactElement {
           <a
             id="contact"
             className="bg-white mt-4 py-1 px-[4px] rounded-full text-2xl border border-black"
-            href="/pages/contact"
+            href="/contact"
           >
             ✉
             {/* <img src="logo-handle.jpg" className='mt-5 ml-1 w-24 h-6'></img> */}

@@ -68,19 +68,30 @@ const BlogsPageId = async ({
       {/* <CustomHead /> */}
       <Header />
 
-      <div id="container" className="flex w-11/12 h-auto mt-60 mx-auto">
-        <div id="main" className="grid grid-cols-2 gap-y-8 w-full mx-auto ml-4">
-          {/* Blog List */}
-          {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
+      <div
+        id="container"
+        className="flex flex-col w-11/12 h-auto mt-60 mx-auto"
+      >
+        <div className="flex">
+          <div
+            id="main"
+            className="grid grid-cols-2 gap-y-8 w-full mx-auto mb-8"
+          >
+            {/* Blog List */}
+            {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
 
-          {/* 各投稿記事の表示 */}
-          <Showblogs
-            currentPage={currentPage}
-            pagenationOffset={pagenationOffset}
-            fetchedData={data}
-            fetchedRepoData={repoData}
-          />
-
+            {/* 各投稿記事の表示 */}
+            <Showblogs
+              currentPage={currentPage}
+              pagenationOffset={pagenationOffset}
+              fetchedData={data}
+              fetchedRepoData={repoData}
+            />
+          </div>
+          {/* プロフィール欄の表示 */}
+          <Profile />
+        </div>
+        <div className="flex">
           {/* ページ番号の記載 */}
           <Pagination
             totalPages={totalPages}
@@ -88,8 +99,6 @@ const BlogsPageId = async ({
             pagenationOffset={pagenationOffset}
           />
         </div>
-        {/* プロフィール欄の表示 */}
-        <Profile />
       </div>
       <Footer fetchedData={data} />
     </body>

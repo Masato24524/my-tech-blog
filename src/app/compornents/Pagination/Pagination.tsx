@@ -19,7 +19,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     // const isDisabled = initialPage === page;
     return (
       <Link
-        href={page === 1 ? "/" : `/pages/${page}`}
+        href={page === 1 ? "/" : `/${page}`}
         // href={`/pages/${page}`}
         className={`text-white p-4 py-3 m-2 mb-10 rounded-md ${
           initialPage === page
@@ -43,7 +43,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   console.log(totalPages);
 
   return (
-    <div>
+    <div className="">
       {/* ページ番号の記載 */}
       <div className="flex mb-10">
         {pageNumbers.map((number) => (
