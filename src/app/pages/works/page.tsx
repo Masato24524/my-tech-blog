@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
 import React from "react";

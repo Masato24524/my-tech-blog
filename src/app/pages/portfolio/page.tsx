@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
 import React from "react";
@@ -23,7 +25,7 @@ const page = () => {
               　家計簿アプリ💰
               <br />
             </p>
-            <p className="pb-4 text-gray-600 bg-gray-200">
+            <div className="pb-4 text-gray-600 bg-gray-200">
               　日付ごとの収支が登録できる家計簿アプリです。
               <br />
               　<br />
@@ -60,7 +62,7 @@ const page = () => {
                   ※Dockerでコンテナ化し、Artifact Registory, Cloud Runでデプロイ
                 </div>
               </div>
-            </p>
+            </div>
           </Link>
         </div>
         {/* <div

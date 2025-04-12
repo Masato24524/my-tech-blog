@@ -12,14 +12,18 @@ export function Profile(): React.ReactElement {
         <img src="/my-icon3.jpg" className="rounded-full max-w-20 mx-auto" />
         <p className="text-2xl text-center">Masato</p>
         <br></br>
-        <p>元機械設計技術者。</p>
-        <p>
+        <p className="text-sm">
+          元機械設計技術者。
+          <br />
           独学でNext.js、TypeScriptなどを学習し、未経験からITエンジニアへキャリアチェンジしました。
         </p>
         <br></br>
 
-        <p className="">技術スタック：</p>
-        <p className="">JavaScript, TypeScript, React, Next.js, Python, Java</p>
+        <p className="text-sm">
+          技術スタック：
+          <br />
+          JavaScript, TypeScript, React, Next.js, Python, Java
+        </p>
         <br></br>
         <p className="text-sm">
           お仕事のご相談を受け付けています。 <br />
@@ -43,7 +47,7 @@ export function Profile(): React.ReactElement {
           </a>
           <a
             id="contact"
-            className="bg-white mt-4 py-1 px-[8px] rounded-full text-2xl border border-black"
+            className="bg-white mt-4 py-1 px-[4px] rounded-full text-2xl border border-black"
             href="/pages/contact"
           >
             ✉
