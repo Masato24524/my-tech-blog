@@ -45,6 +45,10 @@ body {
   @apply text-2xl font-semibold mb-4 mt-5;
 }
 
+#content h4 {
+  @apply text-xl font-bold mt-4;
+}
+
 p:has(span.cms-space) {
   margin-bottom: 16px;
 }
