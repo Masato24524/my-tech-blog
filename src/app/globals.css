@@ -38,15 +38,15 @@ body {
 }
 
 #content h2 {
-  @apply text-2xl font-semibold mb-4 mt-6 p-4 bg-blue-50 text-blue-500 border-l-4 border-blue-500;
+  @apply text-2xl font-semibold mb-4 mt-8 p-4 bg-blue-50 text-blue-500 border-l-4 border-blue-500;
 }
 
 #content h3 {
-  @apply text-2xl font-semibold mb-4 mt-5;
+  @apply text-2xl font-semibold mb-4 mt-8;
 }
 
 #content h4 {
-  @apply text-xl font-bold mt-4;
+  @apply text-xl font-bold mt-8;
 }
 
 p:has(span.cms-space) {
