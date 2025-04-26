@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "prismjs/themes/prism.css";
+
 :root {
   --foreground-rgb: 0, 0, 0;
   /* --background-start-rgb: 214, 219, 220;
@@ -70,6 +72,30 @@ ul li {
 ol li {
   list-style: decimal;
   margin-left: 2.5rem;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background-color: #1a2638 !important; /* 背景色を黒に */
+  color: #fff !important; /* テキスト色を白に */
+  font-size: 0.875rem;
+  text-shadow: none;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.token.constant,
+.token.number {
+  color: #ffc56d;
+}
+
+.token.property {
+  color: #38c7ff;
+}
+
+.token.operator {
+  background: none;
 }
 
 pre {
