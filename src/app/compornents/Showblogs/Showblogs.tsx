@@ -15,7 +15,8 @@ interface ShowblogsProps {
   currentPage: number;
   pagenationOffset: number;
   fetchedData: MicrocmsPost;
-  fetchedRepoData: GithubPost[];
+  fetchedRepoData: any[] | null;
+  // fetchedRepoData: GithubPost[];
 }
 
 interface CombinedBlogs {

@@ -69,17 +69,18 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const getBlogsRepo = async () => {
     try {
-      const response = [];
+      const response: any[] = [];
 
       // await fetch(`${API_URL}/api/github`, {
       //   cache: "no-store",
       // });
 
       // レスポンスのステータスをチェック
-      if (!response.ok) {
-        throw new Error(`Fetching Error Zenn articles: ${response.status}`);
-      }
-      const repoData = await response.json();
+      // if (!response.ok) {
+      //   throw new Error(`Fetching Error Zenn articles: ${response.status}`);
+      // }
+      const repoData = await response;
+      // const repoData = await response.json();
       return repoData;
     } catch (error) {
       console.error("Fetching error Zenn articles:", error);
