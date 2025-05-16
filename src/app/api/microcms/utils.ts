@@ -1,5 +1,4 @@
 import { createClient } from "microcms-js-sdk";
-import { title } from "process";
 
 if (!process.env.SERVICE_DOMAIN) {
   throw new Error("SERVICE_DOMAIN is required");
