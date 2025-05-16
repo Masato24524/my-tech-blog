@@ -25,7 +25,7 @@ const ParseHtml = ({ blogContent }: any) => {
       // const Prism = require("prismjs");
 
       // 言語定義を明示的に読み込む
-      await import("prismjs/components/prism-javascript");
+      await import("prismjs/components/prism-javascript" as any);
       // require("prismjs/components/prism-javascript");
 
       // シンタックスハイライトを適用
