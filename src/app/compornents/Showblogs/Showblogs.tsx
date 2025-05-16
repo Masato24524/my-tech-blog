@@ -185,7 +185,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                   </div>
                 </div>
                 {/* 記事内容のプレビュー */}
-                <SafeHtml blogBody={blog.body} />
+                {/* <SafeHtml blogBody={blog.body} /> */}
               </div>
             </Link>
             <ButtonReturn />

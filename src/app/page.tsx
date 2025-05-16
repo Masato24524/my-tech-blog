@@ -69,15 +69,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const getBlogsRepo = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/github`, {
-        cache: "no-store",
-        // next: {
-        //   revalidate: 60,
-        // },
-      });
-      // next: {
-      //   revalidate: 0;
-      // }
+      const response = [];
+
+      // await fetch(`${API_URL}/api/github`, {
+      //   cache: "no-store",
+      // });
 
       // レスポンスのステータスをチェック
       if (!response.ok) {
