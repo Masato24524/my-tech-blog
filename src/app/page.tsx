@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import "./page.css";
 import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
@@ -12,8 +10,14 @@ import { GithubPost, MicrocmsPost } from "./types/type";
 
 import { pagenationOffsetNum } from "./utils/constants";
 import page from "./contact/page";
+import getPostsData from "./lib/github/posts";
+import Search from "./compornents/Search/Search";
 
-// export const dynamic = "force-dynamic";
+// SSGを強制
+export const dynamic = "force-static";
+
+// 更新間隔（秒）
+export const revalidate = 60; // 仮設定、最終は3600とする
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const limit = 100;
@@ -91,7 +95,13 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     }
   };
   const repoData = await getBlogsRepo();
-  // console.log("repoData", repoData);
+  // console.log("repoData_page_97", repoData);
+
+  // SSGの記事を取得
+
+  // リポジトリ内にあるファイル情報を全て取得。
+  const allPostsData = await getPostsData();
+  // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 
   //md_datasから記事をマージ
   const allBlogs: Blog[] = [
@@ -148,6 +158,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             currentPage={currentPage}
             pagenationOffset={pagenationOffset}
             fetchedData={data}
+            // fetchedRepoData={allPostsData}
             fetchedRepoData={repoData}
           />
 
@@ -158,8 +169,12 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             pagenationOffset={pagenationOffset}
           />
         </div>
-        {/* プロフィール欄の表示 */}
-        <Profile />
+        <div id="sidebar" className="flex flex-col w-1/3 ml-8">
+          {/* 検索欄の表示 */}
+          <Search />
+          {/* プロフィール欄の表示 */}
+          <Profile />
+        </div>
       </div>
       <Footer fetchedData={uniqueTags} />
     </body>

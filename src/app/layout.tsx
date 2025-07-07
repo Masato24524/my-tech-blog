@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 import "@splidejs/splide/dist/css/splide.min.css";
 
@@ -41,12 +42,14 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={notoSansJp.variable}>
-        {/* <ButtonReturnProvider> */}
-        {children}
-        {/* <ButtonReturn /> */}
-        {/* GoogleAnalyticsコンポーネントの追加 */}
-        <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
-        {/* </ButtonReturnProvider> */}
+        <AppRouterCacheProvider>
+          {/* <ButtonReturnProvider> */}
+          {children}
+          {/* <ButtonReturn /> */}
+          {/* GoogleAnalyticsコンポーネントの追加 */}
+          <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
+          {/* </ButtonReturnProvider> */}
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
