@@ -49,6 +49,14 @@ export default function RootLayout({
           <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
           {/* </ButtonReturnProvider> */}
         </AppRouterCacheProvider>
+        <AppRouterCacheProvider>
+          {/* <ButtonReturnProvider> */}
+          {children}
+          {/* <ButtonReturn /> */}
+          {/* GoogleAnalyticsコンポーネントの追加 */}
+          <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
+          {/* </ButtonReturnProvider> */}
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
