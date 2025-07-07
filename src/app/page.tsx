@@ -173,7 +173,9 @@ const BlogsPage = async (): Promise<JSX.Element> => {
           {/* 検索欄の表示 */}
           <Search />
           {/* プロフィール欄の表示 */}
+
           <Profile />
+
         </div>
       </div>
       <Footer fetchedData={uniqueTags} />
