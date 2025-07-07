@@ -4,7 +4,7 @@ export function Profile(): React.ReactElement {
   return (
     <div
       id="profile-container"
-      className="inline-flex float-right w-1/4 h-min top-0 mt-[0px] ml-8 p-4 pb-8 text-gray-950 bg-white shadow-md"
+      className="inline-flex float-right h-min top-0 mt-[0px] p-4 pb-8 text-gray-950 bg-white shadow-md"
     >
       <div className="p-2">
         {/* <p className='text-2xl'>&nbsp;</p> */}

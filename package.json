@@ -13,6 +13,9 @@
     "pages:preview": "npx wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat"
   },
   "dependencies": {
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material-nextjs": "^7.2.0",
     "@next/third-parties": "^15.0.0-canary.51",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",

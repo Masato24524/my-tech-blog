@@ -6,6 +6,8 @@ import SafeHtml from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
+import { AccessTime } from "@mui/icons-material";
+import { Folder } from "@mui/icons-material";
 // import { getBlogsRepo } from "app/api/github/route";
 import { title } from "process";
 
@@ -162,17 +164,21 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                           tag && (
                             <span
                               key={tag.id}
-                              className="p-[2px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-blue-500"
+                              className="p-[2px] pb-[4px] mr-2 mb-1 align-middle text-sm rounded-xl text-white bg-blue-500"
                             >
-                              &nbsp;📁&nbsp;{tag?.tag || ""}&nbsp;&nbsp;
+                              &nbsp;
+                              <Folder sx={{ fontSize: 18 }} />
+                              &nbsp;{tag?.tag || ""}&nbsp;&nbsp;
                             </span>
                           )
                       )}
                     </div>
 
                     {/* 日付の生成 */}
-                    <p className="text-xs mb-2 text-gray-600">
-                      &nbsp;🕒{publishedDate}
+                    <p className="text-xs mb-2 align-middle text-gray-600">
+                      &nbsp;
+                      <AccessTime sx={{ fontSize: 14 }} />
+                      {publishedDate}
                       {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
                       {updatedDate > publishedDate && (
                         <>

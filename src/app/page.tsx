@@ -12,6 +12,7 @@ import { GithubPost, MicrocmsPost } from "./types/type";
 
 import { pagenationOffsetNum } from "./utils/constants";
 import page from "./contact/page";
+import Search from "./compornents/Search/Search";
 
 // export const dynamic = "force-dynamic";
 
@@ -158,8 +159,12 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             pagenationOffset={pagenationOffset}
           />
         </div>
-        {/* プロフィール欄の表示 */}
-        <Profile />
+        <div id="sidebar" className="flex flex-col w-1/3 ml-8">
+          {/* 検索欄の表示 */}
+          <Search />
+          {/* プロフィール欄の表示 */}
+          <Profile />{" "}
+        </div>
       </div>
       <Footer fetchedData={uniqueTags} />
     </body>
