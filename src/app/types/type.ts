@@ -17,3 +17,30 @@ export interface GithubPost {
   date: string;
   topics: string[];
 }
+
+export interface md_datas {
+  source: "github";
+  id: string;
+  title: string;
+  date?: string;
+  content: string;
+  description?: string;
+  image?: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  meta?: {
+    title: string;
+    description: string;
+    image: {
+      url: string;
+      width: number;
+      height: number;
+    };
+  };
+  topics?: {
+    id?: string;
+    tag: string;
+  }[];
+}
