@@ -1,7 +1,7 @@
 "use client";
 
-import DOMPurify from "dompurify";
-// import DOMPurify from "isomorphic-dompurify";
+// import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 // HTMLタグを安全に表示する関数
 export const sanitizeHtml = (htmlString: string): string => {
