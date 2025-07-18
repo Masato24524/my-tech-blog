@@ -16,6 +16,8 @@ interface FooterProps {
 }
 
 export function Footer({ fetchedData }: FooterProps): React.ReactElement {
+  // console.log("Footer_fetchedData", fetchedData);
+
   const [getTagName, setGetTagName] = useState<string[]>([]);
 
   // タグデータを取得

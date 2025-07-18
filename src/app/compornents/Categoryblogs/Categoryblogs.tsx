@@ -3,15 +3,15 @@ import SafeHtml, { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
-import { CategoryPagination } from "../CategoryPagination/CategoryPagination";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
-import { MicrocmsPost } from "app/types/type";
+import { GithubPost, md_datas, MicrocmsPost } from "app/types/type";
 
 type CategoryblogsProps = {
   currentPage: number;
   categoryName: string;
   categoryNameId?: number;
-  fetchedData: MicrocmsPost;
+  fetchedData: md_datas[];
+  // fetchedData: MicrocmsPost;
 };
 
 const Categoryblogs: React.FC<CategoryblogsProps> = async ({
@@ -28,14 +28,17 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   // const blogs: Blog[] = await getBlogs();
 
   // console.log("tags", tags);
-  console.log("blogsC", JSON.stringify(blogs, null, 2));
+  // console.log("blogsC", JSON.stringify(blogs, null, 2));
   //   const totalPages = Math.ceil(data.totalCount / data.limit);
   //   const currentPage = 1;
 
   // プロップスから渡されたcategoryNameと一致するタグを取得
-  const foundTag = blogs.contents
-    .map((blog: any) =>
-      blog.tag.find((tag: any) => tag.tag === decodeURI(categoryName))
+  const foundTag = blogs
+    // const foundTag = blogs.contents
+    .map(
+      (blog: any) =>
+        blog.topics.find((tag: any) => tag === decodeURI(categoryName))
+      // blog.tag.find((tag: any) => tag.tag === decodeURI(categoryName))
     )
     .filter(Boolean);
   console.log("foundTag", foundTag);
@@ -46,16 +49,24 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
       ? foundTag.map((tag: any) => ({ id: tag.id, tag: tag.tag }))
       : [];
   console.log("getTagId", getTagId);
-  const uniqueTag = Array.from(
-    new Map(getTagId.map((tag) => [tag.tag, tag])).values()
-  );
+
+  // const uniqueTag = Array.from(
+  //   new Map(getTagId.map((tag) => [tag.tag, tag])).values()
+  // );
+
+  const uniqueTag = [{ id: "0", tag: categoryName }];
   console.log("uniqueTag", uniqueTag);
 
+  console.log("categoryName", categoryName);
+
   // 一致するブログ記事をフィルタリング
-  const matchingBlogs = blogs.contents.filter((blog: Blog) =>
-    blog.tag?.some((tag) => tag.tag === decodeURI(categoryName))
+  const matchingBlogs = blogs.filter(
+    (blog: any) =>
+      // const matchingBlogs = blogs.contents.filter((blog: Blog) =>
+      blog.topics?.some((tag: any) => tag === categoryName)
+    // blog.tag?.some((tag: any) => tag.tag === decodeURI(categoryName))
   );
-  // console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
+  console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
 
   // フィルタリング後の記事数に基づいてtotalPagesを計算
   const totalMatchingBlogs = matchingBlogs.length;
@@ -67,10 +78,8 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
 
   return (
     <>
-      {/* パンくずリストの表示 */}
-      <Maplist getTagId={uniqueTag} />
       {/* 各投稿記事の表示 */}
-      {matchingBlogs.map((blog: Blog) => {
+      {matchingBlogs.map((blog: any) => {
         // 各ブログのタグを取得
         // const blogTags =
         //   blog.tag?.map((tagId: Tag) =>
@@ -104,9 +113,11 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
           i <= postsPerPage * (currentPage - 1) + (postsPerPage - 1)
         ) {
           return (
-            <div key={blog.id}>
+            <div key={blog.id} className="">
               <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
-                <div className="m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+                <div className="w-auto h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+                  {/* 記事のタイトル */}
+                  <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
                   <div className="flex ml-2 mb-2">
                     <img
                       className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
@@ -114,9 +125,6 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                       alt="No image"
                     />
                     <div className="w-1/2">
-                      {/* 記事のタイトル */}
-                      <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
-
                       {/* タグの表示 */}
                       {/* <div>
                         {blogTags.map(
@@ -144,22 +152,19 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                           </>
                         )}
                       </p>
-
-                      {/* 記事内容のプレビュー */}
-                      <div className="text-sm leading-relaxed mt-2 mb-1">
-                        {/* 危険なHTMLを安全に表示  */}
-                        {/* <div
+                    </div>
+                  </div>
+                  {/* 記事内容のプレビュー */}
+                  <div className="text-sm leading-relaxed mt-2 mb-1">
+                    {/* 危険なHTMLを安全に表示  */}
+                    {/* <div
                           dangerouslySetInnerHTML={{
                             __html: sanitizeHtml(
                               truncateString(blog.body, 140)
                             ),
                           }}
                         /> */}
-                        <SafeHtml blogBody={blog.body} />
-
-                        {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
-                      </div>
-                    </div>
+                    <SafeHtml blogBody={blog.content} />
                   </div>
                 </div>
               </Link>
@@ -167,11 +172,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
           );
         }
       })}
-      <CategoryPagination
-        totalPages={totalPages}
-        initialPage={currentPage}
-        categoryName={categoryName}
-      />
+
       <ButtonReturn />
     </>
   );

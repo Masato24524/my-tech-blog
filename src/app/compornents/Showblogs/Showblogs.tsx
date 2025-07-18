@@ -66,7 +66,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   const repoData = fetchedRepoData;
 
   // const repoData = await getBlogsRepo();
-  // console.log("repoData", repoData);
+  // console.log("repoData_showBlogs", repoData);
   // console.log("repoData.date", repoData[0].date);
 
   //md_datasから記事をマージ
@@ -101,17 +101,11 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   // console.log("allBlogs", allBlogs.length);
   // console.log("publishedAt", blogs[6].publishedAt);
 
-  // const pagenationOffset = 4;
   const blogs = allBlogs.slice(
     (currentPage - 1) * pagenationOffset,
     currentPage * pagenationOffset
   );
-  // const blogs = allBlogs.slice(offset, offset + 5);
-  // console.log("blogs", JSON.stringify(blogs, null, 2));
-
-  // const blogs: Blog[] = data.contents;
-  //   const totalPages = Math.ceil(data.totalCount / data.limit);
-  //   const currentPage = 1;
+  // console.log("blogs_showBlogs", JSON.stringify(blogs, null, 2));
 
   return (
     <>
@@ -124,7 +118,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
           // tags.contents.find((tag) => tag.tag === tagName.tag)
           [];
 
-        // console.log("blogTags", blogTags);
+        // console.log("blogTags_showBlogs", blogTags);
 
         const idPhoto: number = Math.floor(Math.random() * 1000);
         const timestamp: number = new Date().getTime();

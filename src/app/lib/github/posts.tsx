@@ -50,7 +50,7 @@ export async function generateStaticParams() {
         const buffer = Buffer.from(md_data.content, "base64");
         // console.log("buffer", buffer);
         const fileContents = buffer.toString("utf-8");
-        console.log("fileContents", fileContents);
+        // console.log("fileContents", fileContents);
 
         // mdファイルの構文を解析してメタ情報(data:{title, topics, date等)とcontentをオブジェクトに格納する
         const matterResult: any = matter(fileContents);

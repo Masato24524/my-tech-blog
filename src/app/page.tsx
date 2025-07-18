@@ -71,32 +71,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // console.log("dataP", JSON.stringify(data, null, 2));
   // const { data } = await getBlogs(limit, offset);
 
-  // api/githubのフォルダからAPIを叩いて記事を取得する関数
-  const getBlogsRepo = async () => {
-    try {
-      const response = await fetch(`${API_URL}/api/github`, {
-        cache: "no-store",
-      });
-      // レスポンスのステータスをチェック
-      if (!response.ok) {
-        throw new Error(`Fetching Error Zenn articles: ${response.status}`);
-      }
-      const repoData = await response.json();
-      return repoData;
-    } catch (error) {
-      console.error("Fetching error Zenn articles:", error);
-      return null;
-    }
-  };
-  const repoData = await getBlogsRepo();
-  // console.log("repoData_page_97", repoData);
-
   // SSGの記事を取得
-
   // リポジトリ内にあるファイル情報を全て取得。
   const allPostsData = await generateStaticParams();
   // const allPostsData = await getPostsData();
-  console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
+  // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 
   //md_datasから記事をマージ
   // const allBlogs: Blog[] = [
@@ -118,11 +97,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   //Tagデータのマージ
   const allTags: string[] = [
-    ...data.contents.flatMap((item: any) =>
-      item.tag.map((item: any) => item.tag)
-    ),
-    ...(repoData
-      ? repoData.flatMap((mdData: GithubPost) => {
+    // ...data.contents.flatMap((item: any) =>
+    //   item.tag.map((item: any) => item.tag)
+    // ),
+    ...(allPostsData
+      ? allPostsData.flatMap((mdData: any) => {
           return Array.isArray(mdData.topics) ? mdData.topics : [mdData.topics];
         })
       : []),
@@ -130,8 +109,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const uniqueTags = Array.from(new Set(allTags));
 
-  // console.log("allTags:", JSON.stringify(allTags, null, 2));
-  // console.log("uniqueTags:", JSON.stringify(uniqueTags, null, 2));
+  console.log("allTags:", JSON.stringify(allTags, null, 2));
+  console.log("uniqueTags:", JSON.stringify(uniqueTags, null, 2));
 
   const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 

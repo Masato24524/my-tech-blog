@@ -58,6 +58,20 @@ const BlogsPageId = async ({
   //   })),
   // ];
 
+  //Tagデータのマージ
+  const allTags: string[] = [
+    // ...data.contents.flatMap((item: any) =>
+    //   item.tag.map((item: any) => item.tag)
+    // ),
+    ...(allPostsData
+      ? allPostsData.flatMap((mdData: any) => {
+          return Array.isArray(mdData.topics) ? mdData.topics : [mdData.topics];
+        })
+      : []),
+  ];
+
+  const uniqueTags = Array.from(new Set(allTags));
+
   const pagenationOffset = pagenationOffsetNum;
   const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
   // const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
@@ -103,7 +117,8 @@ const BlogsPageId = async ({
           />
         </div>
       </div>
-      <Footer fetchedData={data} />
+      <Footer fetchedData={uniqueTags} />
+      {/* <Footer fetchedData={data} /> */}
     </body>
   );
 };
