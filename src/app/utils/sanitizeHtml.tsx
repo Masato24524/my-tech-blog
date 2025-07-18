@@ -2,6 +2,7 @@
 
 // import DOMPurify from "dompurify";
 import DOMPurify from "isomorphic-dompurify";
+import ReactMarkdown from "react-markdown";
 
 // HTMLタグを安全に表示する関数
 export const sanitizeHtml = (htmlString: string): string => {
@@ -53,13 +54,16 @@ const SafeHtml = ({ blogBody }: any) => {
   return (
     <div>
       <div className="text-sm leading-relaxed mt-2 mb-1">
+        <ReactMarkdown>{truncateString(blogBody, 200)}</ReactMarkdown>
+      </div>
+      <div className="text-sm leading-relaxed mt-2 mb-1">
         {/* 危険なHTMLを安全に表示  */}
-        <div
+        {/* <div
           className="break-words"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(truncateString(blogBody, 200)),
           }}
-        />
+        /> */}
       </div>
     </div>
   );

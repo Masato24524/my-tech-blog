@@ -1,5 +1,4 @@
 import { Blog, getBlogs } from "app/api/microcms/utils";
-// import { Blog, getBlogs, Tag } from "app/libs/client";
 import { Tag } from "app/api/github/route";
 
 import SafeHtml from "app/utils/sanitizeHtml";

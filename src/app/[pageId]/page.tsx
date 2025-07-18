@@ -9,6 +9,7 @@ import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
+import { generateStaticParams } from "app/lib/github/posts";
 // import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
@@ -41,24 +42,25 @@ const BlogsPageId = async ({
     const repoData = await response.json();
     return repoData;
   };
-  const repoData = await getBlogsRepo();
+  const allPostsData = await generateStaticParams();
   // const repoData = await getBlogsRepo();
 
   //md_datasから記事をマージ
-  const allBlogs: Blog[] = [
-    ...data.contents,
-    ...repoData.map((mdData: GithubPost) => ({
-      source: mdData.source,
-      id: mdData.id,
-      title: mdData.title,
-      body: mdData.content,
-      publishedAt: mdData.date || "",
-      updatedAt: mdData.date || "",
-    })),
-  ];
+  // const allBlogs: Blog[] = [
+  //   ...data.contents,
+  //   ...repoData.map((mdData: GithubPost) => ({
+  //     source: mdData.source,
+  //     id: mdData.id,
+  //     title: mdData.title,
+  //     body: mdData.content,
+  //     publishedAt: mdData.date || "",
+  //     updatedAt: mdData.date || "",
+  //   })),
+  // ];
 
   const pagenationOffset = pagenationOffsetNum;
-  const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
+  const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+  // const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
 
   console.log("pageId", params.pageId);
   console.log("offset", offset);
@@ -85,7 +87,8 @@ const BlogsPageId = async ({
               currentPage={currentPage}
               pagenationOffset={pagenationOffset}
               fetchedData={data}
-              fetchedRepoData={repoData}
+              fetchedRepoData={allPostsData}
+              // fetchedRepoData={repoData}
             />
           </div>
           {/* プロフィール欄の表示 */}

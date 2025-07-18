@@ -1,7 +1,7 @@
 import { GithubPost, md_datas } from "app/types/type";
 import matter from "gray-matter";
 
-const getPostsData = async () => {
+export async function generateStaticParams() {
   const zennArticles = await fetch(
     "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/",
     {
@@ -78,6 +78,4 @@ const getPostsData = async () => {
   const removeFlasyDatas = datas.filter(Boolean);
 
   return removeFlasyDatas;
-};
-
-export default getPostsData;
+}

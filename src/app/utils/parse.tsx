@@ -1,5 +1,6 @@
 "use client";
 
+// HTMLタグをparseするためのライブラリ
 import parse from "html-react-parser";
 import React, { useEffect } from "react";
 

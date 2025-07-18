@@ -1,10 +1,9 @@
-export const runtime = "edge";
+// export const runtime = "edge";
 
 // app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
 // import { getBlogsRepo } from "app/api/github/route";
-// import { getDetail, TagData, client, Tag } from "app/api/microcms/route";
 import Link from "next/link";
 import React from "react";
 
@@ -13,8 +12,9 @@ import X_ShareButton from "app/compornents/X_ShareButton/X_ShareButton";
 import { Metadata } from "next";
 import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
-import parse from "html-react-parser";
-import ParseHtml from "app/utils/parse";
+
+import matter from "gray-matter";
+import ReactMarkdown from "react-markdown";
 
 // export const dynamic = "force-dynamic";
 
@@ -67,25 +67,42 @@ export default async function StaticDetailPage({
   const API_URL = process.env.API_URL;
 
   const getBlogsRepo = async () => {
+    const res = await fetch(
+      `https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/${blogId}.md`,
+      {
+        next: { revalidate: false },
+      }
+    );
+
     const response = await fetch(`${API_URL}/api/github`, {
       // cache: "no-store",
       next: {
         revalidate: 60,
       },
     });
+
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
-    const repoDatas = await response.json();
+    const repoDatas = await res.json();
+    // const repoDatas = await response.json();
+
     return repoDatas;
   };
-  const repoDatas = await getBlogsRepo();
-
-  // const blog = await getDetail(blogId);
+  const md_data = await getBlogsRepo();
+  // const repoDatas = await getBlogsRepo();
   // console.log("repoDatas", repoDatas);
 
-  const blog = repoDatas.find((repoData: any) => repoData.id === blogId);
-  // console.log("blogDB", blog);
+  // 取得したデータ(md_data)のうち、contentプロパティをbase64形式からutf-8の文字列に変換する
+  const buffer = Buffer.from(md_data.content, "base64");
+  const fileContents = buffer.toString("utf-8");
+
+  // mdファイルの構文を解析してメタ情報(data:{title, topics, date等)とcontentをオブジェクトに格納する
+  const matterResult: any = matter(fileContents);
+
+  const blog = matterResult;
+  // const blog = repoDatas.find((repoData: any) => repoData.id === blogId); // 全ブログからfetchする場合
+  console.log("blogDB", blog);
 
   // タグデータを取得
   // const tags = await client.get<TagData>({
@@ -104,13 +121,15 @@ export default async function StaticDetailPage({
 
   const convertImagePaths = (htmlContent: string) => {
     return htmlContent.replace(
+      // return htmlContent.replace(
       /<img src="\/images\/([^"]+)"/g,
       `<img src="${GITHUB_BASE_URL}/images/$1"`
     );
   };
 
   const blogContent = convertImagePaths(blog.content);
-  // console.log("blogContent", JSON.stringify(blogContent, null, 2));
+  // const blogContent = convertImagePaths(blog.content);
+  console.log("blogContent", JSON.stringify(blogContent, null, 2));
 
   return (
     <div id="content" className="w-full pr-20 bg-gray-100">
@@ -123,11 +142,11 @@ export default async function StaticDetailPage({
           className="w-full mt-4 m-10 p-8 pt-10 leading-10 bg-white text-gray-950 shadow-md"
         >
           {/* 記事のタイトル */}
-          <h1 className="text-lg font-bold">{blog.title}</h1>
+          <h1 className="text-lg font-bold">{blog.data.title}</h1>
 
           {/* 日付の生成 */}
           <p>
-            {new Date(blog.date).toLocaleDateString("ja-JP", {
+            {new Date(blog.data.date).toLocaleDateString("ja-JP", {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -161,8 +180,9 @@ export default async function StaticDetailPage({
           {/* {parse(blogContent)} */}
           {/* </div> */}
 
+          <ReactMarkdown>{blogContent}</ReactMarkdown>
           {/* パースをuse clientで実行 */}
-          <ParseHtml blogContent={blogContent} />
+          {/* <ParseHtml blogContent={blogContent} /> */}
           <br></br>
           <Link href={"/"} className="return-top bg-gray-300">
             記事一覧に戻る

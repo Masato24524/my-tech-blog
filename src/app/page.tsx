@@ -1,5 +1,5 @@
 import "./page.css";
-import { Blog, getBlogs } from "app/api/microcms/utils";
+// import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
@@ -9,8 +9,8 @@ import { GithubPost, MicrocmsPost } from "./types/type";
 // import { getBlogsRepo } from "./api/github/route";
 
 import { pagenationOffsetNum } from "./utils/constants";
-import page from "./contact/page";
-import getPostsData from "./lib/github/posts";
+import { generateStaticParams } from "./lib/github/posts";
+// import getPostsData from "./lib/github/posts";
 import Search from "./compornents/Search/Search";
 
 // SSGを強制
@@ -71,18 +71,12 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // console.log("dataP", JSON.stringify(data, null, 2));
   // const { data } = await getBlogs(limit, offset);
 
+  // api/githubのフォルダからAPIを叩いて記事を取得する関数
   const getBlogsRepo = async () => {
     try {
       const response = await fetch(`${API_URL}/api/github`, {
         cache: "no-store",
-        // next: {
-        //   revalidate: 60,
-        // },
       });
-      // next: {
-      //   revalidate: 0;
-      // }
-
       // レスポンスのステータスをチェック
       if (!response.ok) {
         throw new Error(`Fetching Error Zenn articles: ${response.status}`);
@@ -100,23 +94,24 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // SSGの記事を取得
 
   // リポジトリ内にあるファイル情報を全て取得。
-  const allPostsData = await getPostsData();
-  // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
+  const allPostsData = await generateStaticParams();
+  // const allPostsData = await getPostsData();
+  console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 
   //md_datasから記事をマージ
-  const allBlogs: Blog[] = [
-    ...data.contents,
-    ...(repoData
-      ? repoData.map((mdData: GithubPost) => ({
-          source: mdData.source,
-          id: mdData.id,
-          title: mdData.title,
-          body: mdData.content,
-          publishedAt: mdData.date || "",
-          updatedAt: mdData.date || "",
-        }))
-      : []),
-  ];
+  // const allBlogs: Blog[] = [
+  //   ...data.contents,
+  //   ...(repoData
+  //     ? repoData.map((mdData: GithubPost) => ({
+  //         source: mdData.source,
+  //         id: mdData.id,
+  //         title: mdData.title,
+  //         body: mdData.content,
+  //         publishedAt: mdData.date || "",
+  //         updatedAt: mdData.date || "",
+  //       }))
+  //     : []),
+  // ];
 
   // console.log("allBlogs", allBlogs.length);
   // console.log("allBlogs:", JSON.stringify(allBlogs, null, 2));
@@ -140,7 +135,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 
-  const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
+  const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+  // const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
   // console.log("totalPages", totalPages);
   const currentPage = 1;
 
@@ -158,8 +154,8 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             currentPage={currentPage}
             pagenationOffset={pagenationOffset}
             fetchedData={data}
-            // fetchedRepoData={allPostsData}
-            fetchedRepoData={repoData}
+            fetchedRepoData={allPostsData}
+            // fetchedRepoData={repoData}
           />
 
           {/* ページ番号の記載 */}
