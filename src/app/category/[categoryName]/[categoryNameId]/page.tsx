@@ -64,8 +64,14 @@ const BlogsCategoryName = async ({
   // SSG用のデータ取得
   const allPostsData = await generateStaticParams();
 
+  // 一致するブログ記事をフィルタリング
+  const matchingBlogs = allPostsData.filter((blog: any) =>
+    blog.topics?.some((tag: any) => tag === categoryName)
+  );
+  console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
+
   const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
-  const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+  const totalPages = Math.ceil(matchingBlogs.length / pagenationOffset);
 
   const allBlogs: Blog[] = [
     ...data.contents,
@@ -93,6 +99,20 @@ const BlogsCategoryName = async ({
   //   blog.tag?.some((blogTag) => blogTag.tag === tagId.tag)
   // );
   // console.log("getTagId", getTagId);
+
+  //Tagデータのマージ
+  const allTags: string[] = [
+    // ...data.contents.flatMap((item: any) =>
+    //   item.tag.map((item: any) => item.tag)
+    // ),
+    ...(allPostsData
+      ? allPostsData.flatMap((mdData: any) => {
+          return Array.isArray(mdData.topics) ? mdData.topics : [mdData.topics];
+        })
+      : []),
+  ];
+
+  const uniqueTags = Array.from(new Set(allTags));
   const uniqueTag = [{ id: "0", tag: categoryName }];
 
   return (
@@ -139,7 +159,7 @@ const BlogsCategoryName = async ({
         </div>
         {/* <Pagination totalPages={totalPages} initialPage={currentPage} /> */}
       </div>
-      <Footer fetchedData={data} />
+      <Footer fetchedData={uniqueTags} />
     </body>
   );
 };

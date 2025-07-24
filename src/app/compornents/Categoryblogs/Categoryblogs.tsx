@@ -1,11 +1,10 @@
 import { Blog, getBlogs, Tag } from "app/api/microcms/utils";
 import SafeHtml from "app/utils/sanitizeHtml";
-import { sanitizeHtml, truncateString } from "app/utils/stringUtils";
 import Link from "next/link";
 import React from "react";
-import Maplist from "../Maplist/Maplist";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 import { GithubPost, md_datas, MicrocmsPost } from "app/types/type";
+import { pagenationOffsetNum } from "app/utils/constants";
 
 type CategoryblogsProps = {
   currentPage: number;
@@ -71,7 +70,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
 
   // フィルタリング後の記事数に基づいてtotalPagesを計算
   const totalMatchingBlogs = matchingBlogs.length;
-  const postsPerPage = 4; //1ページに表示する記事数
+  const postsPerPage = pagenationOffsetNum; //1ページに表示する記事数
   const totalPages = Math.ceil(totalMatchingBlogs / postsPerPage);
   console.log("totalMatchingBlogs", totalMatchingBlogs);
 
