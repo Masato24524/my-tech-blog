@@ -78,13 +78,21 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 
   //Tagデータのマージ
-  const allTags: string[] = [
-    ...(allPostsData
-      ? allPostsData.flatMap((mdData: any) => {
+  const allTags: string[] = [];
+
+  try {
+    if (allPostsData && Array.isArray(allPostsData)) {
+      const tags = allPostsData.flatMap((mdData: any) => {
+        if (mdData && mdData.topics) {
           return Array.isArray(mdData.topics) ? mdData.topics : [mdData.topics];
-        })
-      : []),
-  ];
+        }
+        return [];
+      });
+      allTags.push(...tags);
+    }
+  } catch (error) {
+    console.error("Error processing allTagas:", error);
+  }
 
   const uniqueTags = Array.from(new Set(allTags));
 
