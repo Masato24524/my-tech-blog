@@ -77,24 +77,6 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   // const allPostsData = await getPostsData();
   // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 
-  //md_datasから記事をマージ
-  // const allBlogs: Blog[] = [
-  //   ...data.contents,
-  //   ...(repoData
-  //     ? repoData.map((mdData: GithubPost) => ({
-  //         source: mdData.source,
-  //         id: mdData.id,
-  //         title: mdData.title,
-  //         body: mdData.content,
-  //         publishedAt: mdData.date || "",
-  //         updatedAt: mdData.date || "",
-  //       }))
-  //     : []),
-  // ];
-
-  // console.log("allBlogs", allBlogs.length);
-  // console.log("allBlogs:", JSON.stringify(allBlogs, null, 2));
-
   //Tagデータのマージ
   const allTags: string[] = [
     // ...data.contents.flatMap((item: any) =>
