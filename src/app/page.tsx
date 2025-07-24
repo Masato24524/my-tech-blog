@@ -79,9 +79,6 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
   //Tagデータのマージ
   const allTags: string[] = [
-    // ...data.contents.flatMap((item: any) =>
-    //   item.tag.map((item: any) => item.tag)
-    // ),
     ...(allPostsData
       ? allPostsData.flatMap((mdData: any) => {
           return Array.isArray(mdData.topics) ? mdData.topics : [mdData.topics];
