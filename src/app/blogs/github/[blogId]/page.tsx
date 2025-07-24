@@ -18,6 +18,12 @@ import ReactMarkdown from "react-markdown";
 
 // export const dynamic = "force-dynamic";
 
+// SSGを強制
+export const dynamic = "force-static";
+
+// 更新間隔（秒）
+export const revalidate = 60; // 仮設定、最終は3600とする
+
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
 //   const { contents } = await getBlogs();
@@ -94,8 +100,20 @@ export default async function StaticDetailPage({
   // console.log("repoDatas", repoDatas);
 
   // 取得したデータ(md_data)のうち、contentプロパティをbase64形式からutf-8の文字列に変換する
-  const buffer = Buffer.from(md_data.content, "base64");
-  const fileContents = buffer.toString("utf-8");
+  // const buffer = Buffer.from(md_data.content, "base64");
+  // const fileContents = buffer.toString("utf-8");
+
+  // runtime edge用に修正
+  function base64ToUtf8(base64: string) {
+    const binaryString = atob(base64);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return new TextDecoder("utf-8").decode(bytes);
+  }
+
+  const fileContents = base64ToUtf8(md_data.content);
 
   // mdファイルの構文を解析してメタ情報(data:{title, topics, date等)とcontentをオブジェクトに格納する
   const matterResult: any = matter(fileContents);
