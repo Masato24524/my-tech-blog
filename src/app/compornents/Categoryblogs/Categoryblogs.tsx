@@ -1,5 +1,6 @@
 import { Blog, getBlogs, Tag } from "app/api/microcms/utils";
-import SafeHtml, { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
+import SafeHtml from "app/utils/sanitizeHtml";
+import { sanitizeHtml, truncateString } from "app/utils/stringUtils";
 import Link from "next/link";
 import React from "react";
 import Maplist from "../Maplist/Maplist";
