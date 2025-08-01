@@ -6,9 +6,6 @@ const GITHUB_BASE_URL =
   "https://raw.githubusercontent.com/Masato24524/Zenn-contents/main";
 
 const convertImagePaths = (content: string) => {
-  console.log("=== 画像パス変換開始 ===");
-  console.log("変換前のcontent (最初の500文字):", content.substring(0, 500));
-
   let convertedContent = content;
 
   // Markdown記法の画像を変換
@@ -26,12 +23,6 @@ const convertImagePaths = (content: string) => {
     /<img src="\/images\/([^"]+)"/g,
     `<img src="${GITHUB_BASE_URL}/images/$1"`
   );
-
-  console.log(
-    "変換後のcontent (最初の500文字):",
-    convertedContent.substring(0, 500)
-  );
-  console.log("=== 画像パス変換終了 ===");
 
   return convertedContent;
 };
