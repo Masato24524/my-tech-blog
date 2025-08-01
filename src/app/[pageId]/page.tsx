@@ -9,7 +9,7 @@ import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
-import { generateStaticParams } from "app/lib/github/posts";
+import { fetchAllGithubArticles } from "app/lib/github/posts";
 // import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
@@ -34,15 +34,7 @@ const BlogsPageId = async ({
   const { data } = await getBlogs();
   // const { data } = await getBlogs(limit, offset);
 
-  const getBlogsRepo = async () => {
-    const response = await fetch(`${API_URL}/api/github`);
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const repoData = await response.json();
-    return repoData;
-  };
-  const allPostsData = await generateStaticParams();
+  const allPostsData = await fetchAllGithubArticles();
   // const repoData = await getBlogsRepo();
 
   //md_datasから記事をマージ

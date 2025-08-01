@@ -57,47 +57,14 @@ export async function generateStaticParams({
       console.error("Github fetch failed", error);
       return [];
     }
-
-    // const response = await fetch(`${API_URL}/api/github`, {
-    //   // cache: "no-store",
-    //   next: {
-    //     revalidate: 60,
-    //   },
-    // });
-
-    // if (!response.ok) {
-    //   throw new Error(`Error: ${response.status}`);
-    // }
-
-    // const repoDatas = await response.json();
   };
 
   // 記事のID一覧
   const md_data = await getBlogsRepo();
   console.log("md_data of blogs github:", md_data);
 
+  // 記事のID一覧をリターンとして返すと、各ページのファイルをNext.jsで作成してくれる
   return md_data;
-
-  // const repoDatas = await getBlogsRepo();
-  // console.log("repoDatas", repoDatas);
-
-  // 取得したデータ(md_data)のうち、contentプロパティをbase64形式からutf-8の文字列に変換する
-  // const buffer = Buffer.from(md_data.content, "base64");
-  // const fileContents = buffer.toString("utf-8");
-
-  // runtime edge用に修正
-  // fetchしてきたbase64形式mdファイルをutf8に変換する関数
-  // function base64ToUtf8(base64: string) {
-  //   const binaryString = atob(base64);
-  //   const bytes = new Uint8Array(binaryString.length);
-  //   for (let i = 0; i < binaryString.length; i++) {
-  //     bytes[i] = binaryString.charCodeAt(i);
-  //   }
-  //   return new TextDecoder("utf-8").decode(bytes);
-  // }
-
-  // const blog = repoDatas.find((repoData: any) => repoData.id === blogId); // 全ブログからfetchする場合
-  // console.log("blogDB", blog);
 
   // タグデータを取得
   // const tags = await client.get<TagData>({
