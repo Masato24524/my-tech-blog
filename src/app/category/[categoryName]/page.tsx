@@ -5,7 +5,7 @@ import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Categoryblogs from "app/compornents/Categoryblogs/Categoryblogs";
-import { generateStaticParams } from "app/lib/github/posts";
+import { fetchAllGithubArticles } from "app/lib/github/posts";
 import CategoryPagination from "app/compornents/CategoryPagination/CategoryPagination";
 import { pagenationOffsetNum } from "app/utils/constants";
 import Search from "app/compornents/Search/Search";
@@ -53,7 +53,7 @@ const BlogsCategoryName = async ({
   // const blog = await getDetail(blogId);
   // console.log("blogsCategoryName", data);
 
-  const allPostsData = await generateStaticParams();
+  const allPostsData = await fetchAllGithubArticles();
   // console.log("allPostsData_category", allPostsData);
 
   // 一致するブログ記事をフィルタリング

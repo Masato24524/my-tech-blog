@@ -6,7 +6,7 @@ import { Footer } from "app/compornents/Footer/Footer";
 import { Profile } from "app/compornents/profile/Profile";
 import Categoryblogs from "app/compornents/Categoryblogs/Categoryblogs";
 import { Blog } from "app/api/microcms/utils";
-import { generateStaticParams } from "app/lib/github/posts";
+import { fetchAllGithubArticles } from "app/lib/github/posts";
 import Search from "app/compornents/Search/Search";
 import CategoryPagination from "app/compornents/CategoryPagination/CategoryPagination";
 import { pagenationOffsetNum } from "app/utils/constants";
@@ -62,7 +62,7 @@ const BlogsCategoryName = async ({
   }
 
   // SSG用のデータ取得
-  const allPostsData = await generateStaticParams();
+  const allPostsData = await fetchAllGithubArticles();
 
   // 一致するブログ記事をフィルタリング
   const matchingBlogs = allPostsData.filter((blog: any) =>
