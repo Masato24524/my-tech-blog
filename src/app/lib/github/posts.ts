@@ -102,7 +102,7 @@ export async function fetchAllGithubArticles() {
     // console.log("datasZenn", datas);
 
     const removeFlasyDatas = datas.filter(Boolean);
-    console.log("removeFlasyDatas", removeFlasyDatas);
+    // console.log("removeFlasyDatas", removeFlasyDatas);
 
     return removeFlasyDatas;
   } catch (error) {
