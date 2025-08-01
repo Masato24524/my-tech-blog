@@ -9,7 +9,7 @@ import { GithubPost, MicrocmsPost } from "./types/type";
 // import { getBlogsRepo } from "./api/github/route";
 
 import { pagenationOffsetNum } from "./utils/constants";
-import { generateStaticParams } from "./lib/github/posts";
+import { fetchAllGithubArticles } from "./lib/github/posts";
 // import getPostsData from "./lib/github/posts";
 import Search from "./compornents/Search/Search";
 
@@ -79,7 +79,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
     // SSGの記事を取得
     // リポジトリ内にあるファイル情報を全て取得。
-    const allPostsData = await generateStaticParams();
+    const allPostsData = await fetchAllGithubArticles();
     // const allPostsData = await getPostsData();
     // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 

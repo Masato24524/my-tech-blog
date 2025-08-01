@@ -1,9 +1,45 @@
 import { GithubPost, md_datas } from "app/types/type";
 import matter from "gray-matter";
 
-export async function generateStaticParams() {
+// imageタグをhttpのパスに変換する関数
+const GITHUB_BASE_URL =
+  "https://raw.githubusercontent.com/Masato24524/Zenn-contents/main";
+
+const convertImagePaths = (content: string) => {
+  console.log("=== 画像パス変換開始 ===");
+  console.log("変換前のcontent (最初の500文字):", content.substring(0, 500));
+
+  let convertedContent = content;
+
+  // Markdown記法の画像を変換
+  convertedContent = convertedContent.replace(
+    /!\[([^\]]*)\]\(\/images\/([^)]+)\)/g,
+    (match, alt, imagePath) => {
+      const newPath = `![${alt}](${GITHUB_BASE_URL}/images/${imagePath})`;
+      console.log("Markdown変換:", match, "→", newPath);
+      return newPath;
+    }
+  );
+  // HTML用
+  convertedContent = convertedContent.replace(
+    // return htmlContent.replace(
+    /<img src="\/images\/([^"]+)"/g,
+    `<img src="${GITHUB_BASE_URL}/images/$1"`
+  );
+
+  console.log(
+    "変換後のcontent (最初の500文字):",
+    convertedContent.substring(0, 500)
+  );
+  console.log("=== 画像パス変換終了 ===");
+
+  return convertedContent;
+};
+
+//
+export async function fetchAllGithubArticles() {
   try {
-    const zennArticles = await fetch(
+    const res = await fetch(
       "https://api.github.com/repos/Masato24524/Zenn-contents/contents/articles/",
       {
         headers: {
@@ -11,20 +47,12 @@ export async function generateStaticParams() {
           Accept: "application/vnd.github.v3+json", //github APIのバージョン指定
         },
       }
-    )
-      .then((res) => {
-        // console.log("resZenn", res);
+    );
+    if (!res.ok) {
+      throw new Error(`Github API error:, ${res.status}`);
+    }
 
-        if (!res.ok) {
-          throw new Error(`Github API error:, ${res.status}`);
-        }
-        return res.json();
-      })
-      .catch((err) => {
-        console.log("Github API fetch error:", err);
-        return [];
-      });
-
+    const zennArticles = await res.json();
     // const data = zennArticles;
     // console.log("dataZenn", data);
 
@@ -75,7 +103,7 @@ export async function generateStaticParams() {
               date: string;
               topics: string;
             }),
-            content: matterResult.content,
+            content: convertImagePaths(matterResult.content),
           };
         })
       );
@@ -83,10 +111,17 @@ export async function generateStaticParams() {
     // console.log("datasZenn", datas);
 
     const removeFlasyDatas = datas.filter(Boolean);
+    console.log("removeFlasyDatas", removeFlasyDatas);
 
     return removeFlasyDatas;
   } catch (error) {
     console.error("generateStaticParams error:", error);
     return [];
   }
+}
+
+export async function getArticleById(id: string): Promise<md_datas | null> {
+  const articles = await fetchAllGithubArticles();
+  console.log("articles of posts.ts", articles);
+  return articles.find((article) => article.id === id) || null;
 }
