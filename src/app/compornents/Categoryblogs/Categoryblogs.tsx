@@ -5,6 +5,7 @@ import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 import { GithubPost, md_datas, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
+import { AccessTime, Folder } from "@mui/icons-material";
 
 type CategoryblogsProps = {
   currentPage: number;
@@ -45,7 +46,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   // 一致するタグがあれば、idとtagをセット。なければ空の配列。
   const getTagId: Tag[] =
     foundTag.length > 0
-      ? foundTag.map((tag: any) => ({ id: tag.id, tag: tag.tag }))
+      ? foundTag.map((tag: any) => ({ id: tag.id, tag: tag }))
       : [];
   console.log("getTagId", getTagId);
 
@@ -53,19 +54,43 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   //   new Map(getTagId.map((tag) => [tag.tag, tag])).values()
   // );
 
+  //md_datasから記事をマージ
+  let allBlogs: any = [];
+  const repoData: any = fetchedData;
+
+  if (repoData) {
+    allBlogs = [
+      // ...data.contents, // microCMSは一時的に除外
+      ...repoData.map((mdData: any) => ({
+        source: mdData.source,
+        id: mdData.id,
+        title: mdData.title,
+        body: mdData.content,
+        publishedAt: mdData.date || "",
+        updatedAt: mdData.date || "",
+        tag: mdData.topics ?? [],
+        // tag: mdData.topics ? mdData.topics.map((tag: any) => ({ tag })) : [],
+      })),
+    ];
+  } else {
+    allBlogs = [...blogs.contents];
+  }
+
+  // console.log("allBlogs", JSON.stringify(allBlogs, null, 2));
+
   const uniqueTag = [{ id: "0", tag: categoryName }];
   console.log("uniqueTag", uniqueTag);
 
   console.log("categoryName", categoryName);
 
   // 一致するブログ記事をフィルタリング
-  const matchingBlogs = blogs.filter(
+  const matchingBlogs = allBlogs.filter(
     (blog: any) =>
       // const matchingBlogs = blogs.contents.filter((blog: Blog) =>
-      blog.topics?.some((tag: any) => tag === categoryName)
+      blog.tag?.some((tag: any) => tag === categoryName)
     // blog.tag?.some((tag: any) => tag.tag === decodeURI(categoryName))
   );
-  console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
+  // console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
 
   // フィルタリング後の記事数に基づいてtotalPagesを計算
   const totalMatchingBlogs = matchingBlogs.length;
@@ -112,62 +137,57 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
           i <= postsPerPage * (currentPage - 1) + (postsPerPage - 1)
         ) {
           return (
-            <div key={blog.id} className="">
-              <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
-                <div className="w-auto h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
-                  {/* 記事のタイトル */}
-                  <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
-                  <div className="flex ml-2 mb-2">
-                    <img
-                      className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
-                      src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
-                      alt="No image"
-                    />
-                    <div className="w-1/2">
-                      {/* タグの表示 */}
-                      {/* <div>
-                        {blogTags.map(
-                          (tag: Tag | undefined) =>
-                            tag && (
-                              <span
-                                key={tag.id}
-                                className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
-                              >
-                                &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
-                              </span>
-                            )
-                        )}
-                      </div> */}
-
-                      {/* 日付の生成 */}
-                      <p className="text-xs mb-2 text-gray-600">
-                        &nbsp;🕒{publishedDate}
-                        {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
-                        {updatedDate > publishedDate && (
-                          <>
-                            {" "}
-                            &nbsp;↻
-                            {updatedDate}
-                          </>
-                        )}
-                      </p>
+            <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
+              <div className="w-auto h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+                {/* 記事のタイトル */}
+                <h2 className="min-h-16 pb-2 text-xl font-bold">
+                  {blog.title}
+                </h2>
+                <div className="flex mb-2">
+                  <img
+                    className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
+                    src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
+                    alt="No image"
+                  />
+                  <div className="w-1/2">
+                    {/* タグの表示 */}
+                    <div className="flex flex-wrap">
+                      {blog.tag.map(
+                        // {blogTags.map(
+                        (tag: any) =>
+                          tag && (
+                            <span
+                              key={tag.id}
+                              className="p-[2px] pb-[4px] mr-2 mb-1 align-middle text-sm rounded-xl text-white bg-blue-500"
+                            >
+                              &nbsp;
+                              <Folder sx={{ fontSize: 18 }} />
+                              &nbsp;{tag}&nbsp;&nbsp;
+                            </span>
+                          )
+                      )}
                     </div>
-                  </div>
-                  {/* 記事内容のプレビュー */}
-                  <div className="text-sm leading-relaxed mt-2 mb-1">
-                    {/* 危険なHTMLを安全に表示  */}
-                    {/* <div
-                          dangerouslySetInnerHTML={{
-                            __html: sanitizeHtml(
-                              truncateString(blog.body, 140)
-                            ),
-                          }}
-                        /> */}
-                    <SafeHtml blogBody={blog.content} />
+
+                    {/* 日付の生成 */}
+                    <p className="text-xs mb-2 align-middle text-gray-600">
+                      &nbsp;
+                      <AccessTime sx={{ fontSize: 14 }} />
+                      {publishedDate}
+                      {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
+                      {updatedDate > publishedDate && (
+                        <>
+                          {" "}
+                          &nbsp;↻
+                          {updatedDate}
+                        </>
+                      )}
+                    </p>
                   </div>
                 </div>
-              </Link>
-            </div>
+                {/* 記事内容のプレビュー */}
+                <SafeHtml blogBody={blog.body} />
+              </div>
+            </Link>
           );
         }
       })}
