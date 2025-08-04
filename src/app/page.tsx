@@ -13,6 +13,7 @@ import { pagenationOffsetNum } from "./utils/constants";
 import { fetchAllGithubArticles } from "./lib/github/posts";
 // import getPostsData from "./lib/github/posts";
 import Search from "./compornents/Search/Search";
+import Promotion from "./compornents/Promotion/Promotion";
 
 // SSGを強制
 export const dynamic = "force-static";
@@ -148,6 +149,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             <Search />
             {/* プロフィール欄の表示 */}
             <Profile />
+            <Promotion />
           </div>
         </div>
         <Footer fetchedData={uniqueTags} />

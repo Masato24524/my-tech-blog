@@ -10,6 +10,7 @@ import CategoryPagination from "app/compornents/CategoryPagination/CategoryPagin
 import { pagenationOffsetNum } from "app/utils/constants";
 import Search from "app/compornents/Search/Search";
 import Maplist from "app/compornents/Maplist/Maplist";
+import Promotion from "app/compornents/Promotion/Promotion";
 
 // SSGを強制
 export const dynamic = "force-static";
@@ -147,9 +148,10 @@ export default async function categoryPage({
             </div>
 
             {/* プロフィール欄の表示 */}
-            <div className="flex flex-col ml-2">
+            <div id="sidebar" className="flex flex-col w-1/3 ml-8">
               <Search />
               <Profile />
+              <Promotion />
             </div>
           </div>
           <div className="mt-10 ml-12">
