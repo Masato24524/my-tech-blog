@@ -14,4 +14,10 @@
     display: block;
     margin-left: auto;
   }
+
+  #sidebar {
+    display: flex;
+    width: stretch;
+    margin-left: auto;
+  }
 }

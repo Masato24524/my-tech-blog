@@ -6,7 +6,7 @@ import { truncateString } from "./stringUtils";
 // SafeHtmlコンポーネント
 const SafeHtml = ({ blogBody }: any) => {
   return (
-    <div>
+    <div className="">
       <div className="text-sm leading-relaxed mt-2 mb-1">
         <ReactMarkdown>{truncateString(blogBody, 200)}</ReactMarkdown>
       </div>
