@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     type: "website",
   },
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({
