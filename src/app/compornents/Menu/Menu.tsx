@@ -75,13 +75,13 @@ export const Menu: React.FC<HeaderProps> = ({ toggleMenu, menuOpen }) => {
         </li>
       </ul>
       <img
-        src="../bars_24.svg"
+        src="/bars_24.svg"
         onClick={toggleMenu}
         className="hamburgermenu lg:hidden float-right ml-auto z-40 w-12 h-12 mr-8 bg-white rounded-md"
       />
       {/* <div className='sidebar hidden flex-col float-right text-center z-10 mr-10'> */}
       <img
-        src="../bars_x.svg"
+        src="/bars_x.svg"
         onClick={toggleMenu}
         className="hamburger-menu-close lg:hidden float-right ml-auto z-40 w-12 h-12 mr-8 bg-white rounded-md"
       />

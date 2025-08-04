@@ -183,10 +183,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(contentHtmlArray);
   } catch (error) {
     console.error("Server Error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return NextResponse.json([]);
   }
 }
 // export async function GET(request: Request) {

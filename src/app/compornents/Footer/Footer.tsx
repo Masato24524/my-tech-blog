@@ -16,42 +16,9 @@ interface FooterProps {
 }
 
 export function Footer({ fetchedData }: FooterProps): React.ReactElement {
+  // console.log("Footer_fetchedData", fetchedData);
+
   const [getTagName, setGetTagName] = useState<string[]>([]);
-
-  // タグデータを取得
-  // useEffect(() => {
-  //   const getBlogs = async ({ fetchedData }: FooterProps) => {
-  //     console.log("Fetching started"); // デバッグ用：fetch開始
-  //     try {
-  //       const API_URL = process.env.API_URL;
-
-  //       const response = await fetch(`${API_URL}/api/microcms`, {
-  //         cache: "no-store", //暫定的に毎回読み込ませる
-  //       });
-  //       console.log("Response received:", response); // デバッグ用：レスポンス確認
-
-  //       const datas = fetchedData;
-  //       // const datas = await response.json();
-  //       console.log("dataF", datas);
-
-  //       if (datas) {
-  //         const tags: string[] = Array.from(
-  //           new Set<string>(
-  //             datas.flatMap((item: any) => item.tag.map((t: any) => t.tag))
-  //           )
-  //         );
-  //         setGetTagName(tags);
-  //         console.log("tagsF", tags);
-  //       }
-  //     } catch (error) {
-  //       console.error("Fetching error:", error);
-  //     }
-  //     // const tags = await client.get<TagData>({
-  //     //   endpoint: `tags`,
-  //     // });
-  //   };
-  //   getBlogs({ fetchedData });
-  // }, []);
 
   return (
     <div id="footer-container" className="w-screen mt-2 z-0">

@@ -11,6 +11,7 @@ const nextConfig = {
   },
 
   //Claudflare用の設定
+  // output: "export",
   output: "standalone",
   trailingSlash: true,
   // Cloudflare Pagesのファイルサイズ制限に対応するための設定
@@ -26,7 +27,7 @@ const nextConfig = {
     };
 
     // キャッシュファイルを生成しない設定を追加
-    config.cache = false;
+    // config.cache = false;
 
     return config;
   },

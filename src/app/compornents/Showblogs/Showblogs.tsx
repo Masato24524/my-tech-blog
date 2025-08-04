@@ -1,5 +1,4 @@
 import { Blog, getBlogs } from "app/api/microcms/utils";
-// import { Blog, getBlogs, Tag } from "app/libs/client";
 import { Tag } from "app/api/github/route";
 
 import SafeHtml from "app/utils/sanitizeHtml";
@@ -8,16 +7,17 @@ import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 import { AccessTime } from "@mui/icons-material";
 import { Folder } from "@mui/icons-material";
-// import { getBlogsRepo } from "app/api/github/route";
-import { title } from "process";
 
-import { GithubPost, MicrocmsPost } from "../../types/type";
+// import { getBlogsRepo } from "app/api/github/route";
+
+import { GithubPost, md_datas, MicrocmsPost } from "../../types/type";
 
 interface ShowblogsProps {
   currentPage: number;
   pagenationOffset: number;
   fetchedData: MicrocmsPost;
-  fetchedRepoData: GithubPost[];
+  fetchedRepoData: md_datas[];
+  // fetchedRepoData: GithubPost[];
 }
 
 interface CombinedBlogs {
@@ -54,17 +54,19 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   // console.log("dataS", data);
   const API_URL = process.env.API_URL;
 
-  const getBlogsRepo = async () => {
-    const response = await fetch(`${API_URL}/api/github`);
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const repoData = await response.json();
-    return repoData;
-  };
+  // const getBlogsRepo = async () => {
+  //   const response = await fetch(`${API_URL}/api/github`);
+  //   if (!response.ok) {
+  //     throw new Error(`Error: ${response.status}`);
+  //   }
+  //   const repoData = await response.json();
+  //   return repoData;
+  // };
+
   const repoData = fetchedRepoData;
+
   // const repoData = await getBlogsRepo();
-  // console.log("repoData", repoData);
+  // console.log("repoData_showBlogs", repoData);
   // console.log("repoData.date", repoData[0].date);
 
   //md_datasから記事をマージ
@@ -72,15 +74,17 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
 
   if (repoData) {
     allBlogs = [
-      ...data.contents,
-      ...repoData.map((mdData: GithubPost) => ({
+      // ...data.contents, // microCMSは一時的に除外
+      ...repoData.map((mdData: any) => ({
         source: mdData.source,
         id: mdData.id,
         title: mdData.title,
         body: mdData.content,
         publishedAt: mdData.date || "",
         updatedAt: mdData.date || "",
-        tag: mdData.topics ? mdData.topics.map((tag) => ({ tag: tag })) : [],
+        tag: mdData.topics
+          ? mdData.topics.map((tag: any) => ({ tag: tag }))
+          : [],
       })),
     ];
   } else {
@@ -97,17 +101,11 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   // console.log("allBlogs", allBlogs.length);
   // console.log("publishedAt", blogs[6].publishedAt);
 
-  // const pagenationOffset = 4;
   const blogs = allBlogs.slice(
     (currentPage - 1) * pagenationOffset,
     currentPage * pagenationOffset
   );
-  // const blogs = allBlogs.slice(offset, offset + 5);
-  // console.log("blogs", JSON.stringify(blogs, null, 2));
-
-  // const blogs: Blog[] = data.contents;
-  //   const totalPages = Math.ceil(data.totalCount / data.limit);
-  //   const currentPage = 1;
+  // console.log("blogs_showBlogs", JSON.stringify(blogs, null, 2));
 
   return (
     <>
@@ -120,7 +118,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
           // tags.contents.find((tag) => tag.tag === tagName.tag)
           [];
 
-        // console.log("blogTags", blogTags);
+        // console.log("blogTags_showBlogs", blogTags);
 
         const idPhoto: number = Math.floor(Math.random() * 1000);
         const timestamp: number = new Date().getTime();

@@ -1,23 +1,23 @@
 import { Blog, getBlogs, Tag } from "app/api/microcms/utils";
-import SafeHtml, { sanitizeHtml, truncateString } from "app/utils/sanitizeHtml";
+import SafeHtml from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
-import Maplist from "../Maplist/Maplist";
-import { CategoryPagination } from "../CategoryPagination/CategoryPagination";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
-import { MicrocmsPost } from "app/types/type";
+import { GithubPost, md_datas, MicrocmsPost } from "app/types/type";
+import { pagenationOffsetNum } from "app/utils/constants";
+import { AccessTime, Folder } from "@mui/icons-material";
 
 type CategoryblogsProps = {
   currentPage: number;
   categoryName: string;
   categoryNameId?: number;
-  fetchedData: MicrocmsPost;
+  fetchedData: md_datas[];
+  // fetchedData: MicrocmsPost;
 };
 
 const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   currentPage,
   categoryName,
-  categoryNameId,
   fetchedData,
 }) => {
   const limit = 100; //全ての記事を取得する　※100記事以上になったら要修正
@@ -28,14 +28,17 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   // const blogs: Blog[] = await getBlogs();
 
   // console.log("tags", tags);
-  console.log("blogsC", JSON.stringify(blogs, null, 2));
+  // console.log("blogsC", JSON.stringify(blogs, null, 2));
   //   const totalPages = Math.ceil(data.totalCount / data.limit);
   //   const currentPage = 1;
 
   // プロップスから渡されたcategoryNameと一致するタグを取得
-  const foundTag = blogs.contents
-    .map((blog: any) =>
-      blog.tag.find((tag: any) => tag.tag === decodeURI(categoryName))
+  const foundTag = blogs
+    // const foundTag = blogs.contents
+    .map(
+      (blog: any) =>
+        blog.topics.find((tag: any) => tag === decodeURI(categoryName))
+      // blog.tag.find((tag: any) => tag.tag === decodeURI(categoryName))
     )
     .filter(Boolean);
   console.log("foundTag", foundTag);
@@ -43,23 +46,55 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   // 一致するタグがあれば、idとtagをセット。なければ空の配列。
   const getTagId: Tag[] =
     foundTag.length > 0
-      ? foundTag.map((tag: any) => ({ id: tag.id, tag: tag.tag }))
+      ? foundTag.map((tag: any) => ({ id: tag.id, tag: tag }))
       : [];
   console.log("getTagId", getTagId);
-  const uniqueTag = Array.from(
-    new Map(getTagId.map((tag) => [tag.tag, tag])).values()
-  );
+
+  // const uniqueTag = Array.from(
+  //   new Map(getTagId.map((tag) => [tag.tag, tag])).values()
+  // );
+
+  //md_datasから記事をマージ
+  let allBlogs: any = [];
+  const repoData: any = fetchedData;
+
+  if (repoData) {
+    allBlogs = [
+      // ...data.contents, // microCMSは一時的に除外
+      ...repoData.map((mdData: any) => ({
+        source: mdData.source,
+        id: mdData.id,
+        title: mdData.title,
+        body: mdData.content,
+        publishedAt: mdData.date || "",
+        updatedAt: mdData.date || "",
+        tag: mdData.topics ?? [],
+        // tag: mdData.topics ? mdData.topics.map((tag: any) => ({ tag })) : [],
+      })),
+    ];
+  } else {
+    allBlogs = [...blogs.contents];
+  }
+
+  // console.log("allBlogs", JSON.stringify(allBlogs, null, 2));
+
+  const uniqueTag = [{ id: "0", tag: categoryName }];
   console.log("uniqueTag", uniqueTag);
 
+  console.log("categoryName", categoryName);
+
   // 一致するブログ記事をフィルタリング
-  const matchingBlogs = blogs.contents.filter((blog: Blog) =>
-    blog.tag?.some((tag) => tag.tag === decodeURI(categoryName))
+  const matchingBlogs = allBlogs.filter(
+    (blog: any) =>
+      // const matchingBlogs = blogs.contents.filter((blog: Blog) =>
+      blog.tag?.some((tag: any) => tag === categoryName)
+    // blog.tag?.some((tag: any) => tag.tag === decodeURI(categoryName))
   );
   // console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
 
   // フィルタリング後の記事数に基づいてtotalPagesを計算
   const totalMatchingBlogs = matchingBlogs.length;
-  const postsPerPage = 4; //1ページに表示する記事数
+  const postsPerPage = pagenationOffsetNum; //1ページに表示する記事数
   const totalPages = Math.ceil(totalMatchingBlogs / postsPerPage);
   console.log("totalMatchingBlogs", totalMatchingBlogs);
 
@@ -67,10 +102,8 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
 
   return (
     <>
-      {/* パンくずリストの表示 */}
-      <Maplist getTagId={uniqueTag} />
       {/* 各投稿記事の表示 */}
-      {matchingBlogs.map((blog: Blog) => {
+      {matchingBlogs.map((blog: any) => {
         // 各ブログのタグを取得
         // const blogTags =
         //   blog.tag?.map((tagId: Tag) =>
@@ -104,74 +137,61 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
           i <= postsPerPage * (currentPage - 1) + (postsPerPage - 1)
         ) {
           return (
-            <div key={blog.id}>
-              <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
-                <div className="m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
-                  <div className="flex ml-2 mb-2">
-                    <img
-                      className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
-                      src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
-                      alt="No image"
-                    />
-                    <div className="w-1/2">
-                      {/* 記事のタイトル */}
-                      <h2 className="pb-2 text-xl font-bold">{blog.title}</h2>
-
-                      {/* タグの表示 */}
-                      {/* <div>
-                        {blogTags.map(
-                          (tag: Tag | undefined) =>
-                            tag && (
-                              <span
-                                key={tag.id}
-                                className="p-[2px] text-sm rounded-xl text-white bg-blue-500"
-                              >
-                                &nbsp;📁&nbsp;{tag.tag}&nbsp;&nbsp;
-                              </span>
-                            )
-                        )}
-                      </div> */}
-
-                      {/* 日付の生成 */}
-                      <p className="text-xs mb-2 text-gray-600">
-                        &nbsp;🕒{publishedDate}
-                        {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
-                        {updatedDate > publishedDate && (
-                          <>
-                            {" "}
-                            &nbsp;↻
-                            {updatedDate}
-                          </>
-                        )}
-                      </p>
-
-                      {/* 記事内容のプレビュー */}
-                      <div className="text-sm leading-relaxed mt-2 mb-1">
-                        {/* 危険なHTMLを安全に表示  */}
-                        {/* <div
-                          dangerouslySetInnerHTML={{
-                            __html: sanitizeHtml(
-                              truncateString(blog.body, 140)
-                            ),
-                          }}
-                        /> */}
-                        <SafeHtml blogBody={blog.body} />
-
-                        {/* {removeHtmlTags(blog.body.slice(0, 200))}; */}
-                      </div>
+            <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
+              <div className="w-auto h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+                {/* 記事のタイトル */}
+                <h2 className="min-h-16 pb-2 text-xl font-bold">
+                  {blog.title}
+                </h2>
+                <div className="flex mb-2">
+                  <img
+                    className="max-w-sm w-1/2 min-w-[150px] h-1/4 mr-4"
+                    src={`https://picsum.photos/seed/${idPhoto}/1200/800.jpg?${timestamp}`}
+                    alt="No image"
+                  />
+                  <div className="w-1/2">
+                    {/* タグの表示 */}
+                    <div className="flex flex-wrap">
+                      {blog.tag.map(
+                        // {blogTags.map(
+                        (tag: any) =>
+                          tag && (
+                            <span
+                              key={tag.id}
+                              className="p-[2px] pb-[4px] mr-2 mb-1 align-middle text-sm rounded-xl text-white bg-blue-500"
+                            >
+                              &nbsp;
+                              <Folder sx={{ fontSize: 18 }} />
+                              &nbsp;{tag}&nbsp;&nbsp;
+                            </span>
+                          )
+                      )}
                     </div>
+
+                    {/* 日付の生成 */}
+                    <p className="text-xs mb-2 align-middle text-gray-600">
+                      &nbsp;
+                      <AccessTime sx={{ fontSize: 14 }} />
+                      {publishedDate}
+                      {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
+                      {updatedDate > publishedDate && (
+                        <>
+                          {" "}
+                          &nbsp;↻
+                          {updatedDate}
+                        </>
+                      )}
+                    </p>
                   </div>
                 </div>
-              </Link>
-            </div>
+                {/* 記事内容のプレビュー */}
+                <SafeHtml blogBody={blog.body} />
+              </div>
+            </Link>
           );
         }
       })}
-      <CategoryPagination
-        totalPages={totalPages}
-        initialPage={currentPage}
-        categoryName={categoryName}
-      />
+
       <ButtonReturn />
     </>
   );

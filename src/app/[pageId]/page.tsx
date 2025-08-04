@@ -9,6 +9,7 @@ import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
+import { fetchAllGithubArticles } from "app/lib/github/posts";
 // import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
@@ -33,32 +34,39 @@ const BlogsPageId = async ({
   const { data } = await getBlogs();
   // const { data } = await getBlogs(limit, offset);
 
-  const getBlogsRepo = async () => {
-    const response = await fetch(`${API_URL}/api/github`);
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const repoData = await response.json();
-    return repoData;
-  };
-  const repoData = await getBlogsRepo();
+  const allPostsData = await fetchAllGithubArticles();
   // const repoData = await getBlogsRepo();
 
   //md_datasから記事をマージ
-  const allBlogs: Blog[] = [
-    ...data.contents,
-    ...repoData.map((mdData: GithubPost) => ({
-      source: mdData.source,
-      id: mdData.id,
-      title: mdData.title,
-      body: mdData.content,
-      publishedAt: mdData.date || "",
-      updatedAt: mdData.date || "",
-    })),
+  // const allBlogs: Blog[] = [
+  //   ...data.contents,
+  //   ...repoData.map((mdData: GithubPost) => ({
+  //     source: mdData.source,
+  //     id: mdData.id,
+  //     title: mdData.title,
+  //     body: mdData.content,
+  //     publishedAt: mdData.date || "",
+  //     updatedAt: mdData.date || "",
+  //   })),
+  // ];
+
+  //Tagデータのマージ
+  const allTags: string[] = [
+    // ...data.contents.flatMap((item: any) =>
+    //   item.tag.map((item: any) => item.tag)
+    // ),
+    ...(allPostsData
+      ? allPostsData.flatMap((mdData: any) => {
+          return Array.isArray(mdData.topics) ? mdData.topics : [mdData.topics];
+        })
+      : []),
   ];
 
+  const uniqueTags = Array.from(new Set(allTags));
+
   const pagenationOffset = pagenationOffsetNum;
-  const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
+  const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+  // const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
 
   console.log("pageId", params.pageId);
   console.log("offset", offset);
@@ -85,7 +93,8 @@ const BlogsPageId = async ({
               currentPage={currentPage}
               pagenationOffset={pagenationOffset}
               fetchedData={data}
-              fetchedRepoData={repoData}
+              fetchedRepoData={allPostsData}
+              // fetchedRepoData={repoData}
             />
           </div>
           {/* プロフィール欄の表示 */}
@@ -100,7 +109,8 @@ const BlogsPageId = async ({
           />
         </div>
       </div>
-      <Footer fetchedData={data} />
+      <Footer fetchedData={uniqueTags} />
+      {/* <Footer fetchedData={data} /> */}
     </body>
   );
 };
