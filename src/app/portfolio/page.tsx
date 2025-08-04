@@ -15,6 +15,62 @@ const page = () => {
           id="household-app"
           className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
         >
+          <Link href="https://pomodoro-timer-app-vx57.onrender.com">
+            <img
+              className="w-[600px] h-[300px] m-auto mb-4 p-8 pb-4"
+              src="/pomolog.png"
+              alt="no image"
+            />
+            <p className="pt-4 pb-2 font-bold bg-gray-200 text-center">
+              　学習記録アプリ「PomoLog」
+              <br />
+            </p>
+            <div className="pb-4 text-gray-600 bg-gray-200">
+              　日々の学習内容等をカレンダー帳に記録できます。
+              <br />
+              さらに同じ画面上でポモドーロタイマーを実行できます。
+              <br />
+              　<br />
+              <div className="mx-auto">
+                <p className="pb-2 text-gray-600 bg-gray-200 justify-center flex flex-wrap">
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                    &nbsp;&nbsp;React&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                    &nbsp;&nbsp;TypeScript&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                    &nbsp;&nbsp;Node.js&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                    &nbsp;&nbsp;FullCalendar&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
+                    &nbsp;&nbsp;Supabase&nbsp;&nbsp;
+                  </span>
+                </p>
+                {/* <div className="pb-2 text-gray-600 bg-gray-200 justify-center flex flex-wrap">
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-blue-700">
+                    &nbsp;&nbsp;※Docker&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-orange-500">
+                    &nbsp;&nbsp;※Google Artifact Registory&nbsp;&nbsp;
+                  </span>
+                  <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-orange-500">
+                    &nbsp;&nbsp;※Google Cloud Run&nbsp;&nbsp;
+                  </span>
+                </div> */}
+                <div>
+                  {/* ※Dockerでコンテナ化し、Artifact Registory, Cloud Runでデプロイ */}
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div
+          id="household-app"
+          className="w-[600px] h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2 text-center"
+        >
           <Link href="https://masato24524.github.io/household-app-temp/">
             <img
               className="w-[400px] h-[300px] m-auto mb-4 p-8 pb-4"
@@ -32,7 +88,7 @@ const page = () => {
               <div className="mx-auto">
                 <p className="pb-2 text-gray-600 bg-gray-200 justify-center flex flex-wrap">
                   <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
-                    &nbsp;&nbsp;React.js&nbsp;&nbsp;
+                    &nbsp;&nbsp;React&nbsp;&nbsp;
                   </span>
                   <span className="p-[4px] pb-[4px] mr-2 mb-1 text-sm rounded-xl text-white bg-green-500">
                     &nbsp;&nbsp;TypeScript&nbsp;&nbsp;
