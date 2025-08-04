@@ -46,7 +46,7 @@ export async function generateStaticParams({
   const getBlogsRepo = async () => {
     try {
       const articles = await fetchAllGithubArticles();
-      console.log("articles of blogs", articles);
+      // console.log("articles of blogs", articles);
 
       return articles.map((article) => ({
         blogId: article.id,

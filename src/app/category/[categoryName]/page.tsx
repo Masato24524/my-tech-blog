@@ -18,7 +18,7 @@ export const dynamic = "force-static";
 export const revalidate = 60; // 仮設定、最終は3600とする
 
 // uniqueTopicsの抽出
-export async function makeUniqueTopics(): Promise<any> {
+const makeUniqueTopics = async (): Promise<any> => {
   const allPostsData = await fetchAllGithubArticles();
   // 全記事から、topics(配列状態)を抽出して並べる
   const topicsData = allPostsData.map((article) => {
@@ -29,7 +29,7 @@ export async function makeUniqueTopics(): Promise<any> {
   // 重複を除去
   const uniqueTopics = Array.from(new Set(allTopics));
   return uniqueTopics;
-}
+};
 
 // SSGでカテゴリーページを生成する
 export async function generateStaticParams({

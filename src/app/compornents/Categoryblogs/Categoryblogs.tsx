@@ -17,7 +17,6 @@ type CategoryblogsProps = {
 const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   currentPage,
   categoryName,
-  categoryNameId,
   fetchedData,
 }) => {
   const limit = 100; //全ての記事を取得する　※100記事以上になったら要修正
