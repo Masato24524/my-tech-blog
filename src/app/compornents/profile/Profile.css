@@ -8,7 +8,7 @@
 }
 
 /* 750px以下で適用 */
-@media (750px >= width) {
+@media (max-width: 750px) {
   #profile-container {
     display: block;
     width: stretch;

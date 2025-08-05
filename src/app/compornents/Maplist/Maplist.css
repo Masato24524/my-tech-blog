@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* 750px以下で適用 */
-@media (750px >= width) {
+@media (max-width: 750px) {
   #container {
-    @apply mt-24 pl-2;
+    @apply pl-2;
   }
 }

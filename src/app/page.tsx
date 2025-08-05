@@ -120,7 +120,10 @@ const BlogsPage = async (): Promise<JSX.Element> => {
       <body>
         {/* <CustomHead /> */}
         <Header />
-        <div id="container" className="flex w-11/12 h-auto mt-60 mx-auto">
+        <div
+          id="container"
+          className="flex w-11/12 h-auto mt-24 md:mt-60 mx-auto"
+        >
           <div
             id="main"
             className="grid grid-cols-2 gap-y-8 w-full mx-auto ml-4"

@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 /* 750px以下で適用 */
-@media (750px >= width) {
+@media (max-width: 750px) {
   #container {
     display: block;
     width: 90%;
-    margin-top: 160px;
   }
 
   #main {

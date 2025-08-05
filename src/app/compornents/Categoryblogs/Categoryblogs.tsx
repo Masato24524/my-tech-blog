@@ -140,7 +140,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
             <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
               <div className="w-auto h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
                 {/* 記事のタイトル */}
-                <h2 className="min-h-16 pb-2 text-xl font-bold">
+                <h2 className="min-h-16 pb-2 text-xl font-bold break-all">
                   {blog.title}
                 </h2>
                 <div className="flex mb-2">
@@ -185,7 +185,9 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                   </div>
                 </div>
                 {/* 記事内容のプレビュー */}
-                <SafeHtml blogBody={blog.body} />
+                <div className="break-all">
+                  <SafeHtml blogBody={blog.body} />
+                </div>
               </div>
             </Link>
           );

@@ -126,7 +126,7 @@ export default async function categoryPage({
         <Header />
         <div className="top-container">
           {/* パンくずリストの表示 */}
-          <div className="mt-44">
+          <div className="mt-24 md:mt-44">
             {/* <Maplist getTagId={uniqueTag} /> */}
             <Maplist getTagId={getTagId} />
           </div>

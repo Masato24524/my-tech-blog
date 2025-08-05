@@ -10,6 +10,8 @@ import Showblogs from "app/compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
 import { fetchAllGithubArticles } from "app/lib/github/posts";
+import Search from "app/compornents/Search/Search";
+import Promotion from "app/compornents/Promotion/Promotion";
 // import { getBlogsRepo } from "app/api/github/route";
 
 const BlogsPageId = async ({
@@ -78,35 +80,34 @@ const BlogsPageId = async ({
 
       <div
         id="container"
-        className="flex flex-col w-11/12 h-auto mt-60 mx-auto"
+        className="flex w-11/12 h-auto mt-24 md:mt-60 mx-auto"
       >
-        <div className="flex">
-          <div
-            id="main"
-            className="grid grid-cols-2 gap-y-8 w-full mx-auto mb-8"
-          >
-            {/* Blog List */}
-            {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
+        <div id="main" className="grid grid-cols-2 gap-y-8 w-full mx-auto mb-8">
+          {/* Blog List */}
+          {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
 
-            {/* 各投稿記事の表示 */}
-            <Showblogs
-              currentPage={currentPage}
-              pagenationOffset={pagenationOffset}
-              fetchedData={data}
-              fetchedRepoData={allPostsData}
-              // fetchedRepoData={repoData}
-            />
-          </div>
-          {/* プロフィール欄の表示 */}
-          <Profile />
-        </div>
-        <div className="flex">
+          {/* 各投稿記事の表示 */}
+          <Showblogs
+            currentPage={currentPage}
+            pagenationOffset={pagenationOffset}
+            fetchedData={data}
+            fetchedRepoData={allPostsData}
+            // fetchedRepoData={repoData}
+          />
+
           {/* ページ番号の記載 */}
           <Pagination
             totalPages={totalPages}
             initialPage={currentPage}
             pagenationOffset={pagenationOffset}
           />
+        </div>
+        <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
+          {/* 検索欄の表示 */}
+          <Search />
+          {/* プロフィール欄の表示 */}
+          <Profile />
+          <Promotion />
         </div>
       </div>
       <Footer fetchedData={uniqueTags} />
