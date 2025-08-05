@@ -139,13 +139,14 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               fetchedRepoData={allPostsData}
               // fetchedRepoData={repoData}
             />
-
-            {/* ページ番号の記載 */}
-            <Pagination
-              totalPages={totalPages}
-              initialPage={currentPage}
-              pagenationOffset={pagenationOffset}
-            />
+            <div className="mt-10">
+              {/* ページ番号の記載 */}
+              <Pagination
+                totalPages={totalPages}
+                initialPage={currentPage}
+                pagenationOffset={pagenationOffset}
+              />
+            </div>
           </div>
           <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
             {/* 検索欄の表示 */}

@@ -145,21 +145,22 @@ export default async function categoryPage({
                 fetchedData={allPostsData}
                 // fetchedData={data}
               />
+              <div className="mt-10">
+                <CategoryPagination
+                  totalPages={totalPages}
+                  initialPage={currentPage}
+                  categoryName={params.categoryName}
+                />
+              </div>
             </div>
 
-            {/* プロフィール欄の表示 */}
-            <div id="sidebar" className="flex flex-col w-1/3 ml-8">
+            <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
+              {/* 検索欄の表示 */}
               <Search />
+              {/* プロフィール欄の表示 */}
               <Profile />
               <Promotion />
             </div>
-          </div>
-          <div className="mt-10 ml-12">
-            <CategoryPagination
-              totalPages={totalPages}
-              initialPage={currentPage}
-              categoryName={params.categoryName}
-            />
           </div>
         </div>
         <Footer fetchedData={uniqueTags} />
