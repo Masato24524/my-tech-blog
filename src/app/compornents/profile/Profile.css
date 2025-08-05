@@ -4,14 +4,14 @@
 
 #profile {
   /* color: white; */
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 
 /* 750px以下で適用 */
 @media (750px >= width) {
   #profile-container {
     display: block;
-    width: 100%;
+    width: stretch;
     height: auto;
     margin: auto;
   }

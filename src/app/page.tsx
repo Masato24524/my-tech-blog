@@ -144,7 +144,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               pagenationOffset={pagenationOffset}
             />
           </div>
-          <div id="sidebar" className="flex flex-col w-1/3 ml-8">
+          <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
             {/* 検索欄の表示 */}
             <Search />
             {/* プロフィール欄の表示 */}
