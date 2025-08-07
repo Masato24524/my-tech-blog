@@ -35,8 +35,6 @@ const PopularArticles = ({ articles }: PopularArticlesProps) => {
                 />
               </div>
               <h3 className="popular-article-card__title">{article.title}</h3>
-              <h3>{article.path}</h3>
-              <h3>{article.pageViews}</h3>
             </div>
           </Link>
         ))}
