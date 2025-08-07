@@ -1,4 +1,5 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import { fetchAllGithubArticles } from "app/lib/github/posts";
 
 const propertyId = process.env.GA4_PROPERTY_ID;
 
@@ -41,7 +42,7 @@ export async function getPopularArticles(): Promise<PopularArticle[]> {
       property: `properties/${propertyId}`,
       dateRanges: [
         {
-          startDate: "3daysAgo", // 過去30日間
+          startDate: "3daysAgo", // 過去30日間 ※実装の最初だけ3日間としておく
           endDate: "today",
         },
       ],
