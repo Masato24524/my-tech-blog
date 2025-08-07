@@ -18,41 +18,26 @@ export const dynamic = "force-static";
 export const revalidate = 60; // 仮設定、最終は3600とする
 
 // SSGでカテゴリーページを生成する
-export async function generateStaticParams({
-  params: { pageId },
-}: {
-  params: { pageId: string };
-}): Promise<{ pageId: string }> {
-  const getBlogsPageId = async (): Promise<any> => {
-    try {
-      const allPostsData = await fetchAllGithubArticles();
+export async function generateStaticParams() {
+  try {
+    const allPostsData = await fetchAllGithubArticles();
 
-      const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
-      const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+    const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
+    const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
 
-      const blogsPageIdList = [];
-      for (let i = 2; i <= totalPages; i++) {
-        blogsPageIdList.push({ pageId: i.toString() });
-      }
-      console.log("blogsPageIdList", blogsPageIdList);
-
-      return blogsPageIdList;
-    } catch (error) {
-      console.error("PAGE.TSX ERROR:", error);
-      // エラー時は最小限のページを返す
-      return (
-        <body>
-          <Header />
-          <div>エラーが発生しました</div>
-          <Footer fetchedData={[]} />
-        </body>
-      );
+    const blogsPageIdList = [];
+    for (let i = 2; i <= totalPages; i++) {
+      blogsPageIdList.push({ pageId: i.toString() });
     }
-  };
+    console.log("blogsPageIdList", blogsPageIdList);
 
-  const pageIdList: any = await getBlogsPageId();
+    return blogsPageIdList;
+  } catch (error) {
+    console.error("generateStaticParams ERROR:", error);
 
-  return pageIdList;
+    // エラー時は空配列を返す
+    return [];
+  }
 }
 
 // ページコンポーネント

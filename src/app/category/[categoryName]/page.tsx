@@ -34,12 +34,7 @@ const makeUniqueTopics = async (): Promise<any> => {
 };
 
 // SSGでカテゴリーページを生成する
-export async function generateStaticParams({
-  // const BlogsCategoryName = async ({
-  params: { categoryName },
-}: {
-  params: { categoryName: string };
-}) {
+export async function generateStaticParams() {
   const getCategoryBlogs = async () => {
     try {
       const uniqueTopics = await makeUniqueTopics();
