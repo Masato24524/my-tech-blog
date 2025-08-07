@@ -1,22 +1,15 @@
-// export const runtime = "edge";
-
-// app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
-// import { getBlogsRepo } from "app/api/github/route";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 
 import "./page.css";
 import X_ShareButton from "app/compornents/X_ShareButton/X_ShareButton";
-import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 
-import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import { fetchAllGithubArticles, getArticleById } from "app/lib/github/posts";
-
-// export const dynamic = "force-dynamic";
 
 // SSGを強制
 export const dynamic = "force-static";
@@ -24,14 +17,25 @@ export const dynamic = "force-static";
 // 更新間隔（秒）
 export const revalidate = 60; // 仮設定、最終は3600とする
 
-// 静的パスを生成する関数
-// export async function generateStaticParams() {
-//   const { contents } = await getBlogs();
+interface Props {
+  params: { blogId: string };
+}
 
-//   return contents.map((blog: { id: string; }) => ({
-//     blogId: blog.id,
-//   }));
-// }
+// 動的メタデータ生成
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const blogDatas = await fetchAllGithubArticles();
+  console.log("blogData", blogDatas);
+
+  const currentArticle = blogDatas.find(
+    (article) => article.id === params.blogId
+  );
+  console.log("currentArticle", currentArticle);
+
+  return {
+    title: currentArticle?.title || "Masato's tech Blog",
+    description: `${currentArticle?.title || "Masato's tech Blog"}の詳細記事`,
+  };
+}
 
 // SSGで詳細ページを生成する
 export async function generateStaticParams({
