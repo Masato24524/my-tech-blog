@@ -1,6 +1,7 @@
 // export const runtime = "edge";
 
 // app/blogs/[blogId]/page.tsx
+import { Metadata } from "next";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
 // import { getBlogsRepo } from "app/api/github/route";
@@ -32,6 +33,26 @@ export const revalidate = 60; // 仮設定、最終は3600とする
 //     blogId: blog.id,
 //   }));
 // }
+
+interface Props {
+  params: { blogId: string };
+}
+
+// 動的メタデータ生成
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const blogDatas = await fetchAllGithubArticles();
+  console.log("blogData", blogDatas);
+
+  const currentArticle = blogDatas.find(
+    (article) => article.id === params.blogId
+  );
+  console.log("currentArticle", currentArticle);
+
+  return {
+    title: currentArticle?.title || "Masato's tech Blog",
+    description: `${currentArticle?.title || "Masato's tech Blog"}の詳細記事`,
+  };
+}
 
 // SSGで詳細ページを生成する
 export async function generateStaticParams({
