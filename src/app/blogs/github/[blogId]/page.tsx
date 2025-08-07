@@ -1,6 +1,9 @@
+// export const runtime = "edge";
+
+// app/blogs/[blogId]/page.tsx
+import { Metadata } from "next";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
-import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 
