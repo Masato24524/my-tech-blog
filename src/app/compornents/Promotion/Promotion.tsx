@@ -1,4 +1,5 @@
 import React from "react";
+import "./Promotion.css";
 
 const Promotion: React.FC = () => {
   return (

@@ -1,11 +1,21 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 
 const propertyId = process.env.GA4_PROPERTY_ID;
-const credentials = {
-  client_email: process.env.GA4_CLIENT_EMAIL,
-  private_key: process.env.GA4_PRIVATE_KEY,
-  project_id: process.env.GA4_PROJECT_ID,
-};
+
+const credentialsBase64 = process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64;
+if (!credentialsBase64) {
+  throw new Error(
+    "環境変数 GOOGLE_APPLICATION_CREDENTIALS_BASE64 が設定されていません。"
+  );
+}
+const credentialsJson = Buffer.from(credentialsBase64, "base64").toString();
+
+const credentials = JSON.parse(credentialsJson);
+// {
+//   client_email: process.env.GA4_CLIENT_EMAIL,
+//   private_key: process.env.GA4_PRIVATE_KEY,
+//   project_id: process.env.GA4_PROJECT_ID,
+// };
 
 console.log("=== 設定確認 ===");
 console.log("プロパティID:", propertyId);
