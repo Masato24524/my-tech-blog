@@ -11,6 +11,7 @@ import { pagenationOffsetNum } from "app/utils/constants";
 import Search from "app/compornents/Search/Search";
 import Maplist from "app/compornents/Maplist/Maplist";
 import Promotion from "app/compornents/Promotion/Promotion";
+import Sidebar from "app/compornents/Sidebar/Sidebar";
 
 // SSGを強制
 export const dynamic = "force-static";
@@ -61,6 +62,7 @@ export async function generateStaticParams({
   return categoryNameList;
   // console.log("allPostsData_category", allPostsData);
 }
+
 // ページコンポーネント
 export default async function categoryPage({
   params,
@@ -73,7 +75,7 @@ export default async function categoryPage({
     const matchingBlogs = allPostsData.filter((blog: any) =>
       blog.topics?.some((tag: any) => tag === params.categoryName)
     );
-    console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
+    // console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
 
     const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 
@@ -153,14 +155,7 @@ export default async function categoryPage({
                 />
               </div>
             </div>
-
-            <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
-              {/* 検索欄の表示 */}
-              <Search />
-              {/* プロフィール欄の表示 */}
-              <Profile />
-              <Promotion />
-            </div>
+            <Sidebar />
           </div>
         </div>
         <Footer fetchedData={uniqueTags} />

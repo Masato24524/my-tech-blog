@@ -1,24 +1,65 @@
-export const runtime = "edge";
+// export const runtime = "edge";
 
 import "./page.css";
 import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
-import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "app/compornents/Pagination/Pagination";
 import Showblogs from "app/compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
 import { fetchAllGithubArticles } from "app/lib/github/posts";
-import Search from "app/compornents/Search/Search";
-import Promotion from "app/compornents/Promotion/Promotion";
-// import { getBlogsRepo } from "app/api/github/route";
+import Sidebar from "app/compornents/Sidebar/Sidebar";
 
-const BlogsPageId = async ({
+// SSGを強制
+export const dynamic = "force-static";
+
+// 更新間隔（秒）
+export const revalidate = 60; // 仮設定、最終は3600とする
+
+// SSGでカテゴリーページを生成する
+export async function generateStaticParams({
+  params: { pageId },
+}: {
+  params: { pageId: string };
+}) {
+  const getBlogsPageId = async () => {
+    try {
+      const allPostsData = await fetchAllGithubArticles();
+
+      const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
+      const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+
+      const blogsPageIdList = [];
+      for (let i = 2; i <= totalPages; i++) {
+        blogsPageIdList.push({ pageId: i.toString() });
+      }
+      console.log("blogsPageIdList", blogsPageIdList);
+
+      return blogsPageIdList;
+    } catch (error) {
+      console.error("PAGE.TSX ERROR:", error);
+      // エラー時は最小限のページを返す
+      return (
+        <body>
+          <Header />
+          <div>エラーが発生しました</div>
+          <Footer fetchedData={[]} />
+        </body>
+      );
+    }
+  };
+
+  const pageIdList = await getBlogsPageId();
+  return pageIdList;
+}
+
+// ページコンポーネント
+export default async function BlogsPageId({
   params,
 }: {
   params: { pageId: string };
-}): Promise<JSX.Element> => {
+}): Promise<JSX.Element> {
   const currentPage = parseInt(params.pageId) || 1;
   console.log("currentPage", currentPage);
 
@@ -104,18 +145,10 @@ const BlogsPageId = async ({
             />
           </div>
         </div>
-        <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
-          {/* 検索欄の表示 */}
-          <Search />
-          {/* プロフィール欄の表示 */}
-          <Profile />
-          <Promotion />
-        </div>
+        <Sidebar />
       </div>
       <Footer fetchedData={uniqueTags} />
       {/* <Footer fetchedData={data} /> */}
     </body>
   );
-};
-
-export default BlogsPageId;
+}
