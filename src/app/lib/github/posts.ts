@@ -113,6 +113,6 @@ export async function fetchAllGithubArticles() {
 
 export async function getArticleById(id: string): Promise<md_datas | null> {
   const articles = await fetchAllGithubArticles();
-  console.log("articles of posts.ts", articles);
+  // console.log("articles of posts.ts", articles);
   return articles.find((article) => article.id === id) || null;
 }

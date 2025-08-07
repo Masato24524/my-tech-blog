@@ -73,7 +73,7 @@ export default async function categoryPage({
     const matchingBlogs = allPostsData.filter((blog: any) =>
       blog.topics?.some((tag: any) => tag === params.categoryName)
     );
-    console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
+    // console.log("matchingBlogs", JSON.stringify(matchingBlogs, null, 2));
 
     const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 

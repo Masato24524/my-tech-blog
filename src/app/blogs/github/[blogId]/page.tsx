@@ -41,7 +41,7 @@ interface Props {
 // 動的メタデータ生成
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blogDatas = await fetchAllGithubArticles();
-  console.log("blogData", blogDatas);
+  // console.log("blogData", blogDatas);
 
   const currentArticle = blogDatas.find(
     (article) => article.id === params.blogId
