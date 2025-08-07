@@ -2,7 +2,6 @@ import "./page.css";
 // import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
-import { Profile } from "app/compornents/profile/Profile";
 import Pagination from "./compornents/Pagination/Pagination";
 import Showblogs from "./compornents/Showblogs/Showblogs";
 import { GithubPost, MicrocmsPost } from "./types/type";
@@ -12,8 +11,6 @@ import { pagenationOffsetNum } from "./utils/constants";
 
 import { fetchAllGithubArticles } from "./lib/github/posts";
 // import getPostsData from "./lib/github/posts";
-import Search from "./compornents/Search/Search";
-import Promotion from "./compornents/Promotion/Promotion";
 import Sidebar from "./compornents/Sidebar/Sidebar";
 
 // SSGを強制
