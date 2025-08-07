@@ -22,8 +22,8 @@ export async function generateStaticParams({
   params: { pageId },
 }: {
   params: { pageId: string };
-}) {
-  const getBlogsPageId = async () => {
+}): Promise<{ pageId: string }> {
+  const getBlogsPageId = async (): Promise<any> => {
     try {
       const allPostsData = await fetchAllGithubArticles();
 
@@ -50,7 +50,8 @@ export async function generateStaticParams({
     }
   };
 
-  const pageIdList = await getBlogsPageId();
+  const pageIdList: any = await getBlogsPageId();
+
   return pageIdList;
 }
 
