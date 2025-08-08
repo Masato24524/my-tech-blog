@@ -16,14 +16,14 @@ const notoSansJp = Noto_Sans_JP({
 
 //ページ一覧のメタデータ
 export const metadata: Metadata = {
-  title: "Masato's tech Blog",
+  title: { default: "Masato's tech Blog", template: "%s | Masato Tech Blog" },
   description:
     "本ブログは未経験からフロントエンドエンジニアを目指している、自身のポートフォリオも兼ねています。ブログページをNext.js/Vercel＋microCMSで構成しました。",
   openGraph: {
     title: "Masato's tech Blog",
     description:
       "本ブログは未経験からフロントエンドエンジニアを目指している、自身のポートフォリオも兼ねています。ブログページをNext.js/Vercel＋microCMSで構成しました。",
-    url: "<https://my-tech-blog-five.vercel.app/>",
+    url: "https://www.masato-tech-blog.com",
     siteName: "Masato's tech Blog",
     images: [
       {
@@ -44,18 +44,20 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {/* Google AdSense */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9274816768977258"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.masato-tech-blog.com" />
       </head>
       <body className={notoSansJp.variable}>
         <AppRouterCacheProvider>
           {/* <ButtonReturnProvider> */}
           {children}
+          {/* Google AdSense */}
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9274816768977258"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
           {/* <ButtonReturn /> */}
           {/* GoogleAnalyticsコンポーネントの追加 */}
           <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
