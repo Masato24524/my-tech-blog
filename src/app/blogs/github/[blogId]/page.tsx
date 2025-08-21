@@ -10,6 +10,7 @@ import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import { fetchAllGithubArticles, getArticleById } from "app/lib/github/posts";
 
 // SSGを強制
@@ -155,7 +156,12 @@ export default async function BlogPage({
             {/* {parse(blogContent)} */}
             {/* </div> */}
 
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[
+                remarkGfm, // GitHub Flavored Markdownをサポートし、パイプラインの表を認識させる
+                remarkBreaks, // Zenn記事での改行'\n'を正しく処理
+              ]}
+            >
               {blog.content}
             </ReactMarkdown>
             {/* <ReactMarkdown>{blogContent}</ReactMarkdown> */}
