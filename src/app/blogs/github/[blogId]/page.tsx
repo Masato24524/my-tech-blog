@@ -9,6 +9,7 @@ import X_ShareButton from "app/compornents/X_ShareButton/X_ShareButton";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { fetchAllGithubArticles, getArticleById } from "app/lib/github/posts";
 
 // SSGを強制
@@ -154,7 +155,9 @@ export default async function BlogPage({
             {/* {parse(blogContent)} */}
             {/* </div> */}
 
-            <ReactMarkdown>{blog.content}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {blog.content}
+            </ReactMarkdown>
             {/* <ReactMarkdown>{blogContent}</ReactMarkdown> */}
             {/* パースをuse clientで実行 */}
             {/* <ParseHtml blogContent={blogContent} /> */}
