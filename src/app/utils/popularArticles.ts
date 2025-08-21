@@ -42,7 +42,7 @@ export async function getPopularArticles(): Promise<PopularArticle[]> {
       property: `properties/${propertyId}`,
       dateRanges: [
         {
-          startDate: "3daysAgo", // 過去30日間 ※実装の最初だけ3日間としておく
+          startDate: "30daysAgo", // 過去30日間 ※実装の最初だけ3日間としておく
           endDate: "today",
         },
       ],
