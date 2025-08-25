@@ -12,6 +12,7 @@ export function Profile(): React.ReactElement {
         <img src="/my-icon3.jpg" className="rounded-full max-w-20 mx-auto" />
         <p className="text-2xl text-center">Masato</p>
         <br></br>
+
         <p className="text-sm">
           元機械設計技術者。
           <br />
@@ -24,11 +25,7 @@ export function Profile(): React.ReactElement {
           <br />
           JavaScript, TypeScript, React, Next.js, Python, Java
         </p>
-        <br></br>
-        <p className="text-sm">
-          お仕事のご相談を受け付けています。 <br />
-          下記の問い合わせフォームよりご連絡ください。
-        </p>
+
         <div className="flex w-full mx-auto justify-center">
           <a
             id="profile"
@@ -45,16 +42,19 @@ export function Profile(): React.ReactElement {
           >
             <img src="/logo-zenn.png" className="mt-1 h-6"></img>
           </a>
-          <a
-            id="contact"
-            className="bg-white mt-4 py-1 px-[4px] rounded-full text-2xl border border-black"
-            href="/contact"
-          >
-            ✉
-            {/* <img src="logo-handle.jpg" className='mt-5 ml-1 w-24 h-6'></img> */}
-          </a>
         </div>
         <br></br>
+        <p className="text-sm">
+          お仕事のご相談を受け付けています。 <br />
+          下記の問い合わせフォームよりご連絡ください。
+        </p>
+        <a
+          id="contact"
+          className="flex mt-4 text-sm justify-center text-decoration-line: underline"
+          href="/contact"
+        >
+          お問い合わせフォーム
+        </a>
       </div>
     </div>
   );
