@@ -127,7 +127,6 @@ export default async function categoryPage({
             {/* <Maplist getTagId={uniqueTag} /> */}
             <Maplist getTagId={getTagId} />
           </div>
-
           <div id="container" className="flex w-11/12 h-auto mx-auto">
             <div
               id="main"
@@ -142,17 +141,18 @@ export default async function categoryPage({
                 fetchedData={allPostsData}
                 // fetchedData={data}
               />
-              <div className="mt-10">
-                <CategoryPagination
-                  totalPages={totalPages}
-                  initialPage={currentPage}
-                  categoryName={params.categoryName}
-                />
-              </div>
             </div>
             <Sidebar />
           </div>
+          <div className="mt-10 ml-10">
+            <CategoryPagination
+              totalPages={totalPages}
+              initialPage={currentPage}
+              categoryName={params.categoryName}
+            />
+          </div>
         </div>
+
         <Footer fetchedData={uniqueTags} />
       </body>
     );

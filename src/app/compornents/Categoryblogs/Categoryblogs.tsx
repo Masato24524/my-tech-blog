@@ -5,7 +5,7 @@ import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 import { GithubPost, md_datas, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
-import { AccessTime, Folder } from "@mui/icons-material";
+import { AccessTime, Folder, Update } from "@mui/icons-material";
 
 type CategoryblogsProps = {
   currentPage: number;
@@ -67,7 +67,7 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
         title: mdData.title,
         body: mdData.content,
         publishedAt: mdData.date || "",
-        updatedAt: mdData.date || "",
+        updatedAt: mdData.update || "",
         tag: mdData.topics ?? [],
         // tag: mdData.topics ? mdData.topics.map((tag: any) => ({ tag })) : [],
       })),
@@ -75,6 +75,13 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
   } else {
     allBlogs = [...blogs.contents];
   }
+
+  // publishedAtの順で並べ替え(updatedAtを持つ場合はそれを使用する)
+  allBlogs.sort((a: any, b: any) => {
+    const dateA = new Date(a.updatedAt || a.publishedAt).getTime();
+    const dateB = new Date(b.updatedAt || b.publishedAt).getTime();
+    return dateB - dateA;
+  });
 
   // console.log("allBlogs", JSON.stringify(allBlogs, null, 2));
 
@@ -121,14 +128,13 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
             day: "numeric",
           }
         );
-        const updatedDate = new Date(blog.updatedAt).toLocaleDateString(
-          "ja-JP",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }
-        );
+        const updatedDate = blog.updatedAt
+          ? new Date(blog.updatedAt).toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : null;
 
         i++; /* カウンタをインクリメント */
         // currentPageとpostsPerPageに応じて記事を表示
@@ -173,11 +179,13 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
                       &nbsp;
                       <AccessTime sx={{ fontSize: 14 }} />
                       {publishedDate}
+                      <br />
                       {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
-                      {updatedDate > publishedDate && (
+                      {updatedDate && updatedDate > publishedDate && (
                         <>
                           {" "}
-                          &nbsp;↻
+                          &nbsp;
+                          <Update sx={{ fontSize: 14 }} />
                           {updatedDate}
                         </>
                       )}

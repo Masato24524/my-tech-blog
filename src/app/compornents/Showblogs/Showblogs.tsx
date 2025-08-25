@@ -5,8 +5,7 @@ import SafeHtml from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
-import { AccessTime } from "@mui/icons-material";
-import { Folder } from "@mui/icons-material";
+import { AccessTime, Folder, Update } from "@mui/icons-material";
 
 // import { getBlogsRepo } from "app/api/github/route";
 
@@ -64,6 +63,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   // };
 
   const repoData = fetchedRepoData;
+  console.log("repoData_showBlogs", repoData);
 
   // const repoData = await getBlogsRepo();
   // console.log("repoData_showBlogs", repoData);
@@ -81,7 +81,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
         title: mdData.title,
         body: mdData.content,
         publishedAt: mdData.date || "",
-        updatedAt: mdData.date || "",
+        updatedAt: mdData.update || "",
         tag: mdData.topics
           ? mdData.topics.map((tag: any) => ({ tag: tag }))
           : [],
@@ -91,10 +91,10 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
     allBlogs = [...data.contents];
   }
 
-  // publishedAtの順で並べ替え
+  // publishedAtの順で並べ替え(updatedAtを持つ場合はそれを使用する)
   allBlogs.sort((a, b) => {
-    const dateA = new Date(a.publishedAt).getTime();
-    const dateB = new Date(b.publishedAt).getTime();
+    const dateA = new Date(a.updatedAt || a.publishedAt).getTime();
+    const dateB = new Date(b.updatedAt || b.publishedAt).getTime();
     return dateB - dateA;
   });
 
@@ -130,14 +130,13 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
             day: "numeric",
           }
         );
-        const updatedDate = new Date(blog.updatedAt).toLocaleDateString(
-          "ja-JP",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }
-        );
+        const updatedDate = blog.updatedAt
+          ? new Date(blog.updatedAt).toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : null;
         // console.log("blog.body", blog.body);
 
         return (
@@ -177,11 +176,13 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
                       &nbsp;
                       <AccessTime sx={{ fontSize: 14 }} />
                       {publishedDate}
+                      <br />
                       {/* updatedAtがpublishedAtより新しい場合のみ表示 */}
-                      {updatedDate > publishedDate && (
+                      {updatedDate && updatedDate > publishedDate && (
                         <>
                           {" "}
-                          &nbsp;↻
+                          &nbsp;
+                          <Update sx={{ fontSize: 14 }} />
                           {updatedDate}
                         </>
                       )}

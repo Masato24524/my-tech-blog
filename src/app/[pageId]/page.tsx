@@ -104,7 +104,6 @@ export default async function BlogsPageId({
     <body>
       {/* <CustomHead /> */}
       <Header />
-
       <div
         id="container"
         className="flex w-11/12 h-auto mt-24 md:mt-60 mx-auto"
@@ -112,7 +111,6 @@ export default async function BlogsPageId({
         <div id="main" className="grid grid-cols-2 gap-y-8 w-full mx-auto mb-8">
           {/* Blog List */}
           {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
-
           {/* 各投稿記事の表示 */}
           <Showblogs
             currentPage={currentPage}
@@ -121,17 +119,16 @@ export default async function BlogsPageId({
             fetchedRepoData={allPostsData}
             // fetchedRepoData={repoData}
           />
-
-          <div className="mt-10">
-            {/* ページ番号の記載 */}
-            <Pagination
-              totalPages={totalPages}
-              initialPage={currentPage}
-              pagenationOffset={pagenationOffset}
-            />
-          </div>
         </div>
         <Sidebar />
+      </div>
+      <div className="mt-10 ml-10">
+        {/* ページ番号の記載 */}
+        <Pagination
+          totalPages={totalPages}
+          initialPage={currentPage}
+          pagenationOffset={pagenationOffset}
+        />
       </div>
       <Footer fetchedData={uniqueTags} />
       {/* <Footer fetchedData={data} /> */}
