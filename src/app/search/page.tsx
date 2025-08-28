@@ -142,7 +142,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               <SearchReasults allPostsData={allPostsData} />
             </div>
           </div>
-          <Sidebar />
+          <Sidebar showPopularArticles={false} />
         </div>
         <div className="mt-10 ml-10">
           {/* ページ番号の記載 */}

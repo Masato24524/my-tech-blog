@@ -6,8 +6,14 @@ import PopularArticles from "../PopularArticles/PopularArticles";
 import { getPopularArticles } from "app/utils/popularArticles";
 // import SearchJavascript from "../SearchJavascript/SearchJavascript";
 
-const Sidebar = async () => {
-  const articles = await getPopularArticles();
+const Sidebar = async ({ showPopularArticles = true }) => {
+  let articles: any = [];
+
+  // 人気記事を表示する場合のみAPIを呼び出し
+  if (showPopularArticles) {
+    articles = await getPopularArticles();
+  }
+
   return (
     <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
       {/* 検索欄の表示 */}
@@ -15,7 +21,7 @@ const Sidebar = async () => {
       {/* <SearchJavascript posts={posts} /> */}
       {/* プロフィール欄の表示 */}
       <Profile />
-      <PopularArticles articles={articles} />
+      {showPopularArticles && <PopularArticles articles={articles} />}
       <Promotion />
     </div>
   );
