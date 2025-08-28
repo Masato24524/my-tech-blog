@@ -14,10 +14,13 @@ import Sidebar from "../compornents/Sidebar/Sidebar";
 import SearchReasults from "app/compornents/SearchResults/SearchReasults";
 
 // SSGを強制
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 
 // 更新間隔（秒）
-export const revalidate = 60; // 仮設定、最終は3600とする
+// export const revalidate = 60;
+// 仮設定、最終は3600とする
+
+// app/searchのページはSSRで行う
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const limit = 100;
