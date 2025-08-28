@@ -31,7 +31,7 @@ const SearchReasults = ({ allPostsData }: any) => {
     return dateB - dateA;
   });
 
-  console.log("filteredPosts", filteredPosts);
+  // console.log("filteredPosts", filteredPosts);
 
   return (
     <>
