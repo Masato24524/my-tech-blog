@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentArticle = blogDatas.find(
     (article) => article.id === params.blogId
   );
-  console.log("currentArticle", currentArticle);
+  // console.log("currentArticle", currentArticle);
 
   return {
     title: currentArticle?.title || "Masato's tech Blog",
