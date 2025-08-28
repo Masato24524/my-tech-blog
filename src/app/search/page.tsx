@@ -14,6 +14,7 @@ import { fetchAllGithubArticles } from "../lib/github/posts";
 // import getPostsData from "./lib/github/posts";
 import Sidebar from "../compornents/Sidebar/Sidebar";
 import SearchReasults from "app/compornents/SearchResults/SearchReasults";
+import Search from "app/compornents/Search/Search";
 
 // SSGを強制
 // export const dynamic = "force-static";
@@ -142,7 +143,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               <SearchReasults allPostsData={allPostsData} />
             </div>
           </div>
-          <Sidebar showPopularArticles={false} />
+          <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
+            {/* 検索欄の表示 */}
+            <Search />
+          </div>
+          {/* <Sidebar showPopularArticles={false} /> */}
         </div>
         <div className="mt-10 ml-10">
           {/* ページ番号の記載 */}
