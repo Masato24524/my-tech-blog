@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import "./page.css";
 // import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
