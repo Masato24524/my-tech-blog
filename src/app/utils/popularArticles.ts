@@ -70,13 +70,13 @@ export async function getPopularArticles(): Promise<PopularArticle[]> {
       limit: 10, // 多めに取得して、後でフィルタリング
     });
 
-    console.log("✅ 接続成功！");
-    console.log("データ行数:", response.rows?.length || 0);
+    // console.log("✅ 接続成功！");
+    // console.log("データ行数:", response.rows?.length || 0);
 
     if (response.rows && response.rows.length > 0) {
       console.log("サンプルデータ:", response.rows[0]);
     }
-    console.log("response", response);
+    // console.log("response", response);
 
     const articles: PopularArticle[] = [];
 
@@ -94,7 +94,7 @@ export async function getPopularArticles(): Promise<PopularArticle[]> {
       }
     });
 
-    console.log("articlesPop", articles);
+    // console.log("articlesPop", articles);
 
     return articles.slice(0, 3); // TOP3を返す
   } catch (error) {

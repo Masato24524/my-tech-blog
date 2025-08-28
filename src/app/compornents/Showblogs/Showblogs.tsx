@@ -63,7 +63,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   // };
 
   const repoData = fetchedRepoData;
-  console.log("repoData_showBlogs", repoData);
+  // console.log("repoData_showBlogs", repoData);
 
   // const repoData = await getBlogsRepo();
   // console.log("repoData_showBlogs", repoData);
