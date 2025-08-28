@@ -1,6 +1,6 @@
 "use client";
 
-import Script from "next/script";
+// import Script from "next/script";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";

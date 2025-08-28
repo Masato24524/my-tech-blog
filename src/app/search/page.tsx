@@ -21,6 +21,7 @@ import SearchReasults from "app/compornents/SearchResults/SearchReasults";
 // 仮設定、最終は3600とする
 
 // app/searchのページはSSRで行う
+export const dynamic = "force-dynamic";
 
 const BlogsPage = async (): Promise<JSX.Element> => {
   const limit = 100;
