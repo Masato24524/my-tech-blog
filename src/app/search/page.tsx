@@ -15,6 +15,8 @@ import { fetchAllGithubArticles } from "../lib/github/posts";
 import Sidebar from "../compornents/Sidebar/Sidebar";
 import SearchReasults from "app/compornents/SearchResults/SearchReasults";
 import Search from "app/compornents/Search/Search";
+import { Profile } from "app/compornents/profile/Profile";
+import Promotion from "app/compornents/Promotion/Promotion";
 
 // SSGを強制
 // export const dynamic = "force-static";
@@ -146,6 +148,9 @@ const BlogsPage = async (): Promise<JSX.Element> => {
           <div id="sidebar" className="flex flex-col w-full md:w-1/3 ml-8">
             {/* 検索欄の表示 */}
             <Search />
+            {/* プロフィール欄の表示 */}
+            <Profile />
+            <Promotion />
           </div>
           {/* <Sidebar showPopularArticles={false} /> */}
         </div>
