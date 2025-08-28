@@ -96,7 +96,7 @@ export default async function BlogPage({
   try {
     // params.blogIdを使って該当記事を取得
     const blog = await getArticleById(params.blogId);
-    console.log("blogId", blog);
+    // console.log("blogId", blog);
 
     if (!blog) {
       return (
