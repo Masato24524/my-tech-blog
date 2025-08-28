@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 750px以下で適用 */
+@media (max-width: 750px) {
+  #container {
+    display: block;
+    width: 90%;
+  }
+
+  #main {
+    display: block;
+    margin-left: auto;
+  }
+
+  #sidebar {
+    display: flex;
+    width: stretch;
+    margin-left: auto;
+  }
+}
