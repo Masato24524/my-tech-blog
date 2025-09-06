@@ -3,7 +3,6 @@ export const runtime = "edge";
 // app/blogs/[blogId]/page.tsx
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
-import { getDetail, TagData, client, Tag } from "app/api/microcms/utils";
 import Link from "next/link";
 import React from "react";
 
@@ -14,6 +13,7 @@ import Maplist from "app/compornents/Maplist/Maplist";
 import ButtonReturn from "app/compornents/ButtonReturn/ButtonReturn";
 import parse from "html-react-parser";
 import ParseHtml from "app/utils/parse";
+import { Tag } from "app/types/type";
 
 // 静的パスを生成する関数
 // export async function generateStaticParams() {
