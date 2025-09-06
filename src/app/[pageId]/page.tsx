@@ -1,7 +1,6 @@
 // export const runtime = "edge";
 
 import "./page.css";
-import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
 import Pagination from "app/compornents/Pagination/Pagination";

@@ -104,13 +104,15 @@ const BlogsPage = async (): Promise<JSX.Element> => {
 
     const uniqueTags = Array.from(new Set(allTags));
 
-    console.log("allTags:", JSON.stringify(allTags, null, 2));
-    console.log("uniqueTags:", JSON.stringify(uniqueTags, null, 2));
+    // console.log("allTags:", JSON.stringify(allTags, null, 2));
+    // console.log("uniqueTags:", JSON.stringify(uniqueTags, null, 2));
 
     const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 
-    const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
-    // const totalPages = Math.ceil(allBlogs.length / pagenationOffset);
+    // const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+    const totalPages = Math.ceil(
+      (data.contents.length + allPostsData.length) / pagenationOffset
+    );
     // console.log("totalPages", totalPages);
     const currentPage = 1;
 

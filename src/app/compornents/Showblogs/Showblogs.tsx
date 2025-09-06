@@ -1,6 +1,3 @@
-import { Blog, getBlogs } from "app/api/microcms/utils";
-import { Tag } from "app/api/github/route";
-
 import SafeHtml from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
@@ -9,7 +6,13 @@ import { AccessTime, Folder, Update } from "@mui/icons-material";
 
 // import { getBlogsRepo } from "app/api/github/route";
 
-import { GithubPost, md_datas, MicrocmsPost } from "../../types/type";
+import {
+  Blog,
+  GithubPost,
+  md_datas,
+  MicrocmsPost,
+  Tag,
+} from "../../types/type";
 
 interface ShowblogsProps {
   currentPage: number;
@@ -74,7 +77,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
 
   if (repoData) {
     allBlogs = [
-      // ...data.contents, // microCMSは一時的に除外
+      ...data.contents, // microCMSは一時的に除外
       ...repoData.map((mdData: any) => ({
         source: mdData.source,
         id: mdData.id,

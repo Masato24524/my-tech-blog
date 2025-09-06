@@ -44,3 +44,33 @@ export interface md_datas {
     tag: string;
   }[];
 }
+
+export interface Blog {
+  source: "microcms" | "github";
+  id: string;
+  title: string;
+  publishedAt: string;
+  updatedAt: string;
+  body: string;
+  description?: string;
+  image?: {
+    url: string;
+    width: number;
+    height: number;
+  };
+  meta?: {
+    title: string;
+    description: string;
+    image: {
+      url: string;
+      width: number;
+      height: number;
+    };
+  };
+  tag?: { id?: string; tag: string }[];
+}
+
+export interface Tag {
+  id?: string;
+  tag: string;
+}
