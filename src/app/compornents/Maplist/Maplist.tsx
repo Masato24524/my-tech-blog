@@ -1,7 +1,7 @@
 import "./Maplist.css";
 import React from "react";
-import { Tag } from "app/api/microcms/utils";
 import Link from "next/link";
+import { Tag } from "app/types/type";
 
 type MaplistProps = {
   getTagId: Tag[];

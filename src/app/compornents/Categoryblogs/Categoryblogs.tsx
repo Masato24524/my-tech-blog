@@ -1,9 +1,8 @@
-import { Blog, getBlogs, Tag } from "app/api/microcms/utils";
 import SafeHtml from "app/utils/sanitizeHtml";
 import Link from "next/link";
 import React from "react";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
-import { GithubPost, md_datas, MicrocmsPost } from "app/types/type";
+import { GithubPost, md_datas, MicrocmsPost, Tag } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
 import { AccessTime, Folder, Update } from "@mui/icons-material";
 
