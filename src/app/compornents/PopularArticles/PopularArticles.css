@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .popular-articles {
-  background: linear-gradient(135deg, #8497eb 0%, #8a6dce 100%);
+  /* background: linear-gradient(135deg, #8497eb 0%, #8a6dce 100%); */
   border-radius: 6px;
   padding: 10px 20px;
   margin: 32px 0;
@@ -11,7 +11,7 @@
 }
 
 .popular-articles__title {
-  color: white;
+  color: black;
   font-size: 1.1rem;
   font-weight: bold;
   margin: 0 0 10px 0;
