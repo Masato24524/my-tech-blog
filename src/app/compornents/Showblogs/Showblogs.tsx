@@ -17,7 +17,7 @@ import {
 interface ShowblogsProps {
   currentPage: number;
   pagenationOffset: number;
-  fetchedData: MicrocmsPost;
+  // fetchedData: MicrocmsPost;
   fetchedRepoData: md_datas[];
   // fetchedRepoData: GithubPost[];
 }
@@ -34,7 +34,7 @@ interface CombinedBlogs {
 const Showblogs: React.FC<ShowblogsProps> = async ({
   currentPage,
   pagenationOffset,
-  fetchedData,
+  // fetchedData,
   fetchedRepoData,
 }) => {
   const limit = 100; //デフォルト値と同じとする
@@ -49,7 +49,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
   //   const data = await response.json();
   //   return data;
   // };
-  const data: any = fetchedData;
+  // const data: any = fetchedData;
   // const { data } = await getBlogs();
 
   // const { data, tags } = await getBlogs(limit, offset);
@@ -77,7 +77,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
 
   if (repoData) {
     allBlogs = [
-      ...data.contents, // microCMSは一時的に除外
+      // ...data.contents, // microCMSは一時的に除外
       ...repoData.map((mdData: any) => ({
         source: mdData.source,
         id: mdData.id,
@@ -91,7 +91,7 @@ const Showblogs: React.FC<ShowblogsProps> = async ({
       })),
     ];
   } else {
-    allBlogs = [...data.contents];
+    allBlogs = [];
   }
 
   // publishedAtの順で並べ替え(updatedAtを持つ場合はそれを使用する)

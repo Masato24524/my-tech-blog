@@ -9,6 +9,7 @@ import { GithubPost, MicrocmsPost } from "app/types/type";
 import { pagenationOffsetNum } from "app/utils/constants";
 import { fetchAllGithubArticles } from "app/lib/github/posts";
 import Sidebar from "app/compornents/Sidebar/Sidebar";
+import { Header_U } from "app/compornents/Header_U/Header_U";
 
 // SSGを強制
 export const dynamic = "force-static";
@@ -54,12 +55,12 @@ export default async function BlogsPageId({
 
   const API_URL = process.env.API_URL;
 
-  const getBlogs = async () => {
-    const response = await fetch(`${API_URL}/api/microcms`);
-    const data = await response.json();
-    return data;
-  };
-  const { data } = await getBlogs();
+  // const getBlogs = async () => {
+  //   const response = await fetch(`${API_URL}/api/microcms`);
+  //   const data = await response.json();
+  //   return data;
+  // };
+  // const { data } = await getBlogs();
   // const { data } = await getBlogs(limit, offset);
 
   const allPostsData = await fetchAllGithubArticles();
@@ -102,10 +103,13 @@ export default async function BlogsPageId({
   return (
     <body>
       {/* <CustomHead /> */}
-      <Header />
+      <div className="flex">
+        <Header />
+        <Header_U />
+      </div>
       <div
         id="container"
-        className="flex w-11/12 h-auto mt-24 md:mt-60 mx-auto"
+        className="flex w-11/12 h-auto mt-20 md:mt-20 mx-auto"
       >
         <div id="main" className="grid grid-cols-2 gap-y-8 w-full mx-auto mb-8">
           {/* Blog List */}
@@ -114,7 +118,7 @@ export default async function BlogsPageId({
           <Showblogs
             currentPage={currentPage}
             pagenationOffset={pagenationOffset}
-            fetchedData={data}
+            // fetchedData={data}
             fetchedRepoData={allPostsData}
             // fetchedRepoData={repoData}
           />

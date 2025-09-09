@@ -12,11 +12,11 @@ import { pagenationOffsetNum } from "../utils/constants";
 
 import { fetchAllGithubArticles } from "../lib/github/posts";
 // import getPostsData from "./lib/github/posts";
-import Sidebar from "../compornents/Sidebar/Sidebar";
 import SearchReasults from "app/compornents/SearchResults/SearchReasults";
 import Search from "app/compornents/Search/Search";
 import { Profile } from "app/compornents/profile/Profile";
 import Promotion from "app/compornents/Promotion/Promotion";
+import { Header_U } from "app/compornents/Header_U/Header_U";
 
 // SSGを強制
 // export const dynamic = "force-static";
@@ -128,10 +128,11 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     return (
       <body>
         {/* <CustomHead /> */}
+        <Header_U />
         <Header />
         <div
           id="container"
-          className="flex w-11/12 h-auto mt-24 md:mt-60 mx-auto"
+          className="flex w-11/12 h-auto mt-20 md:mt-20 mx-auto"
         >
           <div id="contents" className="block w-full">
             <div

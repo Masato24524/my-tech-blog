@@ -13,7 +13,7 @@ const convertImagePaths = (content: string) => {
     /!\[([^\]]*)\]\(\/images\/([^)]+)\)/g,
     (match, alt, imagePath) => {
       const newPath = `![${alt}](${GITHUB_BASE_URL}/images/${imagePath})`;
-      console.log("Markdown変換:", match, "→", newPath);
+      // console.log("Markdown変換:", match, "→", newPath);
       return newPath;
     }
   );
@@ -82,7 +82,9 @@ export async function fetchAllGithubArticles() {
           const matterResult: any = matter(fileContents);
           // console.log("matterResult", matterResult);
 
-          if (!matterResult.data.published) {
+          if (
+            !(matterResult.data.published_myblog ?? matterResult.data.published)
+          ) {
             return null; // published でない場合は null を返す
           }
 

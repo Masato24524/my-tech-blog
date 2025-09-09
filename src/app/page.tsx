@@ -1,6 +1,7 @@
 import "./page.css";
 // import { Blog, getBlogs } from "app/api/microcms/utils";
 import { Header } from "app/compornents/Header/Header";
+import { Header_U } from "./compornents/Header_U/Header_U";
 import { Footer } from "app/compornents/Footer/Footer";
 import Pagination from "./compornents/Pagination/Pagination";
 import Showblogs from "./compornents/Showblogs/Showblogs";
@@ -30,50 +31,50 @@ const BlogsPage = async (): Promise<JSX.Element> => {
   console.log("=== PAGE.TSX DEBUG START ===");
 
   try {
-    const getBlogs = async () => {
-      try {
-        // process.env.VERCEL_URLを使用して本番環境のURLを構築
-        const baseUrl = process.env.API_URL;
-        console.log("baseUrl", baseUrl);
-        const vercelUrl = process.env.VERCEL_URL;
-        const response =
-          process.env.NODE_ENV === "development"
-            ? await fetch(`http://localhost:3000/api/microcms`, {
-                next: {
-                  revalidate: 60,
-                },
-              })
-            : await fetch(`${API_URL}/api/microcms`, {
-                // cache: "no-store",
-                next: {
-                  revalidate: 60,
-                },
-              });
-        // console.log("responseToppage", response.json());
-        // レスポンスの詳細をログ出力
-        // console.log("Response status:", response.status);
-        // console.log("Response headers:", Object.fromEntries(response.headers));
+    // const getBlogs = async () => {
+    //   try {
+    //     // process.env.VERCEL_URLを使用して本番環境のURLを構築
+    //     const baseUrl = process.env.API_URL;
+    //     console.log("baseUrl", baseUrl);
+    //     const vercelUrl = process.env.VERCEL_URL;
+    //     const response =
+    //       process.env.NODE_ENV === "development"
+    //         ? await fetch(`http://localhost:3000/api/microcms`, {
+    //             next: {
+    //               revalidate: 60,
+    //             },
+    //           })
+    //         : await fetch(`${API_URL}/api/microcms`, {
+    //             // cache: "no-store",
+    //             next: {
+    //               revalidate: 60,
+    //             },
+    //           });
+    //     // console.log("responseToppage", response.json());
+    //     // レスポンスの詳細をログ出力
+    //     // console.log("Response status:", response.status);
+    //     // console.log("Response headers:", Object.fromEntries(response.headers));
 
-        if (!response.ok) {
-          throw new Error(
-            `Fetching Error on top pages.tsx: ${response.status}`
-          );
-        }
-        const data = await response.json();
-        // console.log("dataP-2", data);
+    //     if (!response.ok) {
+    //       throw new Error(
+    //         `Fetching Error on top pages.tsx: ${response.status}`
+    //       );
+    //     }
+    //     const data = await response.json();
+    //     // console.log("dataP-2", data);
 
-        return data;
-      } catch (error: any) {
-        console.error("Fetching error on top pages.tsx:", {
-          message: error.message,
-          stack: error.stack,
-          apiUrl: process.env.API_URL,
-          vercelUrl: process.env.VERCEL_URL,
-        });
-        throw error;
-      }
-    };
-    const { data } = await getBlogs();
+    //     return data;
+    //   } catch (error: any) {
+    //     console.error("Fetching error on top pages.tsx:", {
+    //       message: error.message,
+    //       stack: error.stack,
+    //       apiUrl: process.env.API_URL,
+    //       vercelUrl: process.env.VERCEL_URL,
+    //     });
+    //     throw error;
+    //   }
+    // };
+    // const { data } = await getBlogs();
     // console.log("dataP", JSON.stringify(data, null, 2));
     // const { data } = await getBlogs(limit, offset);
 
@@ -81,7 +82,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     // リポジトリ内にあるファイル情報を全て取得。
     const allPostsData = await fetchAllGithubArticles();
     // const allPostsData = await getPostsData();
-    // console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
+    console.log("allPostsData", JSON.stringify(allPostsData, null, 2));
 
     //Tagデータのマージ
     const allTags: string[] = [];
@@ -110,19 +111,21 @@ const BlogsPage = async (): Promise<JSX.Element> => {
     const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 
     // const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
-    const totalPages = Math.ceil(
-      (data.contents.length + allPostsData.length) / pagenationOffset
-    );
-    // console.log("totalPages", totalPages);
+    const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+    console.log("totalPages", allPostsData.length);
     const currentPage = 1;
 
     return (
       <body>
         {/* <CustomHead /> */}
-        <Header />
+        <div className="flex">
+          <Header />
+          <Header_U />
+        </div>
+
         <div
           id="container"
-          className="flex w-11/12 h-auto mt-24 md:mt-60 mx-auto"
+          className="flex w-11/12 h-auto mt-20 md:mt-20 mx-auto"
         >
           <div
             id="main"
@@ -135,7 +138,7 @@ const BlogsPage = async (): Promise<JSX.Element> => {
             <Showblogs
               currentPage={currentPage}
               pagenationOffset={pagenationOffset}
-              fetchedData={data}
+              // fetchedData={data}
               fetchedRepoData={allPostsData}
               // fetchedRepoData={repoData}
             />

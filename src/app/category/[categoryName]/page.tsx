@@ -3,15 +3,13 @@
 import "./page.css";
 import { Header } from "app/compornents/Header/Header";
 import { Footer } from "app/compornents/Footer/Footer";
-import { Profile } from "app/compornents/profile/Profile";
 import Categoryblogs from "app/compornents/Categoryblogs/Categoryblogs";
 import { fetchAllGithubArticles } from "app/lib/github/posts";
 import CategoryPagination from "app/compornents/CategoryPagination/CategoryPagination";
 import { pagenationOffsetNum } from "app/utils/constants";
-import Search from "app/compornents/Search/Search";
 import Maplist from "app/compornents/Maplist/Maplist";
-import Promotion from "app/compornents/Promotion/Promotion";
 import Sidebar from "app/compornents/Sidebar/Sidebar";
+import { Header_U } from "app/compornents/Header_U/Header_U";
 
 // SSGを強制
 export const dynamic = "force-static";
@@ -120,10 +118,13 @@ export default async function categoryPage({
     return (
       <body>
         {/* <CustomHead /> */}
-        <Header />
+        <div className="flex">
+          <Header />
+          <Header_U />
+        </div>
         <div className="top-container">
           {/* パンくずリストの表示 */}
-          <div className="mt-24 md:mt-44">
+          <div className="mt-12 md:mt-12">
             {/* <Maplist getTagId={uniqueTag} /> */}
             <Maplist getTagId={getTagId} />
           </div>
