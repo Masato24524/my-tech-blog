@@ -7,14 +7,15 @@ const PrivacyPolicy = () => {
   return (
     <div>
       <div id="content" className="privacy-policy w-fit p-4">
-        <header className="privacy-header">
+        <header className="privacy-header text-center">
           <h1>プライバシーポリシー</h1>
-          <p className="last-updated">最終更新日：2025年9月10日</p>
+          <p className="last-updated text-right">最終更新日：2025年9月10日</p>
         </header>
 
-        <div className="privacy-content">
+        <div className="privacy-content mt-4">
           <p className="intro">
-            Masato's-tech-blog（以下「当サイト」）は、お客様の個人情報の保護を重要視し、個人情報保護法やその他関係法令を遵守するとともに、以下のプライバシーポリシーに従って適切な取り扱いと保護に努めます。
+            {`Masato's-tech-blog`}
+            （以下「当サイト」）は、お客様の個人情報の保護を重要視し、個人情報保護法やその他関係法令を遵守するとともに、以下のプライバシーポリシーに従って適切な取り扱いと保護に努めます。
           </p>
 
           <section className="privacy-section">
