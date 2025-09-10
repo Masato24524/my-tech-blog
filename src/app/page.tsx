@@ -122,14 +122,13 @@ const BlogsPage = async (): Promise<JSX.Element> => {
           <Header />
           <Header_U />
         </div>
-
         <div
           id="container"
           className="flex w-11/12 h-auto mt-20 md:mt-20 mx-auto"
         >
           <div
             id="main"
-            className="grid grid-cols-2 gap-y-8 w-full mx-auto ml-4"
+            className="grid grid-cols-1 sm:grid-cols-2 grid-rows-4 gap-y-8 w-full mx-auto"
           >
             {/* Blog List */}
             {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
@@ -142,16 +141,16 @@ const BlogsPage = async (): Promise<JSX.Element> => {
               fetchedRepoData={allPostsData}
               // fetchedRepoData={repoData}
             />
-            <div className="mt-10">
-              {/* ページ番号の記載 */}
-              <Pagination
-                totalPages={totalPages}
-                initialPage={currentPage}
-                pagenationOffset={pagenationOffset}
-              />
-            </div>
           </div>
           <Sidebar />
+        </div>{" "}
+        <div className="mt-10 ml-10">
+          {/* ページ番号の記載 */}
+          <Pagination
+            totalPages={totalPages}
+            initialPage={currentPage}
+            pagenationOffset={pagenationOffset}
+          />
         </div>
         <Footer fetchedData={uniqueTags} />
       </body>

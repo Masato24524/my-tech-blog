@@ -111,7 +111,10 @@ export default async function BlogsPageId({
         id="container"
         className="flex w-11/12 h-auto mt-20 md:mt-20 mx-auto"
       >
-        <div id="main" className="grid grid-cols-2 gap-y-8 w-full mx-auto mb-8">
+        <div
+          id="main"
+          className="grid grid-cols-1 sm:grid-cols-2 grid-rows-4 gap-y-8 w-full mx-auto mb-8"
+        >
           {/* Blog List */}
           {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}
           {/* 各投稿記事の表示 */}

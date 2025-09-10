@@ -26,7 +26,7 @@ export function Footer({ fetchedData }: FooterProps): React.ReactElement {
         <div className="p-4 pb-32">
           <span className="m-4 text-white border-b-2">カテゴリー</span>
           {/* タグの表示 */}
-          <div className="mt-2 flex flex-wrap">
+          <div className="mt-2 mb-4 ml-2 flex flex-wrap">
             {fetchedData && fetchedData.length > 0 ? (
               fetchedData.map((tagId: any) => (
                 <span
@@ -39,12 +39,20 @@ export function Footer({ fetchedData }: FooterProps): React.ReactElement {
                 </span>
               ))
             ) : (
-              <span>タグがありません</span> // fetchedData が空または undefined の場合の表示
+              <span className="ml-4 mb-4 text-white">タグがありません</span> // fetchedData が空または undefined の場合の表示
             )}
-          </div>
+          </div>{" "}
+          <p className="ml-4 text-white underline">リンク</p>
+          <Link
+            href={`/privacy-policy`}
+            className="mt-4 ml-4 text-white hover:underline"
+          >
+            プライバシーポリシー
+          </Link>
         </div>
-
-        <p className="absolute right-10 bottom-1 p-1 px-2 text-white text-sm">{`©Copyright2024 Masato's tech Blog All Rights Reserved.`}</p>
+        <div className="block mb-2 ">
+          <p className="absolute right-10 bottom-1 p-1 px-2 text-white text-sm">{`©Copyright2024 Masato's tech Blog All Rights Reserved.`}</p>
+        </div>
       </footer>
     </div>
   );

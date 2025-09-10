@@ -72,7 +72,7 @@ export default async function categoryPage({
 
     const pagenationOffset = pagenationOffsetNum; // 1ページあたりの表示件数
 
-    const totalPages = Math.ceil(allPostsData.length / pagenationOffset);
+    const totalPages = Math.ceil(matchingBlogs.length / pagenationOffset);
     // const totalPages = Math.ceil(matchingBlogs.length / pagenationOffset);
     // console.log("totalPages", totalPages);
 
@@ -106,14 +106,14 @@ export default async function categoryPage({
 
     // ユニークタグ
     const uniqueTags = await makeUniqueTopics();
-    console.log("uniqueTags", uniqueTags);
+    // console.log("uniqueTags", uniqueTags);
 
     const currentPage = 1;
-    console.log("currentPage", currentPage);
+    // console.log("currentPage", currentPage);
 
     const limit = 5; //デフォルト値と同じとする
     const offset = limit * (currentPage - 1);
-    console.log("offset", offset);
+    // console.log("offset", offset);
 
     return (
       <body>
@@ -131,7 +131,7 @@ export default async function categoryPage({
           <div id="container" className="flex w-11/12 h-auto mx-auto">
             <div
               id="main"
-              className="grid grid-cols-2 sm:grid-cols-2 gap-y-8 w-full mx-auto"
+              className="grid grid-cols-2 sm:grid-cols-2 grid-rows-4 auto-rows-max gap-y-8 w-full mx-auto"
             >
               {/* Blog List */}
               {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}

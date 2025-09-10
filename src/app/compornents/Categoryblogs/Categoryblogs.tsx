@@ -142,8 +142,12 @@ const Categoryblogs: React.FC<CategoryblogsProps> = async ({
           i <= postsPerPage * (currentPage - 1) + (postsPerPage - 1)
         ) {
           return (
-            <Link href={`/blogs/${blog.source}/${blog.id}`} key={blog.id}>
-              <div className="w-auto h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
+            <Link
+              href={`/blogs/${blog.source}/${blog.id}`}
+              key={blog.id}
+              className="w-auto"
+            >
+              <div className="h-full m-2 mt-0 mb-8 p-4 pb-1 text-gray-950 bg-white rounded-lg shadow-md hover:bg-blue-100">
                 {/* 記事のタイトル */}
                 <h2 className="min-h-16 pb-2 text-xl font-bold break-all">
                   {blog.title}

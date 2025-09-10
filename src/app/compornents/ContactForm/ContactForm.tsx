@@ -77,7 +77,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="w-full md:w-3/4 mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">お問い合わせ</h2>
 
       <form onSubmit={handleSubmit}>

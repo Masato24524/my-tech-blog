@@ -111,7 +111,7 @@ export default async function BlogPage({
       <div id="content" className="w-full pr-20 bg-gray-100">
         <Header />
 
-        <div className="mt-44">
+        <div className="mt-20">
           {/* <Maplist getTagId={getTagId} /> */}
           <div
             id="blog-container"

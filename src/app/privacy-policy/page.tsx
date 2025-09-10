@@ -3,20 +3,19 @@ export const runtime = "edge";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
 import React from "react";
-import Link from "next/link";
 import "./page.css";
-import ContactForm from "app/compornents/ContactForm/ContactForm";
+import PrivacyPolicy from "app/compornents/PrivacyPolicy/PrivacyPolicy";
 
 const page = () => {
   return (
     <body>
       <Header />
-      <div id="container" className="flex w-[90%] mx-auto mt-20 text-center">
+      <div id="container" className="flex w-[90%] mx-auto mt-20">
         <div
           id="household-app"
-          className="w-[90%]  md:w-1/2 h-1/3 mb-20 mx-auto rounded-lg shadow-md bg-white border-2 text-center"
+          className="h-1/3 mb-20 ml-20 rounded-lg shadow-md bg-white border-2"
         >
-          <ContactForm />
+          <PrivacyPolicy />
         </div>
       </div>
 

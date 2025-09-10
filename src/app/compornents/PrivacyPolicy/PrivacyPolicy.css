@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 750px以下で適用 */
+@media (750px >= width) {
+  #footer-container {
+    display: inline-flex;
+    width: 100vw;
+  }
+
+  #footer-container p {
+    left: 195px;
+    right: 20px;
+  }
+}
+
+#content h1 {
+  @apply text-3xl font-semibold mb-4 mt-8;
+}
+
+#content h2 {
+  @apply text-2xl font-semibold mb-4 mt-8 p-4 bg-blue-50 text-blue-500 border-l-4 border-blue-500;
+}
+
+#content h3 {
+  @apply text-2xl font-semibold mb-4 mt-8;
+}
+
+#content h4 {
+  @apply text-xl font-bold mt-8;
+}

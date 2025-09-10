@@ -34,7 +34,9 @@ const PopularArticles = ({ articles }: PopularArticlesProps) => {
                   alt="No image"
                 />
               </div>
-              <h3 className="popular-article-card__title">{article.title}</h3>
+              <h3 className="popular-article-card__title break-all">
+                {article.title}
+              </h3>
             </div>
           </Link>
         ))}

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a[href^="http"] {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 750px以下で適用 */
+@media (max-width: 750px) {
+  #container {
+    display: block;
+    width: 90%;
+    margin-left: 10px;
+  }
+  #household-app {
+    width: 95%;
+    margin-left: 20px;
+  }
+  #caution {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 20px 10px;
+  }
+}
