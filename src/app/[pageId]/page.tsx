@@ -113,7 +113,7 @@ export default async function BlogsPageId({
       >
         <div
           id="main"
-          className="grid grid-cols-1 sm:grid-cols-2 grid-rows-4 gap-y-8 w-full mx-auto mb-8"
+          className="grid grid-cols-2 sm:grid-cols-2 grid-rows-4 gap-y-8 w-full mx-auto mb-8"
         >
           {/* Blog List */}
           {/* <h1 className="inline text-3xl font-bold pb-12"></h1> */}

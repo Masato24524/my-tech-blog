@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 
       // SSG用の形式に変換
       const categoryNameList = uniqueTopics.map((topic: string) => ({
-        categoryName: topic,
+        categoryName: encodeURIComponent(topic),
       }));
 
       return categoryNameList;
@@ -62,6 +62,7 @@ export default async function categoryPage({
 }: {
   params: { categoryName: string };
 }) {
+  const decodedCategoryName = decodeURIComponent(params.categoryName);
   try {
     const allPostsData = await fetchAllGithubArticles();
     // 一致するブログ記事をフィルタリング
@@ -83,7 +84,7 @@ export default async function categoryPage({
     // console.log("tags", tags);
 
     // Maplistのみで使用する場合
-    const getTagId = [{ id: "0", tag: params.categoryName }];
+    const getTagId = [{ id: "0", tag: decodedCategoryName }];
 
     // const getTagId = tags.contents.filter((tagId) =>
     //   blog.tag?.some((blogTag) => blogTag.tag === tagId.tag)
@@ -138,7 +139,7 @@ export default async function categoryPage({
               {/* 各投稿記事の表示 */}
               <Categoryblogs
                 currentPage={currentPage}
-                categoryName={params.categoryName}
+                categoryName={decodedCategoryName}
                 fetchedData={allPostsData}
                 // fetchedData={data}
               />
@@ -149,7 +150,7 @@ export default async function categoryPage({
             <CategoryPagination
               totalPages={totalPages}
               initialPage={currentPage}
-              categoryName={params.categoryName}
+              categoryName={decodedCategoryName}
             />
           </div>
         </div>
@@ -161,7 +162,7 @@ export default async function categoryPage({
     return (
       <div>
         <h1>エラーが発生しました</h1>
-        <p>categoryName: {params.categoryName}</p>
+        <p>categoryName: {decodedCategoryName}</p>
         <p>Error: {String(error)}</p>
       </div>
     );
