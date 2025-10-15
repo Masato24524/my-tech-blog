@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { Metadata } from "next";
 import { Footer } from "app/compornents/Footer/Footer";
 import { Header } from "app/compornents/Header/Header";
